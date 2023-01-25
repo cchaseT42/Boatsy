@@ -21,3 +21,12 @@ def add_image():
     return new_image.to_dict(), 201
 
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@image_routes.route('/<int:id>', methods=['DELETE'])
+def delete_image(id):
+    image = Image.query.get(id)
+
+    db.session.delete(image)
+    db.session.commit()
+    return 'Successfully deleted'

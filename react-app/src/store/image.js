@@ -49,3 +49,12 @@ export const updateImg = (data) => async dispatch => {
   dispatch(update(updatedImg))
   return updatedImg
 }
+
+export const destroyImg = (imgId) => async dispatch => {
+  const response = await fetch(`/api/images/${imgId}`, {
+    method: 'delete'
+  })
+    if (response.ok){
+      dispatch(destroy(imgId))
+    }
+}

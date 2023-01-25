@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from "react-router-dom";
 import { updateProduct } from "../../store/product";
-import { updateImg } from "../../store/image";
+import { createImg } from "../../store/image";
+import { destroyImg } from "../../store/image";
 import { getProduct } from "../../store/product"
 
 function UpdateProduct(){
@@ -10,13 +11,18 @@ function UpdateProduct(){
   const history = useHistory()
   const { productId } = useParams()
   const user = useSelector(state => state.session.user)
-  console.log(user)
   const products = useSelector(state => state.products)
   const product = Object.values(products)[0]
+  let images = Object.values(product.images)
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
   }, [dispatch])
+
+  // const destroyImg = async () => {
+  //   await dispatch(destroyImg(imgId)).then(() => history.push('/'))
+  // }
 
 
   const [name, setName] = useState(product.productName)
@@ -25,6 +31,18 @@ function UpdateProduct(){
   const [image, setImage] = useState("")
   const [validationErrors, setValidationErrors] = useState([])
   const errors = []
+
+  const addimgSubmit = async (e) => {
+    e.preventDefault()
+
+    const imgPayload = {
+      productId,
+      url: image
+    }
+
+    let newImg = await dispatch(createImg(imgPayload))
+    history.push(`/products/${productId}`)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,13 +58,6 @@ function UpdateProduct(){
 
 
     let updatedProduct = await dispatch(updateProduct(payload, productId))
-
-    // const imgPayload = {
-    //   productId: newProduct.id,
-    //   url: image
-    // }
-
-    // let newImg = await dispatch(createImg(imgPayload))
     history.push(`/products/${productId}`)
 
   }
@@ -85,17 +96,33 @@ function UpdateProduct(){
             onChange={(e) => setPrice(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="image">Preview Image</label>
+        <button>Submit</button>
+        </form>
+        <form onSubmit={addimgSubmit}>
+        <label htmlFor="image">Add New Image</label>
           <input
             name="image"
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             />
+            <button>Add New Image</button>
+            </form>
+        <div>
+          <ul className="images">
+            {product.images.length > 0 && Object.values(product.images).map((image) => {
+              return (
+                <li key={image.id}>
+                  <img className="img" src={image.url} alt=''></img>
+                  <button onClick={async e =>{
+                    await dispatch(destroyImg(image.id))
+                    await dispatch(getProduct(productId))
+                  }}>Delete</button>
+                </li>
+              )
+            })}
+          </ul>
         </div>
-        <button>Submit</button>
-      </form>
     </div>
   )
 }
