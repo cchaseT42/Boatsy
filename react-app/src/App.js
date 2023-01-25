@@ -10,6 +10,7 @@ import User from './components/User';
 import AllProducts from './components/AllProducts/AllProducts';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import CreateProduct from './components/CreateProduct/CreateProduct';
+import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import { authenticate } from './store/session';
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
         </Route>
         <Route path='/products/sell'>
           <CreateProduct/>
+        </Route>
+        <Route path='/products/edit/:productId'>
+          <UpdateProduct/>
         </Route>
         <Route path='/products/:productId'>
           <SingleProduct/>
