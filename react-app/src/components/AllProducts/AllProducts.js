@@ -31,7 +31,7 @@ function AllProducts(){
               </span>
               <span>
               <Link to={`/products/${product.id}`}>
-              <img className='img' src={product.images[0].url} alt=''/>
+              {product.images.length == 0 ? <img className='img'></img>: <img className='img' src={product.images[0].url} alt=''></img>}
               </Link>
               </span>
             </li>

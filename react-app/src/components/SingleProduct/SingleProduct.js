@@ -33,7 +33,7 @@ function SingleProduct(){
                 <p>${product.price}</p>
               </span>
               <span>
-              <img className='img' src={product.images[0].url} alt=''/>
+              {product.images.length == 0 ? <img className='img'></img>: <img className='img' src={product.images[0].url} alt=''></img>}
               </span>
             </li>
           )
