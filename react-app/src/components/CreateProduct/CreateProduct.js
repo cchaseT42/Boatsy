@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { createProduct } from "../../store/product";
+import { createImg } from "../../store/image";
 
 function CreateProduct(){
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ function CreateProduct(){
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
+  const [image, setImage] = useState("")
   const [validationErrors, setValidationErrors] = useState([])
   const errors = []
 
@@ -31,7 +33,15 @@ function CreateProduct(){
       price
     }
 
+
     let newProduct = await dispatch(createProduct(payload))
+
+    const imgPayload = {
+      productId: newProduct.id,
+      url: image
+    }
+
+    let newImg = await dispatch(createImg(imgPayload))
     history.push(`/products/${newProduct.id}`)
 
   }
@@ -69,6 +79,15 @@ function CreateProduct(){
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            />
+        </div>
+        <div>
+          <label htmlFor="image">Preview Image</label>
+          <input
+            name="image"
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
             />
         </div>
         <button>Submit</button>
