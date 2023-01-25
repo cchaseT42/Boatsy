@@ -82,6 +82,15 @@ export const updateProduct = (data, productId) => async dispatch => {
   return updatedProduct
 }
 
+export const deleteProduct = (productId) => async dispatch => {
+  const response = await fetch(`/api/products/${productId}`, {
+    method: 'delete'
+  })
+    if (response.ok){
+      dispatch(destroy(productId))
+    }
+}
+
 let initialState = {}
 
 const products = (state = initialState, action) => {
@@ -110,7 +119,7 @@ const products = (state = initialState, action) => {
     }
     case DELETE: {
       const newState = {...state}
-      delete newState[action.productId]
+      delete newState[action.product.id]
       return newState
     }
     default: return state
