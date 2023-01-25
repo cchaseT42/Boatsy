@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import { getProduct } from "../../store/product"
 import './SingleProduct.css'
 
@@ -8,6 +8,7 @@ import './SingleProduct.css'
 function SingleProduct(){
 
   const dispatch = useDispatch()
+  const history = useHistory()
   const { productId } = useParams()
   const product = useSelector(state => state.products)
 
@@ -35,6 +36,7 @@ function SingleProduct(){
               <span>
               {product.images.length == 0 ? <img className='img'></img>: <img className='img' src={product.images[0].url} alt=''></img>}
               </span>
+              <button onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
             </li>
           )
         })}
