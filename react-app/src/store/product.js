@@ -1,4 +1,3 @@
-
 const LOAD = 'product/getProducts'
 const PRODUCTLOAD = 'product/getProduct'
 const CREATE = 'product/createProduct'

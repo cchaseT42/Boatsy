@@ -26,7 +26,6 @@ function SingleProduct(){
       itemCount: 1
     }
 
-    console.log("addtoCart")
     let newCart = await dispatch(createCart(payload))
   }
 
@@ -39,7 +38,6 @@ function SingleProduct(){
     dispatch(getProduct(productId))
   }, [dispatch])
 
-  console.log(product)
 
   return (
     <div className="ProductDetails">

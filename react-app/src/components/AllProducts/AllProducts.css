@@ -7,7 +7,7 @@
   row-gap: 18px;
   column-gap: 18px;
   justify-items: stretch;
-  grid-auto-flow: column;
+  grid-auto-flow: row;
 
 }
 
