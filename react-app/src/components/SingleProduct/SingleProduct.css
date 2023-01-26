@@ -1,0 +1,41 @@
+.ProductDetails{
+  margin-left: 15%;
+  margin-right: 15%;
+  display:flex;
+  flex-direction: row;
+}
+
+.showImg {
+  width: 600px;
+  height: 600px;
+  border-radius: 2%;
+}
+
+.detailDiv {
+  margin-left: 50px;
+  width:700px;
+}
+
+.notOwnerButtons{
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+}
+
+.ownerbuttons {
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+}
+
+.cartbutton {
+  border-radius: 20px;
+  height: 40px;
+  width: 400px
+}
+
+.buttonOwner {
+  border-radius: 20px;
+  height: 40px;
+  width: 400px
+}

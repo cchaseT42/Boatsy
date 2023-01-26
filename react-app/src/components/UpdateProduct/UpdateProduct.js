@@ -35,17 +35,47 @@ function UpdateProduct(){
   const addimgSubmit = async (e) => {
     e.preventDefault()
 
+    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
+    if (errors.length) return setValidationErrors(errors)
+
     const imgPayload = {
       productId,
       url: image
     }
 
+
+
     let newImg = await dispatch(createImg(imgPayload))
-    history.push(`/products/${productId}`)
+
+    await dispatch(getProduct(productId))
+  }
+
+  const addImg_handlesubmit = async (e) => {
+
+    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
+    if (errors.length) return setValidationErrors(errors)
+
+    const imgPayload = {
+      productId,
+      url: image
+    }
+
+
+
+    let newImg = await dispatch(createImg(imgPayload))
+
+    await dispatch(getProduct(productId))
+
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name) errors.push("Name field is required")
+    if (!description) errors.push("Description field is required")
+    if (!price) errors.push("Price field is required")
+    if (isNaN(price)) errors.push("Price field must be a number")
+    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
 
     if (errors.length) return setValidationErrors(errors)
 
@@ -58,6 +88,11 @@ function UpdateProduct(){
 
 
     let updatedProduct = await dispatch(updateProduct(payload, productId))
+
+    if (image) {
+      addImg_handlesubmit()
+    }
+
     history.push(`/products/${productId}`)
 
   }
