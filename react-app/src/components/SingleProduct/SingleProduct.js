@@ -12,7 +12,9 @@ function SingleProduct(){
   const dispatch = useDispatch()
   const history = useHistory()
   const { productId } = useParams()
-  const product = useSelector(state => state.products)
+  const products = useSelector(state => state.products)
+  const productsArr = Object.values(products)
+  const product = productsArr[0]
   const user = useSelector(state => state.session.user)
 
   const addtoCart = async (e) => {
@@ -41,31 +43,20 @@ function SingleProduct(){
 
   return (
     <div className="ProductDetails">
-      {Object.values(product).map((product) => {
-          return (
-            <li key={product.id} className='product'>
-              <span>
-                <p>{product.productName}</p>
+              <div className="imgDiv">
+              <span className='displayImg'>
+              {product.images.length == 0 ? <img className='showImg'></img>: <img className='showImg' src={product.images[0].url} alt=''></img>}
               </span>
-              <span>
-                <p>{product.productDescription}</p>
-              </span>
-              <span>
-                <p>${product.price}</p>
-              </span>
-              <span>
-              {product.images.length == 0 ? <img className='img'></img>: <img className='img' src={product.images[0].url} alt=''></img>}
-              </span>
-              {user !== null && user.id !== product.ownerId && (<div>
-                <button onClick={addtoCart}>Add To Cart</button>
+              </div>
+              <div className='detailDiv'>
+              {user !== null && user.id !== product.ownerId && (<div className="notOwnerButtons">
+                <button className="cartbutton" onClick={addtoCart}>Add To Cart</button>
               </div>)}
-              {user !== null && user.id === product.ownerId && (<div>
-              <button onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
-              <button onClick={handleDelete}>Delete</button>
+              {user !== null && user.id === product.ownerId && (<div className='ownerbuttons'>
+              <button className="buttonOwner" onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
+              <button className="buttonOwner" onClick={handleDelete}>Delete</button>
               </div>)}
-            </li>
-          )
-        })}
+              </div>
     </div>
   )
 }
