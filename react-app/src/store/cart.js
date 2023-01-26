@@ -41,6 +41,7 @@ export const getCart = (id) => async dispatch => {
 }
 
 export const createCart = (data) => async dispatch => {
+  console.log(data)
   const response = await fetch(`/api/cart/add`, {
     method: 'post',
     headers: {
@@ -49,6 +50,7 @@ export const createCart = (data) => async dispatch => {
     body: JSON.stringify(data)
   })
   const newCart = await response.json()
+  console.log("newCart", newCart)
   dispatch(create(newCart))
   return newCart
 }

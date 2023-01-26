@@ -15,6 +15,7 @@ def cart(id):
 @cart_routes.route('/add', methods=['POST'])
 @login_required
 def add_cart():
+  print("hello")
   form = CartForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { getProduct } from "../../store/product"
 import { deleteProduct } from "../../store/product"
+import { createCart } from "../../store/cart"
 import './SingleProduct.css'
 
 
@@ -13,6 +14,19 @@ function SingleProduct(){
   const { productId } = useParams()
   const product = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
+
+  const addtoCart = async (e) => {
+    e.preventDefault()
+
+    const payload = {
+      userId: user.id,
+      productId: Number(productId),
+      itemCount: 1
+    }
+
+    console.log("addtoCart")
+    let newCart = await dispatch(createCart(payload))
+  }
 
   const handleDelete = async () => {
     await dispatch(deleteProduct(productId)).then(() => history.push('/'))
@@ -42,6 +56,9 @@ function SingleProduct(){
               <span>
               {product.images.length == 0 ? <img className='img'></img>: <img className='img' src={product.images[0].url} alt=''></img>}
               </span>
+              {user !== null && user.id !== product.ownerId && (<div>
+                <button onClick={addtoCart}>Add To Cart</button>
+              </div>)}
               {user !== null && user.id === product.ownerId && (<div>
               <button onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
               <button onClick={handleDelete}>Delete</button>
