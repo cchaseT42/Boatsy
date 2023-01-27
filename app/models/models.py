@@ -9,6 +9,22 @@ def add_prefix_for_prod(attr):
     else:
         return attr
 
+cart_products = db.Table(
+    "cart_products",
+    db.Column(
+        "userId",
+        db.Integer,
+        db.ForeignKey("users.id"),
+        primary_key=True
+    ),
+    db.Column(
+        "productId",
+        db.Integer,
+        db.ForeignKey("products.id"),
+        primary_key=True
+    )
+)
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -19,6 +35,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    products = db.relationship(
+        "Product",
+        secondary=cart_products,
+        back_populates="users"
+    )
 
     @property
     def password(self):
@@ -49,8 +71,11 @@ class Product(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    # imageId = db.Column(db.Integer, db.ForeignKey(
-    #     add_prefix_for_prod('images.id')), nullable=False)
+    users = db.relationship(
+        "User",
+        secondary=cart_products,
+        back_populates="products"
+    )
 
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
