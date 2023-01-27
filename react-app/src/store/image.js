@@ -1,4 +1,3 @@
-
 const CREATE = "image/createImg"
 const UPDATE = 'image/createImg'
 const DELETE = 'image/deleteImg'
