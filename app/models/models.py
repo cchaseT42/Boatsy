@@ -9,21 +9,25 @@ def add_prefix_for_prod(attr):
     else:
         return attr
 
-cart_products = db.Table(
-    "cart_products",
-    db.Column(
-        "userId",
-        db.Integer,
-        db.ForeignKey("users.id"),
-        primary_key=True
-    ),
-    db.Column(
-        "productId",
-        db.Integer,
-        db.ForeignKey("products.id"),
-        primary_key=True
-    )
-)
+# cart_products = db.Table(
+#     "cart_products",
+#     db.Column(
+#         "id",
+#         db.Integer,
+#         primary_key=True,
+#         nullable=False
+#     ),
+#     db.Column(
+#         "userId",
+#         db.Integer,
+#         db.ForeignKey("users.id"),
+#     ),
+#     db.Column(
+#         "productId",
+#         db.Integer,
+#         db.ForeignKey("products.id"),
+#     )
+# )
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -36,11 +40,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    products = db.relationship(
-        "Product",
-        secondary=cart_products,
-        back_populates="users"
-    )
+    # products = db.relationship(
+    #     "Product",
+    #     secondary=cart_products,
+    #     back_populates="users"
+    # )
 
     @property
     def password(self):
@@ -57,7 +61,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            # 'products': [product.id for product in self.products]
         }
 
 
@@ -71,11 +76,11 @@ class Product(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    users = db.relationship(
-        "User",
-        secondary=cart_products,
-        back_populates="products"
-    )
+    # users = db.relationship(
+    #     "User",
+    #     secondary=cart_products,
+    #     back_populates="products"
+    # )
 
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
@@ -107,14 +112,12 @@ class Cart(db.Model):
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
 
-    itemCount = db.Column(db.Integer, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
             'productId': self.productId,
-            'itemCount': self.itemCount
         }
 
 

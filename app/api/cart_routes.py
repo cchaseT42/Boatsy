@@ -13,7 +13,6 @@ def cart(id):
   return cart.to_dict(), 200
 
 @cart_routes.route('/add', methods=['POST'])
-@login_required
 def add_cart():
   print("hello")
   form = CartForm()

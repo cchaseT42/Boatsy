@@ -23,8 +23,9 @@ function SingleProduct(){
     const payload = {
       userId: user.id,
       productId: Number(productId),
-      itemCount: 1
     }
+
+    console.log(payload)
 
     let newCart = await dispatch(createCart(payload))
   }
