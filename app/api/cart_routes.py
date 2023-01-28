@@ -6,11 +6,15 @@ from .auth_routes import validation_errors_to_error_messages
 
 cart_routes = Blueprint('cart', __name__)
 
-@cart_routes.route('/')
+@cart_routes.route('/<int:id>')
 @login_required
 def cart(id):
-  cart = Cart.query(Cart).filter(Cart.userId == id)
-  return cart.to_dict(), 200
+  carts = Cart.query.all()
+  print("all", cart)
+  carts = list(filter(lambda cart: cart.userId == id, carts))
+  print(carts)
+  # cart = db.session.query(Cart).filter(Cart.userId == id)
+  return {'cart_items': [cart.to_dict() for cart in carts]}, 200
 
 @cart_routes.route('/add', methods=['POST'])
 def add_cart():

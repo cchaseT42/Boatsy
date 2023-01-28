@@ -69,7 +69,11 @@ let initialState = {}
 const carts = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
-      const newState = {[action.cart.id]: action.cart}
+      const newState = {}
+      const cartsArr = action.cart.cart_items
+      cartsArr.forEach(cart_item => {
+        newState[cart_item.id] = cart_item
+      })
       return newState
     }
     case CREATE: {
