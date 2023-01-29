@@ -11,6 +11,7 @@ import AllProducts from './components/AllProducts/AllProducts';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import CreateProduct from './components/CreateProduct/CreateProduct';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
+import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <AllProducts/>
+        </Route>
+        <Route path='/cart'>
+          <Cart/>
         </Route>
         <Route path='/products/sell'>
           <CreateProduct/>

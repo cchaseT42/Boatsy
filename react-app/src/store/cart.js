@@ -41,7 +41,7 @@ export const getCart = (id) => async dispatch => {
 }
 
 export const createCart = (data) => async dispatch => {
-  console.log(data)
+  console.log("data:", data)
   const response = await fetch(`/api/cart/add`, {
     method: 'post',
     headers: {
@@ -55,21 +55,25 @@ export const createCart = (data) => async dispatch => {
   return newCart
 }
 
-// export const deleteCart = (id) => async dispatch => {
-//   const response = await fetch(`/api/products/${productId}`, {
-//     method: 'delete'
-//   })
-//     if (response.ok){
-//       dispatch(destroy(productId))
-//     }
-// }
+export const deleteCart = (id) => async dispatch => {
+  const response = await fetch(`/api/cart/${id}`, {
+    method: 'delete'
+  })
+    if (response.ok){
+      dispatch(destroy(id))
+    }
+}
 
 let initialState = {}
 
 const carts = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
-      const newState = {[action.cart.id]: action.cart}
+      const newState = {}
+      const cartsArr = action.cart.cart_items
+      cartsArr.forEach(cart_item => {
+        newState[cart_item.id] = cart_item
+      })
       return newState
     }
     case CREATE: {

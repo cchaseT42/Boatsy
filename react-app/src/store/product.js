@@ -68,6 +68,7 @@ export const createProduct = (data) => async dispatch => {
   return newProduct
 }
 
+
 export const updateProduct = (data, productId) => async dispatch => {
   const response = await fetch(`/api/products/${Number(productId)}`, {
     method: 'put',
