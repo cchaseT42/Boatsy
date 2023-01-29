@@ -16,7 +16,14 @@ function Cart(){
 
   return (
     <div>
-      hi
+      {Object.values(carts).map((products) => {
+        return(
+          <span>
+            {products.products.productName}
+          </span>
+        )
+        })
+      }
     </div>
     )
 }
