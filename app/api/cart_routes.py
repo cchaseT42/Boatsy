@@ -31,3 +31,11 @@ def add_cart():
     return new_cart.to_dict(), 201
 
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@cart_routes.route('/<int:id>', methods=['DELETE'])
+def remove_cart(id):
+  cart = Cart.query.get(id)
+
+  db.session.delete(cart)
+  db.session.commit()
+  return 'Successfully deleted'

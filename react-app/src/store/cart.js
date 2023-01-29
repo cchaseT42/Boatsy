@@ -55,14 +55,14 @@ export const createCart = (data) => async dispatch => {
   return newCart
 }
 
-// export const deleteCart = (id) => async dispatch => {
-//   const response = await fetch(`/api/products/${productId}`, {
-//     method: 'delete'
-//   })
-//     if (response.ok){
-//       dispatch(destroy(productId))
-//     }
-// }
+export const deleteCart = (id) => async dispatch => {
+  const response = await fetch(`/api/cart/${id}`, {
+    method: 'delete'
+  })
+    if (response.ok){
+      dispatch(destroy(id))
+    }
+}
 
 let initialState = {}
 
