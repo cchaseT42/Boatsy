@@ -68,20 +68,6 @@ export const createProduct = (data) => async dispatch => {
   return newProduct
 }
 
-export const addCart = (data, userId) => async dispatch => {
-  const response = await fetch(`/api/products/${data.productId}/addtocart`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userId})
-  })
-
-  const cartItem = await response.json()
-  console.log("hiii", cartItem)
-  dispatch(update(cartItem))
-  return cartItem
-}
 
 export const updateProduct = (data, productId) => async dispatch => {
   const response = await fetch(`/api/products/${Number(productId)}`, {
