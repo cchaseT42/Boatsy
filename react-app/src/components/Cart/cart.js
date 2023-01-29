@@ -11,16 +11,59 @@ function Cart(){
     dispatch(getCart(user.id))
   }, [dispatch])
 
-  const carts = useSelector(state => state.carts)
-  console.log(carts)
+  const cartsObj = useSelector(state => state.carts)
+  const carts = Object.values(cartsObj)
+  let itemsArr = []
+  let productsArr = []
+  carts.forEach(product => {
+    if (!itemsArr.includes(product.productId)){
+      console.log("not included", product.productId)
+      console.log(itemsArr, "itemsArr")
+      product.count = 1
+      itemsArr.push(product.productId)
+      productsArr.push(product)
+    } else {
+      productsArr.forEach(products => {
+        if (products.productId === product.productId)
+        products.count += 1
+      })
+      console.log(productsArr, "products")
+    }
+  })
+
+  // Object.values(carts.map((products) => {
+  //   let itemsArr = []
+  //   if (itemsArr.includes(products)){
+  //     products.count += 1
+  //     return
+  //   } else {
+  //     itemsArr.push(products)
+  //     products.count = 1
+  //   }
+  // }))
+
 
   return (
     <div>
       {Object.values(carts).map((products) => {
+        {let itemsArr = []
+          if (itemsArr.includes(products)){
+            return console.log("included!")
+          } else {
+            itemsArr.push(products)
+          }
+         }
         return(
-          <span>
-            {products.products.productName}
-          </span>
+          <ul>
+            <li>
+              <span>
+                <img className="img" src={products.products.images[0].url}></img>
+              </span>
+              <span>
+              {products.products.productName}
+              </span>
+            </li>
+          </ul>
         )
         })
       }
