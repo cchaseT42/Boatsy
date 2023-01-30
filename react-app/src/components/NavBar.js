@@ -19,6 +19,12 @@ const NavBar = () => {
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
+          <NavLink to='/cart' exact={true} activeClassName='active'>
+            Cart
+          </NavLink>
+          <NavLink to ='/products/sell' exact={true} activeClassName='active'>
+            Sell
+          </NavLink>
           <LogoutButton />
     </nav>
   );
