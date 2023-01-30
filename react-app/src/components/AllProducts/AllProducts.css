@@ -1,4 +1,24 @@
-.container {
+/* .container {
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  flex-direction: column;
+
+} */
+
+.splash{
+  background-color: rgb(83, 235, 235);
+  width:100%;
+  height:150px;
+  display: flex;
+  justify-content: center;
+}
+
+.boatsy{
+  font-weight: 20;
+}
+
+.flex{
   margin-left: 15%;
   margin-right: 15%;
   display: grid;
@@ -6,14 +26,30 @@
   grid-template-columns: repeat(4, 1fr);
   row-gap: 18px;
   column-gap: 18px;
-  justify-items: stretch;
   grid-auto-flow: row;
+}
 
+a{
+  color: black;
+  text-decoration: none;
 }
 
 .img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
+  transition: all .02s ease-in-out;
+}
+
+.img:hover{
+  cursor: pointer;
+  filter: drop-shadow(0 0 0.75rem rgb(223, 223, 223))
+}
+
+.product {
+}
+
+.product:hover{
+
 }
 
 li {
@@ -31,5 +67,5 @@ li {
 }
 
 .DivCont {
-  position: relative
+  position: relative;
 }

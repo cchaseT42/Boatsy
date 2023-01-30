@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
+import LoginFormModal from '../LoginFormModal';
 import './auth.css'
 
-const LoginForm = () => {
+const LoginForm = ({setShowModal}) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const error = []
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -17,11 +20,19 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+    setShowModal(false)
+    await history.push('/')
   };
 
   const demoUser = async (e) => {
     e.preventDefault();
+    setShowModal(false)
     const data = await dispatch(login("demo@aa.io", "password"))
+  }
+
+  const sign_up = async (e) => {
+    setShowModal(false)
+    return history.push('/sign-up')
   }
 
   const updateEmail = (e) => {
@@ -38,14 +49,14 @@ const LoginForm = () => {
 
   return (
     <div className="login_div">
-    <form onSubmit={onLogin}>
-      <div className="login_form">
-        <div className='sign_in'>
+      <div className='sign_in'>
       <p className='sign_in_p'>
         Sign in
       </p>
-      <button id='signup_btn'>Sign up</button>
+      <button id='signup_btn' onClick={sign_up}>Sign up</button>
       </div>
+    <form onSubmit={onLogin}>
+      <div className="login_form">
       <div className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
@@ -56,6 +67,7 @@ const LoginForm = () => {
         <label className='above_form' htmlFor='email'>Email address</label>
         </div>
         <input
+          className='login_input'
           name='email'
           type='text'
           placeholder='Email'
@@ -68,6 +80,7 @@ const LoginForm = () => {
         <label className='above_form' htmlFor='password'>Password</label>
         </div>
         <input
+          className='login_input'
           name='password'
           type='password'
           placeholder='Password'

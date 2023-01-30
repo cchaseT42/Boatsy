@@ -55,19 +55,3 @@ def delete_product(id):
     db.session.delete(product)
     db.session.commit()
     return 'Successfully deleted'
-
-# @product_routes.route('/<int:id>/addtocart', methods=['POST'])
-# def add_to_cart(id):
-#   product = Product.query.get(id)
-
-#   form = CartForm()
-#   form['csrf_token'].data = request.cookies['csrf_token']
-
-#   if form.validate_on_submit():
-#     userId = form.data['userId']
-#     user = User.query.get(userId)
-
-#     product.users.append(user)
-#     db.session.commit()
-#     return product.to_dict(), 201
-#   return {'errors': validation_errors_to_error_messages(form.errors)}, 401

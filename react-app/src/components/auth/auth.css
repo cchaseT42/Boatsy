@@ -1,13 +1,37 @@
 #navbar{
-  display:flex;
-  flex-direction: row;
-  justify-content: right;
   height: 100px;
   border-style: solid;
   border-top: transparent;
   border-right: transparent;
   border-left: transparent;
   border-color: rgb(222,222,222);
+  border-width: 2px;
+}
+
+#navbar_div{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+  border-style: solid;
+  border-top: transparent;
+  border-right: transparent;
+  border-left: transparent;
+  border-color: rgb(222,222,222);
+  border-width: 2px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.logo{
+  height: 100px;
+  width: 170px;
+}
+.navbar_div{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
 }
 
 .above_form{
@@ -27,8 +51,16 @@
   flex-direction: column;
 }
 
+.user_buttons{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .sign_in{
   margin: auto;
+  margin-top: 5%;
+  margin-bottom: 0%;
   width: 80%;
   display: flex;
   flex-direction: row;
@@ -39,7 +71,7 @@
   font-size: 24px;
 }
 
-input{
+.login_input{
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -80,7 +112,21 @@ input{
 
 #demo:hover{
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.02);
+}
+
+#logout_btn{
+  border:none;
+  background-color: rgb(222,222,222);
+  height: 30%;
+  width: 100%;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+}
+
+#logout_btn:hover{
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
 }
 
 #login{
@@ -96,7 +142,7 @@ input{
 
 #login:hover{
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 #signup_btn{
@@ -114,5 +160,5 @@ input{
 
 #signup_btn:hover{
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
