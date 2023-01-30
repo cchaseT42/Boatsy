@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './auth.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -36,14 +37,24 @@ const LoginForm = () => {
   }
 
   return (
+    <div className="login_div">
     <form onSubmit={onLogin}>
-      <div>
+      <div className="login_form">
+        <div className='sign_in'>
+      <p className='sign_in_p'>
+        Sign in
+      </p>
+      <button id='signup_btn'>Sign up</button>
+      </div>
+      <div className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
+      <div className="email">
+        <div>
+        <label className='above_form' htmlFor='email'>Email address</label>
+        </div>
         <input
           name='email'
           type='text'
@@ -52,8 +63,10 @@ const LoginForm = () => {
           onChange={updateEmail}
         />
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
+      <div className = "password">
+        <div>
+        <label className='above_form' htmlFor='password'>Password</label>
+        </div>
         <input
           name='password'
           type='password'
@@ -61,12 +74,16 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
       </div>
-      <div>
-        <button id="Demo" type='submit' onClick={demoUser}>Sign in as demo user</button>
+      <div className='signin_button'>
+        <button id='login' type='submit'>Sign in</button>
+      </div>
+      <div className='signin_button'>
+        <button id="demo" type='submit' onClick={demoUser}>Demo</button>
+      </div>
       </div>
     </form>
+    </div>
   );
 };
 
