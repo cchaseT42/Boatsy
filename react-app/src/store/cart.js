@@ -1,7 +1,6 @@
 
 const LOAD = 'cart/getCart'
 const CREATE = 'cart/addCart'
-const UPDATE = 'cart/updateCart'
 const DELETE = 'cart/deleteCart'
 
 const load = (cart) => {
@@ -18,12 +17,6 @@ const create = (cart) => {
   }
 }
 
-const update = (cart) => {
-  return {
-    type: UPDATE,
-    cart
-  }
-}
 
 const destroy = (cart) => {
   return {
@@ -77,11 +70,6 @@ const carts = (state = initialState, action) => {
       return newState
     }
     case CREATE: {
-      const newState = {...state}
-      newState[action.cart.id] = action.cart
-      return newState
-    }
-    case UPDATE: {
       const newState = {...state}
       newState[action.cart.id] = action.cart
       return newState

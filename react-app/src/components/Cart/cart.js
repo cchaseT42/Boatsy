@@ -5,7 +5,6 @@ import { createCart } from "../../store/cart";
 import { deleteCart } from "../../store/cart";
 import { getCart } from "../../store/cart";
 import './cart.css'
-import products from "../../store/product";
 
 function Cart(){
   const dispatch = useDispatch()
