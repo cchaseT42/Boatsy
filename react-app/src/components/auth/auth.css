@@ -1,11 +1,164 @@
 #navbar{
-  display:flex;
-  flex-direction: row;
-  justify-content: right;
   height: 100px;
   border-style: solid;
   border-top: transparent;
   border-right: transparent;
   border-left: transparent;
   border-color: rgb(222,222,222);
+  border-width: 2px;
+}
+
+#navbar_div{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+  border-style: solid;
+  border-top: transparent;
+  border-right: transparent;
+  border-left: transparent;
+  border-color: rgb(222,222,222);
+  border-width: 2px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.logo{
+  height: 100px;
+  width: 170px;
+}
+.navbar_div{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.above_form{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.login_div {
+  width: 350px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_buttons{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.sign_in{
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 0%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sign_in_p{
+  font-size: 24px;
+}
+
+.login_input{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border-color: rgb(195, 195, 195);
+}
+
+.email {
+  margin: auto;
+  height: 40px;
+  width: 80%;
+}
+
+.password {
+  padding-top: 40px;
+  margin: auto;
+  height: 40px;
+  width: 80%;
+}
+
+.signin_button{
+  width: 80%;
+  height: 50px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10%;
+}
+
+#demo{
+  font-size: 24px;
+  color: white;
+  background-color: rgb(0, 238, 255);
+  border: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+}
+
+#demo:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#logout_btn{
+  border:none;
+  background-color: rgb(222,222,222);
+  height: 30%;
+  width: 100%;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+}
+
+#logout_btn:hover{
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+}
+
+#login{
+  font-size: 24px;
+  color: white;
+  background-color: rgb(34, 34, 34);
+  border: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+}
+
+#login:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#signup_btn{
+  margin: auto;
+  margin-right: 0px;
+  font-size: 14px;
+  color: white;
+  background-color: rgb(34, 34, 34);
+  border: none;
+  height: 30px;
+  width: 30%;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+}
+
+#signup_btn:hover{
+  cursor: pointer;
+  transform: scale(1.02);
 }
