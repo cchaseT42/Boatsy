@@ -17,6 +17,16 @@
   width:700px;
 }
 
+.product_price{
+  width: 70%;
+}
+
+#product_price {
+  font-family: Montserrat,sans-serif;
+  font-weight: 80;
+  font-size: 32px;
+}
+
 #name{
   font-family: Montserrat,sans-serif;
   font-weight: 20;
@@ -46,13 +56,33 @@
 }
 
 .cartbutton {
-  border-radius: 20px;
+  border-radius: 25px;
   height: 40px;
-  width: 400px
+  width: 400px;
+  margin-top: 10px;
+  border: none;
+  font-size: 24px;
+  background-color: rgb(222, 222, 222);
+  transition: all .2s ease-in-out;
 }
 
 .buttonOwner {
-  border-radius: 20px;
+  border-radius: 25px;
   height: 40px;
-  width: 400px
+  width: 400px;
+  margin-top: 10px;
+  border: none;
+  font-size: 24px;
+  background-color: rgb(222, 222, 222);
+  transition: all .2s ease-in-out;
+}
+
+.buttonOwner:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.cartbutton:hover {
+  cursor: pointer;
+  transform: scale(1.02);
 }
