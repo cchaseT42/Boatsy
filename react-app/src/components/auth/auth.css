@@ -57,6 +57,21 @@
   flex-direction: row;
 }
 
+.user_button{
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border-color: transparent;
+  height: 30px;
+  background-color: rgb(222,222,222);
+  transition: all .2s ease-in-out;
+}
+
+.user_button:hover{
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+}
+
 .sign_in{
   margin: auto;
   margin-top: 5%;
@@ -118,7 +133,7 @@
 #logout_btn{
   border:none;
   background-color: rgb(222,222,222);
-  height: 30%;
+  height: 30px;
   width: 100%;
   border-radius: 25px;
   transition: all .2s ease-in-out;
@@ -143,6 +158,16 @@
 #login:hover{
   cursor: pointer;
   transform: scale(1.02);
+}
+
+.material-symbols-outlined{
+  font-size: 32px;
+  transition: all .2s ease-in-out;
+  border-radius: 10px;
+}
+
+.material-symbols-outlined:hover{
+  background-color: rgb(243, 243, 243);
 }
 
 #signup_btn{

@@ -21,11 +21,12 @@ const NavBar = () => {
           </div>
           <div className='user_buttons'>
           <NavLink to='/cart' exact={true} activeClassName='active'>
-          <i className="fas fa-user-circle" />
+          <span className='cart_div'>{user && <span className="material-symbols-outlined">shopping_cart_checkout</span>}</span>
           </NavLink>
           <NavLink to ='/products/sell' exact={true} activeClassName='active'>
-            Sell
+            <span>{user && <button className='user_button'>Sell</button>}</span>
           </NavLink>
+
           <li>
             {!user && <LoginFormModal/>}
             {user && <LogoutButton/>}

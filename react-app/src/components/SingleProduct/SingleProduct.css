@@ -34,13 +34,19 @@
 
 .product_name{
   display: flex;
-  align-items:center;
   flex-direction: column;
+  margin-left: 15%
 }
 
 #desc{
+  margin-left: 15%;
   font-family: Montserrat,sans-serif;
-  font-size: 19px;
+  font-size: 24px;
+}
+
+#description{
+  margin-left: 15%;
+  font-family: Montserrat,sans-serif;
 }
 
 .notOwnerButtons{
@@ -57,23 +63,30 @@
 
 .cartbutton {
   border-radius: 25px;
+  color: white;
   height: 40px;
   width: 400px;
   margin-top: 10px;
   border: none;
-  font-size: 24px;
-  background-color: rgb(222, 222, 222);
+  font-size: 18px;
+  background-color: rgb(84, 83, 83);
   transition: all .2s ease-in-out;
+}
+
+#amount_p{
+  font-family: Montserrat,sans-serif;
+  font-size: 18px;
 }
 
 .buttonOwner {
   border-radius: 25px;
+  color: white;
   height: 40px;
   width: 400px;
   margin-top: 10px;
   border: none;
-  font-size: 24px;
-  background-color: rgb(222, 222, 222);
+  font-size: 18px;
+  background-color: rgb(84, 83, 83);
   transition: all .2s ease-in-out;
 }
 

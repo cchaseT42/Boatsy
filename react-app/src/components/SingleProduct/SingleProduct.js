@@ -50,7 +50,6 @@ function SingleProduct(){
               <div className='detailDiv'>
                 <div className='product_name'>
                 <h1 id='name'>{product.productName}</h1>
-                <p id='desc'>{product.productDescription}</p>
                 <div className='product_price'>
                   <h2 id='product_price'>${product.price}</h2>
                 </div>
@@ -62,6 +61,10 @@ function SingleProduct(){
               <button className="buttonOwner" onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
               <button className="buttonOwner" onClick={handleDelete}>Delete</button>
               </div>)}
+              <div>
+              <p id='description'>Description :</p>
+              <p id='desc'>{product.productDescription}</p>
+              </div>
               </div>
     </div>
   )

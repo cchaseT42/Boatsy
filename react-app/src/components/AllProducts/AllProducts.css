@@ -15,7 +15,8 @@
 }
 
 .boatsy{
-  font-weight: 20;
+  font-weight: 15;
+  font-family: Montserrat,sans-serif;
 }
 
 .flex{
@@ -44,13 +45,6 @@ a{
 .img:hover{
   cursor: pointer;
   filter: drop-shadow(0 0 0.75rem rgb(223, 223, 223))
-}
-
-.product {
-}
-
-.product:hover{
-
 }
 
 li {
