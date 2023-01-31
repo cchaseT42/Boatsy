@@ -37,6 +37,7 @@ a{
 .img {
   width: 250px;
   height: 250px;
+  border-radius: 5%;
   transition: all .02s ease-in-out;
 }
 
