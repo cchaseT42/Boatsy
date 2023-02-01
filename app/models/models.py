@@ -51,7 +51,7 @@ class Product(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    carts = db.relationship("Cart", back_populates="product")
+    carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
 
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)

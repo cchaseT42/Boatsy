@@ -1,0 +1,75 @@
+.UpdateProductForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5%;
+}
+
+.img_edit{
+  height: 200px;
+  width: 200px;
+}
+
+.images_div{
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.edit_form{
+  margin-right: 20%;
+  border-style: solid;
+  border-color: rgb(222, 222, 222);
+  padding: 3%;
+}
+
+#submitBtnEdit{
+  font-size: 24px;
+  color: white;
+  background-color: rgb(0, 238, 255);
+  border: none;
+  border-radius: 25px;
+  transition: all .2s ease-in-out;
+  width: 100%;
+}
+
+#submitBtnEdit:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.edit_input{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.input_body{
+  height: 40px;
+}
+
+.edit_tag{
+  font-size: 24px;
+}
+
+#deletebtn{
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 25px;
+  color: white;
+  background-color:black;
+}
+
+#deletebtn:hover{
+  cursor: pointer;
+}
+
+.delete_img_div{
+  display: flex;
+  flex-direction: column;
+}
+
+ul{
+  padding-left: 10px;
+  padding-right: 10px;
+}

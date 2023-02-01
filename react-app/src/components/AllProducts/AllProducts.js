@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getProducts } from '../../store/product'
 import './AllProducts.css'
+import noimage from '../../no_image/No_Image_Available.jpg'
 
 function AllProducts(){
   const dispatch = useDispatch()
@@ -12,8 +13,6 @@ function AllProducts(){
 
   const productsArr6 = Object.values(products).slice(0, 6)
   const productsArr7on = Object.values(products).slice(6)
-  console.log(productsArr7on)
-  console.log(productsArr6)
 
   useEffect(() => {
     dispatch(getProducts())
@@ -33,7 +32,7 @@ function AllProducts(){
               <li key={product.id}>
                  <Link to={`/products/${product.id}`}>
                 <span>
-                {product.images.length == 0 ? <img className='bubbleimg'></img>:<img className='bubbleimg' src={product.images[0].url} alt=''></img>}
+                {product.images.length == 0 ? <img className='bubbleimg' src={noimage}></img>:<img className='bubbleimg' src={product.images[0].url} alt=''></img>}
                 </span>
                 <div className='splash_text'>
                   <p>
@@ -54,7 +53,7 @@ function AllProducts(){
               <div className="DivCont">
               <span>
               <Link to={`/products/${product.id}`}>
-              {product.images.length == 0 ? <img className='img'></img>:<img className='img' src={product.images[0].url} alt=''></img>}
+              {product.images.length == 0 ? <img className='img' src={noimage}></img>:<img className='img' src={product.images[0].url} alt=''></img>}
              <div>
              <span id="displayCont">
                 <span className='curr'>$</span>
