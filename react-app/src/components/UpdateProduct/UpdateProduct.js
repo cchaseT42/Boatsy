@@ -5,6 +5,7 @@ import { updateProduct } from "../../store/product";
 import { createImg } from "../../store/image";
 import { destroyImg } from "../../store/image";
 import { getProduct } from "../../store/product"
+import './UpdateProduct.css'
 
 function UpdateProduct(){
   const dispatch = useDispatch()
@@ -19,10 +20,6 @@ function UpdateProduct(){
   useEffect(() => {
     dispatch(getProduct(productId))
   }, [dispatch])
-
-  // const destroyImg = async () => {
-  //   await dispatch(destroyImg(imgId)).then(() => history.push('/'))
-  // }
 
 
   const [name, setName] = useState(product.productName)
@@ -98,61 +95,74 @@ function UpdateProduct(){
   }
   return (
     <div className= "UpdateProductForm">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='edit_form'>
       <ul className="errors">
           {validationErrors.length > 0 && validationErrors.map((error, idx) => (
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
         </ul>
-        <div>
-          <label htmlFor="name">Name</label>
+        <div className="edit_input">
+          <label className='edit_tag' htmlFor="name">Name</label>
           <input
+            className='input_body'
             name='name'
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
+        <div className="edit_input">
+          <label className='edit_tag' htmlFor="description">Description</label>
           <input
+            className='input_body'
             name="description"
             type="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="price">Price</label>
+        <div className="edit_input">
+          <label className='edit_tag' htmlFor="price">Price</label>
           <input
+            className='input_body'
             name="price"
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             />
         </div>
-        <button>Submit</button>
+        <div className='btnDiv'>
+        <button id='submitBtnEdit'>Submit</button>
+        </div>
         </form>
-        <form onSubmit={addimgSubmit}>
-        <label htmlFor="image">Add New Image</label>
+        <div className='images_div'>
+        <form className='img_form' onSubmit={addimgSubmit}>
+          <p id='or'>
+            Or-
+          </p>
+          <div className='img_form_div'>
+        <label className='edit_tag' htmlFor="image">Add New Image</label>
           <input
+            className='input_body'
             name="image"
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             />
-            <button>Add New Image</button>
+            <button id='img_submit_btn'>Add</button>
+          </div>
             </form>
-        <div>
           <ul className="images">
             {product.images.length > 0 && Object.values(product.images).map((image) => {
               return (
                 <li key={image.id}>
-                  <img className="img" src={image.url} alt=''></img>
-                  <button onClick={async e =>{
+                <div className='delete_img_div'>
+                  <img className="img_edit" src={image.url} alt=''></img>
+                  <button id='deletebtn' onClick={async e =>{
                     await dispatch(destroyImg(image.id))
                     await dispatch(getProduct(productId))
                   }}>Delete</button>
+                  </div>
                 </li>
               )
             })}

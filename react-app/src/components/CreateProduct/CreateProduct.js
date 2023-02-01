@@ -58,7 +58,7 @@ function CreateProduct({setShowModal}){
           ))}
         </ul>
         <div className='inputDiv'>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name" className='inputName'>Name</label>
           <input
             className='inputArea'
             name='name'
@@ -68,7 +68,7 @@ function CreateProduct({setShowModal}){
             />
         </div>
         <div className='inputDiv'>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description" className='inputName'>Description</label>
           <input
             className='inputArea'
             name="description"
@@ -78,7 +78,7 @@ function CreateProduct({setShowModal}){
             />
         </div>
         <div className='inputDiv'>
-          <label htmlFor="price">Price</label>
+          <label htmlFor="price" className='inputName'>Price</label>
           <input
             className='inputArea'
             name="price"
@@ -88,7 +88,7 @@ function CreateProduct({setShowModal}){
             />
         </div>
         <div className='inputDiv'>
-          <label htmlFor="image">Preview Image</label>
+          <label htmlFor="image" className='inputName'>Preview Image (optional)</label>
           <input
             className='inputArea'
             name="image"

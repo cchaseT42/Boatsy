@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { getProduct } from "../../store/product"
 import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
+import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
 
@@ -44,7 +45,7 @@ function SingleProduct(){
     <div className="ProductDetails">
               <div className="imgDiv">
               <span className='displayImg'>
-              {product.images.length == 0 ? <img className='showImg'></img>: <img className='showImg' src={product.images[0].url} alt=''></img>}
+              {product.images.length == 0 ? <img className='showImg' src={noimage}></img>: <img className='showImg' src={product.images[0].url} alt=''></img>}
               </span>
               </div>
               <div className='detailDiv'>
@@ -56,6 +57,7 @@ function SingleProduct(){
                 </div>
                 </div>
               {user !== null && user.id !== product.ownerId && (<div className="notOwnerButtons">
+                <div><p id='added_to_cart'>Added!</p></div>
                 <button className="cartbutton" onClick={addtoCart}>Add To Cart</button>
               </div>)}
               {!user && (<div className='not_logged_in'>
@@ -74,6 +76,14 @@ function SingleProduct(){
               <p id='description'>Description :</p>
               <p id='desc'>{product.productDescription}</p>
               </div>
+              <div id="filler-text-2nd">
+                <span class="material-symbols-outlined" id='handshakeicon'>handshake</span>
+                <div>
+                <p id='PiracyBody'><p id='Piracy'>Piracy Protection Policy:</p>Shop confidently with boatsy. should your loot be plundered
+                during its journey to your port, I will personally send those responsible to Davy Jones's Locker
+                </p>
+                </div>
+                </div>
               </div>
     </div>
   )
