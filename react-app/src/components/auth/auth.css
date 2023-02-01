@@ -144,6 +144,22 @@
   background-color: rgb(243, 243, 243);
 }
 
+#sellbtn{
+  border:none;
+  height:30px;
+  background-color: rgb(222,222,222);
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#sellbtn:hover{
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
+}
+
 #login{
   font-size: 24px;
   color: white;
@@ -160,13 +176,13 @@
   transform: scale(1.02);
 }
 
-.material-symbols-outlined{
+#carticon{
   font-size: 32px;
   transition: all .2s ease-in-out;
   border-radius: 10px;
 }
 
-.material-symbols-outlined:hover{
+#carticon:hover{
   background-color: rgb(243, 243, 243);
 }
 

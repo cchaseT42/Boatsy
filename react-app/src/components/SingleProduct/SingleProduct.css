@@ -21,6 +21,17 @@
   width: 70%;
 }
 
+#filler-text{
+  margin-left: 15%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+p{
+  font-family: Montserrat,sans-serif;
+}
+
 #product_price {
   font-family: Montserrat,sans-serif;
   font-weight: 80;
@@ -30,6 +41,19 @@
 #name{
   font-family: Montserrat,sans-serif;
   font-weight: 20;
+}
+
+#lower{
+  margin-top: 50px;
+}
+
+#Hooray{
+  font-family: Montserrat,sans-serif;
+  font-weight: bold;
+}
+
+#shipicon{
+  font-size: 32px;
 }
 
 .product_name{
@@ -53,6 +77,18 @@
   display: flex;
   align-items:center;
   flex-direction: column;
+}
+
+.not_logged_in{
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  margin-left: 15%;
+}
+
+#info{
+  color: red;
+  font-size: 26px;
 }
 
 .ownerbuttons {
