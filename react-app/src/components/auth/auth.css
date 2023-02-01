@@ -57,6 +57,21 @@
   flex-direction: row;
 }
 
+.user_button{
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border-color: transparent;
+  height: 30px;
+  background-color: rgb(222,222,222);
+  transition: all .2s ease-in-out;
+}
+
+.user_button:hover{
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+}
+
 .sign_in{
   margin: auto;
   margin-top: 5%;
@@ -118,7 +133,7 @@
 #logout_btn{
   border:none;
   background-color: rgb(222,222,222);
-  height: 30%;
+  height: 30px;
   width: 100%;
   border-radius: 25px;
   transition: all .2s ease-in-out;
@@ -127,6 +142,22 @@
 #logout_btn:hover{
   cursor: pointer;
   background-color: rgb(243, 243, 243);
+}
+
+#sellbtn{
+  border:none;
+  height:30px;
+  background-color: rgb(222,222,222);
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#sellbtn:hover{
+    cursor: pointer;
+    background-color: rgb(243, 243, 243);
 }
 
 #login{
@@ -143,6 +174,16 @@
 #login:hover{
   cursor: pointer;
   transform: scale(1.02);
+}
+
+#carticon{
+  font-size: 32px;
+  transition: all .2s ease-in-out;
+  border-radius: 10px;
+}
+
+#carticon:hover{
+  background-color: rgb(243, 243, 243);
 }
 
 #signup_btn{

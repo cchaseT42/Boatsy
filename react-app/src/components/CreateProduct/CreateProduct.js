@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
 import { createProduct } from "../../store/product";
 import { createImg } from "../../store/image";
+import './CreateProduct.css'
 
-function CreateProduct(){
+function CreateProduct({setShowModal}){
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(state => state.session.user)
@@ -43,7 +44,8 @@ function CreateProduct(){
     }
 
     let newImg = await dispatch(createImg(imgPayload))
-    history.push(`/products/${newProduct.id}`)
+    setShowModal(false)
+    await history.push(`/products/${newProduct.id}`)
 
   }
 
@@ -55,43 +57,49 @@ function CreateProduct(){
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
         </ul>
-        <div>
+        <div className='inputDiv'>
           <label htmlFor="name">Name</label>
           <input
+            className='inputArea'
             name='name'
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             />
         </div>
-        <div>
+        <div className='inputDiv'>
           <label htmlFor="description">Description</label>
           <input
+            className='inputArea'
             name="description"
             type="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             />
         </div>
-        <div>
+        <div className='inputDiv'>
           <label htmlFor="price">Price</label>
           <input
+            className='inputArea'
             name="price"
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             />
         </div>
-        <div>
+        <div className='inputDiv'>
           <label htmlFor="image">Preview Image</label>
           <input
+            className='inputArea'
             name="image"
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             />
         </div>
-        <button>Submit</button>
+        <div className='btnDiv'>
+        <button id='submitBtn'>Submit</button>
+        </div>
       </form>
     </div>
   )

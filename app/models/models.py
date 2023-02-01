@@ -56,7 +56,7 @@ class Product(db.Model):
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Numeric(5,2), nullable=False)
 
     def to_dict(self):
         return {
@@ -65,7 +65,7 @@ class Product(db.Model):
             'images': [image.to_dict() for image in self.images],
             'productName': self.productName,
             'productDescription': self.productDescription,
-            'price': self.price
+            'price': str(self.price)
         }
 
 

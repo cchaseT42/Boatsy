@@ -52,15 +52,15 @@ function Cart(){
         products.count += 1
       })
     }
-    total += product.products.price
+    total += parseFloat(product.products.price)
   })
 
 
 
   return (
     <div className='container_cart'>
-      <div className='count_total'>
-        {carts.length === 1 ? <h1>{carts.length} Item in Cart</h1> : <h1>{carts.length} Items in Cart</h1>}
+      <div>
+        {carts.length === 1 ? <h1 className='count_total'>{carts.length} Item in Cart</h1> : <h1 className='count_total'>{carts.length} Items in Cart</h1>}
       </div>
       <div className="cart_items">
       {productsArr.map((product) => {
@@ -69,24 +69,26 @@ function Cart(){
             <li className='list_element'>
             <div className='cart_details'>
               <div>
-              <img className='img'src={product.products.images[0].url}></img>
+              {product.products.images.length === 0 ? <img className='img'></img>: <img className='img' src={product.products.images[0].url} alt=''></img>}
               </div>
               <div className='amount'>
               <p id="product_name">{product.products.productName}</p>
+              <div className='amount_buttons'>
               <button className='cart_button' onClick={e => addtoCart(product.productId)}>Add</button>
-              <span> Amount: {product.count}</span>
+              <span id='amount_p'> Amount {product.count}</span>
               <button className='cart_button' onClick={e => removefromCart(product.id)}>Remove</button>
               </div>
               </div>
+              </div>
               <div className='price_details'>
-              <span> Price: {product.count * product.products.price}</span>
-              <p>(each: {product.products.price})</p>
+              <span id='amount_p'>${product.count * product.products.price}</span>
+              <p id='amount_each_p'>(${product.products.price} each)</p>
               </div>
             </li>
           </ul>
         )
       })}
-      <h1 className='count_total'>total: {total}</h1>
+      <h1 className='count_total'>total ${total}</h1>
       </div>
     </div>
     )
