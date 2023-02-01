@@ -85,7 +85,7 @@ def seed_users():
     )
 
     product14=Product(
-        productName="Ship in a corked bottle", productDescription="Had to put the cork on because the ship kept trying to get out. Willing to negotiate, Don't want this in my house anymore.", price=00.99, ownerId=8
+        productName="Ship in a corked bottle", productDescription="Had to put the cork on because the ship kept trying to get out. Willing to negotiate, Don't want this in my house anymore. In a bottle.", price=00.99, ownerId=8
     )
 
     db.session.add(product1)

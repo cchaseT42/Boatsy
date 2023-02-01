@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import LoginFormModal from '../LoginFormModal';
+import SignUpFormModal from '../SignupFormModal';
 import './auth.css'
 
 const LoginForm = ({setShowModal}) => {
@@ -17,9 +18,7 @@ const LoginForm = ({setShowModal}) => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    if (data) return setErrors(data);
     setShowModal(false)
     await history.push('/')
   };
@@ -30,10 +29,6 @@ const LoginForm = ({setShowModal}) => {
     const data = await dispatch(login("demo@aa.io", "password"))
   }
 
-  const sign_up = async (e) => {
-    setShowModal(false)
-    return history.push('/sign-up')
-  }
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -53,7 +48,6 @@ const LoginForm = ({setShowModal}) => {
       <p className='sign_in_p'>
         Sign in
       </p>
-      <button id='signup_btn' onClick={sign_up}>Sign up</button>
       </div>
     <form onSubmit={onLogin}>
       <div className="login_form">
