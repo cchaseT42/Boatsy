@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import '../components/auth/auth.css'
 import LoginFormModal from './LoginFormModal';
+import SellFormModal from './SellFormModal';
 import logo from '../logo/Screenshot_49.png'
 
 const NavBar = () => {
@@ -21,11 +22,9 @@ const NavBar = () => {
           </div>
           <div className='user_buttons'>
           <NavLink to='/cart' exact={true} activeClassName='active'>
-          <i className="fas fa-user-circle" />
+          <span className='cart_div'>{user && <span className="material-symbols-outlined" id='carticon'>shopping_cart_checkout</span>}</span>
           </NavLink>
-          <NavLink to ='/products/sell' exact={true} activeClassName='active'>
-            Sell
-          </NavLink>
+            {user && <SellFormModal/>}
           <li>
             {!user && <LoginFormModal/>}
             {user && <LogoutButton/>}

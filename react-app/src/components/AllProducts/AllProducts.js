@@ -10,6 +10,11 @@ function AllProducts(){
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
 
+  const productsArr6 = Object.values(products).slice(0, 6)
+  const productsArr7on = Object.values(products).slice(6)
+  console.log(productsArr7on)
+  console.log(productsArr6)
+
   useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
@@ -17,11 +22,33 @@ function AllProducts(){
   return (
     <div className='container'>
       <div className='splash'>
+        <div className='boatsy_bubble_div'>
+        <div className='boatsyDiv'>
         {!user && <h1 className='boatsy'> Welcome to boatsy</h1>}
         {user && <h1 className='boatsy'> Welcome back {user.username}</h1>}
+        </div>
+        <div className='bubbleitems'>
+          {productsArr6.map((product) => {
+            return (
+              <li key={product.id}>
+                 <Link to={`/products/${product.id}`}>
+                <span>
+                {product.images.length == 0 ? <img className='bubbleimg'></img>:<img className='bubbleimg' src={product.images[0].url} alt=''></img>}
+                </span>
+                <div className='splash_text'>
+                  <p>
+                    {product.productName}
+                  </p>
+                </div>
+                </Link>
+              </li>
+            )
+          })}
+        </div>
       </div>
+    </div>
       <div className='flex'>
-        {Object.values(products).map((product) => {
+        {productsArr7on.map((product) => {
           return (
             <li key={product.id} className='product'>
               <div className="DivCont">
