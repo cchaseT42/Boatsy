@@ -10,27 +10,27 @@ https://boatsy.onrender.com/
 
 ## Technologies/Framesworks Used
 
-Javascript
-React
-Redux
-Python
-SQLAlchemy
-wtforms
-Alembic
-Flask
+1. Javascript
+2. React
+3. Redux
+4. Python
+5. SQLAlchemy
+6. wtforms
+7. Alembic
+8. Flask
 
 ## MVP Core Features
 
 ###### Products
-Users can list products for sale
-Users can view all products for sale
-Users can edit or delete products they have put up for sale.
+1. Users can list products for sale
+2. Users can view all products for sale
+3. Users can edit or delete products they have put up for sale.
 
 ###### Cart
-Users can add products to their cart
-Users can view their cart
-Users can adjust quantities of products in their cart
-Users can remove products from their cart.
+1. Users can add products to their cart
+2. Users can view their cart
+3. Users can adjust quantities of products in their cart
+4. Users can remove products from their cart.
 
 
 ![](https://media.discordapp.net/attachments/762125768314454027/1070843988900323398/image.png?width=1374&height=671)
@@ -40,21 +40,21 @@ Users can remove products from their cart.
 ## Future Implementation Goals
 
 ###### Orders
-Users can create orders by checking out from their cart
-Users can view their orders from an orders page
-Users can edit their orders or cancel(delete) them.
+1. Users can create orders by checking out from their cart
+2. Users can view their orders from an orders page
+3. Users can edit their orders or cancel(delete) them.
 
 ###### Reviews
-Users can review products
-Users can view all reviews for an individual product
-Users can edit their review
-Users can delete their review
+1. Users can review products
+2. Users can view all reviews for an individual product
+3. Users can edit their review
+4. Users can delete their review
 
 ###### AWS Implementation
 Users can upload a file for an image instead of pasting a url.
 
 ###### Favorites
-Users can favorite items
-Users can view their favorites from a favorites page
-Users can remove items from their favorites
+1. Users can favorite items
+2. Users can view their favorites from a favorites page
+3. Users can remove items from their favorites
 
