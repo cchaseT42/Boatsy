@@ -28,6 +28,10 @@
   font-size: 12px;
 }
 
+#math{
+  display: none;
+}
+
 .cart_button{
   background-color: rgb(84, 83, 83);
   color: white;

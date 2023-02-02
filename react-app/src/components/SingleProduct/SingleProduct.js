@@ -68,9 +68,6 @@ function SingleProduct(){
     dispatch(getProduct(productId))
   }, [dispatch])
 
-  useEffect(() => {
-    dispatch(getCart(user.id))
-  }, [dispatch])
 
 
   return (
