@@ -19,11 +19,12 @@ const SignUpForm = ({setShowModal}) => {
     e.preventDefault();
 
     if (!username) error.push('Username field required')
-    if (!email) error.push('Email field is required.')
+    if (!email) error.push('Email field is required')
+    if (email && !email.includes('@' && '.')) error.push('Email field must be a valid email')
     if (!password) error.push('Password field is required')
-    if (!repeatPassword) error.push('Repeat password field is required.')
+    if (!repeatPassword) error.push('Repeat password field is required')
     if ((password && repeatPassword) && password !== repeatPassword){
-      error.push("Passwords don't match.")
+      error.push("Passwords don't match")
     }
 
     if (error.length) return setErrors(error)
