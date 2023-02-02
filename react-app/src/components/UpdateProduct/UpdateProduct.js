@@ -72,7 +72,6 @@ function UpdateProduct(){
     if (!description) errors.push("Description field is required")
     if (!price) errors.push("Price field is required")
     if (isNaN(price)) errors.push("Price field must be a number")
-    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
 
     if (errors.length) return setValidationErrors(errors)
 
