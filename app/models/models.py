@@ -51,12 +51,12 @@ class Product(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    carts = db.relationship("Cart", back_populates="product")
+    carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
 
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Numeric(5,2), nullable=False)
 
     def to_dict(self):
         return {
@@ -65,7 +65,7 @@ class Product(db.Model):
             'images': [image.to_dict() for image in self.images],
             'productName': self.productName,
             'productDescription': self.productDescription,
-            'price': self.price
+            'price': str(self.price)
         }
 
 
@@ -83,6 +83,8 @@ class Cart(db.Model):
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
 
+    count = db.Column(db.Integer, nullable=False)
+
     product = db.relationship("Product", back_populates="carts")
 
 
@@ -91,6 +93,7 @@ class Cart(db.Model):
             'id': self.id,
             'userId': self.userId,
             'productId': self.productId,
+            'count': self.count,
             'products': self.product.to_dict()
         }
 

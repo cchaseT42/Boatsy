@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
 import { createProduct } from "../../store/product";
 import { createImg } from "../../store/image";
+import './CreateProduct.css'
 
-function CreateProduct(){
+function CreateProduct({setShowModal}){
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(state => state.session.user)
@@ -20,9 +21,12 @@ function CreateProduct(){
     e.preventDefault();
 
     if (!name) errors.push("Name field is required")
+    if (name.length > 50) errors.push("Name must be less than 50 characters long.")
     if (!description) errors.push("Description field is required")
+    if (description.length > 1000) errors.push("Description must be less than 1000 characters long.")
     if (!price) errors.push("Price field is required")
     if (isNaN(price)) errors.push("Price field must be a number")
+    if (price && !isNaN(price) && price < 1) errors.push("Price must be a positive integer")
     if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
 
     if (errors.length) return setValidationErrors(errors)
@@ -43,7 +47,8 @@ function CreateProduct(){
     }
 
     let newImg = await dispatch(createImg(imgPayload))
-    history.push(`/products/${newProduct.id}`)
+    setShowModal(false)
+    await history.push(`/products/${newProduct.id}`)
 
   }
 
@@ -55,43 +60,49 @@ function CreateProduct(){
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
         </ul>
-        <div>
-          <label htmlFor="name">Name</label>
+        <div className='inputDiv'>
+          <label htmlFor="name" className='inputName'>Name</label>
           <input
+            className='inputArea'
             name='name'
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
+        <div className='inputDiv'>
+          <label htmlFor="description" className='inputName'>Description</label>
           <input
+            className='inputArea'
             name="description"
             type="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="price">Price</label>
+        <div className='inputDiv'>
+          <label htmlFor="price" className='inputName'>Price</label>
           <input
+            className='inputArea'
             name="price"
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             />
         </div>
-        <div>
-          <label htmlFor="image">Preview Image</label>
+        <div className='inputDiv'>
+          <label htmlFor="image" className='inputName'>Preview Image (optional)</label>
           <input
+            className='inputArea'
             name="image"
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
             />
         </div>
-        <button>Submit</button>
+        <div className='btnDiv'>
+        <button id='submitBtn'>Submit</button>
+        </div>
       </form>
     </div>
   )

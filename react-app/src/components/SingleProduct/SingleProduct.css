@@ -6,9 +6,10 @@
 }
 
 .showImg {
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   border-radius: 2%;
+  margin-top: 40px;
 }
 
 .detailDiv {
@@ -16,10 +17,106 @@
   width:700px;
 }
 
+.product_price{
+  width: 70%;
+}
+
+#filler-text{
+  margin-left: 15%;
+  display: flex;
+  flex-direction: row;
+
+}
+
+p{
+  font-family: Montserrat,sans-serif;
+}
+
+#product_price {
+  font-family: Montserrat,sans-serif;
+  font-weight: 80;
+  font-size: 32px;
+}
+
+#name{
+  font-family: Montserrat,sans-serif;
+  font-weight: 20;
+  padding-right: 23%;
+}
+
+#lower{
+  margin-top: 50px;
+}
+
+#Hooray{
+  font-family: Montserrat,sans-serif;
+  font-weight: bold;
+}
+
+#shipicon{
+  font-size: 32px;
+}
+
+.product_name{
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  overflow-wrap: break-word;
+}
+
+#handshakeicon{
+  font-size: 32px;
+  margin-top: 10px;
+}
+
+#Piracy{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#PiracyBody{
+  font-size: 12px;
+}
+
+#filler-text-2nd{
+  margin-top: 30px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 15%;
+  margin-right: 10%
+}
+
+#desc{
+  margin-left: 15%;
+  font-family: Montserrat,sans-serif;
+  font-size: 24px;
+  overflow-wrap: break-word;
+  padding-right: 20%;
+}
+
+#description{
+  margin-left: 15%;
+  font-family: Montserrat,sans-serif;
+  font-weight: bold;
+}
+
 .notOwnerButtons{
   display: flex;
   align-items:center;
   flex-direction: column;
+}
+
+.not_logged_in{
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  margin-left: 15%;
+}
+
+#info{
+  color: red;
+  font-size: 26px;
 }
 
 .ownerbuttons {
@@ -29,13 +126,50 @@
 }
 
 .cartbutton {
-  border-radius: 20px;
+  border-radius: 25px;
+  color: white;
   height: 40px;
-  width: 400px
+  width: 400px;
+  margin-top: 10px;
+  border: none;
+  font-size: 18px;
+  background-color: rgb(84, 83, 83);
+  transition: all .02s ease-in-out;
+}
+
+#amount_p{
+  font-family: Montserrat,sans-serif;
+  font-size: 18px;
 }
 
 .buttonOwner {
-  border-radius: 20px;
+  border-radius: 25px;
+  color: white;
   height: 40px;
-  width: 400px
+  width: 400px;
+  margin-top: 10px;
+  border: none;
+  font-size: 18px;
+  background-color: rgb(84, 83, 83);
+  transition: all .2s ease-in-out;
+}
+
+.buttonOwner:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.cartbutton:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#added_to_cart{
+  font-family: Montserrat,sans-serif;
+  color: red;
+  display: none;
+}
+
+.cartbutton:active{
+transform: translateY(3px);
 }

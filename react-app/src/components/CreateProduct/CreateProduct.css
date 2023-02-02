@@ -1,0 +1,84 @@
+.CreateProductForm{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.inputDiv{
+  display:flex;
+  flex-direction: column;
+  margin: 10%;
+}
+
+.inputName{
+  font-family: Montserrat,sans-serif;
+  font-size: 12px;
+}
+
+.errors{
+  color: red;
+  font-family: Montserrat,sans-serif;
+}
+
+.inputArea{
+  font-family: Montserrat,sans-serif;
+  height: 200%;
+}
+
+#submitBtn{
+    font-size: 24px;
+    color: white;
+    background-color: rgb(0, 238, 255);
+    border: none;
+    height: 100%;
+    border-radius: 25px;
+    transition: all .2s ease-in-out;
+    width: 80%;
+    margin-left: 10%;
+}
+
+#submitBtn:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#img_submit_btn{
+    margin-top: 20px;
+    font-size: 24px;
+    color: white;
+    background-color: rgb(0, 238, 255);
+    border: none;
+    width: 80%;
+    margin-left: 10%;
+    height: 100%;
+    border-radius: 25px;
+    transition: all .2s ease-in-out;
+}
+
+#img_submit_btn:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.btnDiv{
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 20%;
+}
+
+#or{
+  font-size: 12px;
+}
+
+.img_form_div{
+  display: flex;
+  flex-direction: column;
+  margin: 10%;
+}
+
+
+.images_div{
+  border-style: solid;
+  border-color: rgb(222,222,222);
+}

@@ -18,13 +18,36 @@
 }
 
 #product_name{
+  font-family: Montserrat,sans-serif;
   font-weight: lighter;
   font-size: 24px;
 }
 
+#amount_each_p{
+  font-family: Montserrat,sans-serif;
+  font-size: 12px;
+}
+
+#math{
+  display: none;
+}
+
 .cart_button{
-  background: none;
+  background-color: rgb(84, 83, 83);
+  color: white;
+  border-radius: 10px;
   border: none;
+}
+
+.amount{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.amount_buttons{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
 }
 
 .cart_button:hover{
@@ -39,5 +62,13 @@
 }
 
 .count_total {
+  font-weight: 20;
+  font-family: Montserrat,sans-serif;
   margin-left: 40px;
+}
+
+.price_details{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }

@@ -1,34 +1,50 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
-import { useHistory, useParams } from "react-router-dom";
-import { createCart } from "../../store/cart";
+import { useHistory, useParams, Link } from "react-router-dom";
+import { updateCart } from "../../store/cart";
 import { deleteCart } from "../../store/cart";
 import { getCart } from "../../store/cart";
+import noimage from '../../no_image/No_Image_Available.jpg'
 import './cart.css'
-import products from "../../store/product";
 
 function Cart(){
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
   let total = 0
+  let count = 0
 
-  const addtoCart = async (productId) => {
+  const addtoCart = async (id, productId) => {
 
     const payload = {
       userId: user.id,
       productId: Number(productId),
+      count: 1
     }
 
     console.log(payload)
 
-    let newCart = await dispatch(createCart(payload))
+    let newCart = await dispatch(updateCart(id, payload))
 
     await dispatch(getCart(user.id))
   }
 
-  const removefromCart = async (id) => {
-    let deletedCart = await dispatch(deleteCart(id))
+  const removefromCart = async (id, productId) => {
+    const payload = {
+      userId: user.id,
+      productId: Number(productId),
+      count: -1
+    }
 
+    console.log(payload)
+
+    let newCart = await dispatch(updateCart(id, payload))
+
+
+    await dispatch(getCart(user.id))
+  }
+
+  const deletefromCart = async (id) => {
+    let deleted = await dispatch(deleteCart(id))
     await dispatch(getCart(user.id))
   }
 
@@ -37,59 +53,57 @@ function Cart(){
   }, [dispatch])
 
   const cartsObj = useSelector(state => state.carts)
+  console.log(cartsObj)
+  console.log(cartsObj)
   const carts = Object.values(cartsObj)
-  const itemsArr = []
-  const productsArr = []
-  console.log("all items", carts)
-  carts.forEach(product => {
-    console.log(product)
-    if (!itemsArr.includes(product.productId)){
-      product.count = 1
-      itemsArr.unshift(product.productId)
-      productsArr.unshift(product)
-    } else {
-      productsArr.forEach(products => {
-        if (products.productId === product.productId)
-        products.count += 1
-      })
-    }
-    total += product.products.price
-  })
+  console.log(carts)
 
 
 
   return (
-    <div className='container_cart'>
-      <div className='count_total'>
-        {carts.length === 1 ? <h1>{carts.length} Item in Cart</h1> : <h1>{carts.length} Items in Cart</h1>}
-      </div>
+  <div>
+    { carts.length > 0 ? <div className='container_cart'>
       <div className="cart_items">
-      {productsArr.map((product) => {
+      {carts.map((product) => {
         return(
           <ul>
             <li className='list_element'>
             <div className='cart_details'>
               <div>
-              <img className='img'src={product.products.images[0].url}></img>
+              <Link to={`/products/${product.products.id}`}>
+              {product.products.images.length == 0 ? <img className='img' src={noimage}></img>: <img className='img' src={product.products.images[0].url}
+              onError={(e)=>{ if (e.target.src !== noimage)
+              { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
+              </Link>
               </div>
               <div className='amount'>
               <p id="product_name">{product.products.productName}</p>
-              <button className='cart_button' onClick={e => addtoCart(product.productId)}>Add</button>
-              <span> Amount: {product.count}</span>
-              <button className='cart_button' onClick={e => removefromCart(product.id)}>Remove</button>
+              <div className='amount_buttons'>
+              <button className='cart_button' onClick={e => addtoCart(product.id, product.productId)}>Add</button>
+              <span id='amount_p'> Amount {product.count}</span>
+              <button className='cart_button' onClick={product.count > 1 ? e => (removefromCart(product.id, product.productId)) :
+               e => deletefromCart(product.id) }>Remove</button>
+              </div>
               </div>
               </div>
               <div className='price_details'>
-              <span> Price: {product.count * product.products.price}</span>
-              <p>(each: {product.products.price})</p>
+                <p id='math'>{total += product.products.price * product.count} {count += product.count}</p>
+              <span id='amount_p'>${Number(product.count * product.products.price).toFixed(2)}</span>
+              <p id='amount_each_p'>(${Number(product.products.price).toFixed(2)} each)</p>
               </div>
             </li>
           </ul>
         )
       })}
-      <h1 className='count_total'>total: {total}</h1>
+      <div>
+        {count === 1 ? <h1 className='count_total'>{count} Item in Cart</h1> :
+        <h1 className='count_total'>{count} Items in Cart</h1>}
       </div>
-    </div>
+      <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
+      </div>
+    </div> : <div className='container_cart'><h1 className='count_total'>You haven't added anything to your cat yet
+    . Have a look around!</h1></div> }
+  </div>
     )
   }
 
