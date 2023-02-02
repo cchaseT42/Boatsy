@@ -4,6 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { updateCart } from "../../store/cart";
 import { deleteCart } from "../../store/cart";
 import { getCart } from "../../store/cart";
+import noimage from '../../no_image/No_Image_Available.jpg'
 import './cart.css'
 
 function Cart(){
@@ -53,12 +54,15 @@ function Cart(){
 
   const cartsObj = useSelector(state => state.carts)
   console.log(cartsObj)
+  console.log(cartsObj)
   const carts = Object.values(cartsObj)
+  console.log(carts)
 
 
 
   return (
-    <div className='container_cart'>
+  <div>
+    { carts.length > 0 ? <div className='container_cart'>
       <div className="cart_items">
       {carts.map((product) => {
         return(
@@ -67,7 +71,9 @@ function Cart(){
             <div className='cart_details'>
               <div>
               <Link to={`/products/${product.products.id}`}>
-              {product.products.images.length === 0 ? <img className='img'></img>: <img className='img' src={product.products.images[0].url} alt=''></img>}
+              {product.products.images.length == 0 ? <img className='img' src={noimage}></img>: <img className='img' src={product.products.images[0].url}
+              onError={(e)=>{ if (e.target.src !== noimage)
+              { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
               </Link>
               </div>
               <div className='amount'>
@@ -75,7 +81,7 @@ function Cart(){
               <div className='amount_buttons'>
               <button className='cart_button' onClick={e => addtoCart(product.id, product.productId)}>Add</button>
               <span id='amount_p'> Amount {product.count}</span>
-              <button className='cart_button' onClick={product.count <= 1 ? e => removefromCart(product.id, product.productId) :
+              <button className='cart_button' onClick={product.count > 1 ? e => (removefromCart(product.id, product.productId)) :
                e => deletefromCart(product.id) }>Remove</button>
               </div>
               </div>
@@ -95,7 +101,8 @@ function Cart(){
       </div>
       <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
       </div>
-    </div>
+    </div> : <div className='container_cart'><h1 className='count_total'>0 Items in Cart. Have a look around!</h1></div> }
+  </div>
     )
   }
 
