@@ -27,51 +27,42 @@ function UpdateProduct(){
   const [price, setPrice] = useState(product.price)
   const [image, setImage] = useState("")
   const [validationErrors, setValidationErrors] = useState([])
+  const [imgvalidationErrors, setImgvalidationErrors] = useState([])
   const errors = []
+  const imgErrors = []
 
   const addimgSubmit = async (e) => {
     e.preventDefault()
 
-    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
-    if (errors.length) return setValidationErrors(errors)
+    if (!image) imgErrors.push ('Please input an image.')
+    if (image && !(image.includes('http' || 'https'))) imgErrors.push("Image url must be a valid web address.")
+    if (image && !(image.includes('jpg' || 'png'))) imgErrors.push("Image must be of jpg or png type.")
+    if (imgErrors.length) return setImgvalidationErrors(imgErrors)
 
     const imgPayload = {
       productId,
       url: image
     }
 
-
-
-    let newImg = await dispatch(createImg(imgPayload))
-
-    await dispatch(getProduct(productId))
-  }
-
-  const addImg_handlesubmit = async (e) => {
-
-    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
-    if (errors.length) return setValidationErrors(errors)
-
-    const imgPayload = {
-      productId,
-      url: image
-    }
+    setImgvalidationErrors([])
 
 
 
     let newImg = await dispatch(createImg(imgPayload))
 
     await dispatch(getProduct(productId))
-
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!name) errors.push("Name field is required")
+    if (name.length > 50) errors.push("Name must be less than 50 characters long.")
     if (!description) errors.push("Description field is required")
+    if (description.length > 1000) errors.push("Description must be less than 1000 characters long.")
     if (!price) errors.push("Price field is required")
     if (isNaN(price)) errors.push("Price field must be a number")
+    if (price && !isNaN(price) && price < 1) errors.push("Price must be a positive integer")
 
     if (errors.length) return setValidationErrors(errors)
 
@@ -81,6 +72,8 @@ function UpdateProduct(){
       productDescription: description,
       price
     }
+
+    setValidationErrors([])
 
 
     let updatedProduct = await dispatch(updateProduct(payload, productId))
@@ -136,6 +129,11 @@ function UpdateProduct(){
             Or-
           </p>
           <div className='img_form_div'>
+          <ul className="errors">
+          {imgvalidationErrors.length > 0 && imgvalidationErrors.map((error, idx) => (
+            <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
+          ))}
+        </ul>
         <label className='edit_tag' htmlFor="image">Add New Image</label>
           <input
             className='input_body'

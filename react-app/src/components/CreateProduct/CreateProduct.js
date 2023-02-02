@@ -21,10 +21,14 @@ function CreateProduct({setShowModal}){
     e.preventDefault();
 
     if (!name) errors.push("Name field is required")
+    if (name.length > 50) errors.push("Name must be less than 50 characters long.")
     if (!description) errors.push("Description field is required")
+    if (description.length > 1000) errors.push("Description must be less than 1000 characters long.")
     if (!price) errors.push("Price field is required")
     if (isNaN(price)) errors.push("Price field must be a number")
+    if (price && !isNaN(price) && price < 1) errors.push("Price must be a positive integer")
     if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
+    if (image && !(image.includes('jpg' || 'png'))) errors.push("Image must be of jpg or png type.")
 
     if (errors.length) return setValidationErrors(errors)
 
