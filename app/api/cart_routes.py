@@ -40,9 +40,7 @@ def update_cart(id):
   form['csrf_token'].data = request.cookies['csrf_token']
 
   if form.validate_on_submit():
-    cart.productName = form.data['productName']
-    cart.productDescription = form.data['productDescription']
-    cart.count = int(cart.count) + int(form.data['price'])
+    cart.count = int(cart.count) + int(form.data['count'])
     db.session.commit()
     return cart.to_dict(), 201
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401

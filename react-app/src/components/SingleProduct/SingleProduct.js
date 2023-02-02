@@ -4,6 +4,8 @@ import { useHistory, useParams } from "react-router-dom"
 import { getProduct } from "../../store/product"
 import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
+import { getCart } from "../../store/cart"
+import { updateCart } from "../../store/cart"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -15,15 +17,19 @@ function SingleProduct(){
   const { productId } = useParams()
   const products = useSelector(state => state.products)
   const productsArr = Object.values(products)
+  const cart = useSelector(state => state.carts)
+  console.log(cart)
   const product = productsArr[0]
   const user = useSelector(state => state.session.user)
 
   const addtoCart = async (e) => {
     e.preventDefault()
+    let cart = await dispatch(getCart())
 
     const payload = {
       userId: user.id,
       productId: Number(productId),
+      count: 1
     }
 
     console.log(payload)
