@@ -86,10 +86,6 @@ function UpdateProduct(){
 
     let updatedProduct = await dispatch(updateProduct(payload, productId))
 
-    if (image) {
-      addImg_handlesubmit()
-    }
-
     history.push(`/products/${productId}`)
 
   }

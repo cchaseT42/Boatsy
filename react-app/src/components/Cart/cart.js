@@ -10,6 +10,7 @@ function Cart(){
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
   let total = 0
+  let count = 0
 
   const addtoCart = async (id, productId) => {
 
@@ -58,9 +59,6 @@ function Cart(){
 
   return (
     <div className='container_cart'>
-      <div>
-        {carts.length === 1 ? <h1 className='count_total'>{carts.length} Item in Cart</h1> : <h1 className='count_total'>{carts.length} Items in Cart</h1>}
-      </div>
       <div className="cart_items">
       {carts.map((product) => {
         return(
@@ -83,14 +81,19 @@ function Cart(){
               </div>
               </div>
               <div className='price_details'>
-              <span id='amount_p'>${product.count * product.products.price}</span>
-              <p id='amount_each_p'>(${product.products.price} each)</p>
+                <p id='math'>{total += product.products.price * product.count} {count += product.count}</p>
+              <span id='amount_p'>${Number(product.count * product.products.price).toFixed(2)}</span>
+              <p id='amount_each_p'>(${Number(product.products.price).toFixed(2)} each)</p>
               </div>
             </li>
           </ul>
         )
       })}
-      <h1 className='count_total'>total ${total}</h1>
+      <div>
+        {count === 1 ? <h1 className='count_total'>{count} Item in Cart</h1> :
+        <h1 className='count_total'>{count} Items in Cart</h1>}
+      </div>
+      <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
       </div>
     </div>
     )
