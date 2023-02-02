@@ -2,6 +2,7 @@
 const LOAD = 'cart/getCart'
 const CREATE = 'cart/addCart'
 const DELETE = 'cart/deleteCart'
+const UPDATE = 'cart/updateCart'
 
 const load = (cart) => {
   return {
@@ -24,6 +25,13 @@ const destroy = (cart) => {
     cart
   }
 }
+
+const update = (cart => {
+  return {
+    type: UPDATE,
+    cart
+  }
+})
 
 export const getCart = (id) => async dispatch => {
   const response = await fetch(`/api/cart/${id}`)
@@ -48,6 +56,19 @@ export const createCart = (data) => async dispatch => {
   return newCart
 }
 
+export const updateCart = (id, data) => async dispatch => {
+  const response = await fetch(`/api/cart/${id}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const updatedCart = await response.json()
+  dispatch(update(updatedCart))
+  return updatedCart
+}
+
 export const deleteCart = (id) => async dispatch => {
   const response = await fetch(`/api/cart/${id}`, {
     method: 'delete'
@@ -56,6 +77,7 @@ export const deleteCart = (id) => async dispatch => {
       dispatch(destroy(id))
     }
 }
+
 
 let initialState = {}
 
@@ -70,6 +92,11 @@ const carts = (state = initialState, action) => {
       return newState
     }
     case CREATE: {
+      const newState = {...state}
+      newState[action.cart.id] = action.cart
+      return newState
+    }
+    case UPDATE: {
       const newState = {...state}
       newState[action.cart.id] = action.cart
       return newState
