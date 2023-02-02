@@ -83,6 +83,8 @@ class Cart(db.Model):
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
 
+    count = db.Column(db.Integer, nullable=False)
+
     product = db.relationship("Product", back_populates="carts")
 
 
@@ -91,6 +93,7 @@ class Cart(db.Model):
             'id': self.id,
             'userId': self.userId,
             'productId': self.productId,
+            'count': self.count,
             'products': self.product.to_dict()
         }
 

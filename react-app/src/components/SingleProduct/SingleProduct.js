@@ -4,6 +4,8 @@ import { useHistory, useParams } from "react-router-dom"
 import { getProduct } from "../../store/product"
 import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
+import { getCart } from "../../store/cart"
+import { updateCart } from "../../store/cart"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -15,30 +17,57 @@ function SingleProduct(){
   const { productId } = useParams()
   const products = useSelector(state => state.products)
   const productsArr = Object.values(products)
+  const cart = useSelector(state => state.carts)
   const product = productsArr[0]
   const user = useSelector(state => state.session.user)
 
   const addtoCart = async (e) => {
     e.preventDefault()
 
+    let cartScan = Object.values(cart)
+    let cartArr = []
+    cartScan.forEach(product => {
+      if (product.productId == productId){
+        cartArr.push(product)
+        return
+      }
+    })
+
+    if (cartArr.length > 0) return addmoreCart(cartArr)
+
     const payload = {
       userId: user.id,
       productId: Number(productId),
+      count: 1
     }
 
-    console.log(payload)
 
     let newCart = await dispatch(createCart(payload))
+    await dispatch(getCart(user.id))
   }
 
   const handleDelete = async () => {
     await dispatch(deleteProduct(productId)).then(() => history.push('/'))
   }
 
+  const addmoreCart = async (cart) => {
+
+    const payload = {
+      userId: user.id,
+      productId: Number(productId),
+      count: 1
+    }
+
+    let newCart = await dispatch(updateCart(cart[0].id, payload))
+
+    await dispatch(getCart(user.id))
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
   }, [dispatch])
+
 
 
   return (
