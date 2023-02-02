@@ -32,6 +32,7 @@ def add_cart():
 
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@cart_routes.route('/<int:id>', methods=['PUT'])
 @cart_routes.route('/<int:id>', methods=['DELETE'])
 def remove_cart(id):
   cart = Cart.query.get(id)

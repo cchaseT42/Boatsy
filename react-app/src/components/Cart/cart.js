@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { createCart } from "../../store/cart";
 import { deleteCart } from "../../store/cart";
 import { getCart } from "../../store/cart";
@@ -69,7 +69,9 @@ function Cart(){
             <li className='list_element'>
             <div className='cart_details'>
               <div>
+              <Link to={`/products/${product.products.id}`}>
               {product.products.images.length === 0 ? <img className='img'></img>: <img className='img' src={product.products.images[0].url} alt=''></img>}
+              </Link>
               </div>
               <div className='amount'>
               <p id="product_name">{product.products.productName}</p>
