@@ -41,6 +41,7 @@ p{
 #name{
   font-family: Montserrat,sans-serif;
   font-weight: 20;
+  padding-right: 23%;
 }
 
 #lower{
@@ -59,7 +60,8 @@ p{
 .product_name{
   display: flex;
   flex-direction: column;
-  margin-left: 15%
+  margin-left: 15%;
+  overflow-wrap: break-word;
 }
 
 #handshakeicon{
@@ -89,6 +91,8 @@ p{
   margin-left: 15%;
   font-family: Montserrat,sans-serif;
   font-size: 24px;
+  overflow-wrap: break-word;
+  padding-right: 20%;
 }
 
 #description{
