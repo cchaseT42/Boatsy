@@ -5,6 +5,7 @@ import { updateProduct } from "../../store/product";
 import { createImg } from "../../store/image";
 import { destroyImg } from "../../store/image";
 import { getProduct } from "../../store/product"
+import noimage from '../../no_image/No_Image_Available.jpg'
 import './UpdateProduct.css'
 
 function UpdateProduct(){
@@ -36,7 +37,6 @@ function UpdateProduct(){
 
     if (!image) imgErrors.push ('Please input an image.')
     if (image && !(image.includes('http' || 'https'))) imgErrors.push("Image url must be a valid web address.")
-    if (image && !(image.includes('jpg' || 'png'))) imgErrors.push("Image must be of jpg or png type.")
     if (imgErrors.length) return setImgvalidationErrors(imgErrors)
 
     const imgPayload = {
@@ -150,7 +150,8 @@ function UpdateProduct(){
               return (
                 <li key={image.id}>
                 <div className='delete_img_div'>
-                  <img className="img_edit" src={image.url} alt=''></img>
+                  <img className='img_edit' src={image.url} onError={(e)=>{ if (e.target.src !== noimage)
+                    { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>
                   <button id='deletebtn' onClick={async e =>{
                     await dispatch(destroyImg(image.id))
                     await dispatch(getProduct(productId))
