@@ -64,6 +64,9 @@ function SingleProduct(){
   }
 
 
+  useEffect(() => {
+    dispatch(getProduct(productId))
+  }, [dispatch])
 
 
 
