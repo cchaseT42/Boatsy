@@ -28,7 +28,6 @@ function CreateProduct({setShowModal}){
     if (isNaN(price)) errors.push("Price field must be a number")
     if (price && !isNaN(price) && price < 1) errors.push("Price must be a positive integer")
     if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
-    if (image && !(image.includes('jpg' || 'png'))) errors.push("Image must be of jpg or png type.")
 
     if (errors.length) return setValidationErrors(errors)
 

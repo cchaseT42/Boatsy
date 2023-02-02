@@ -74,7 +74,9 @@ function SingleProduct(){
     <div className="ProductDetails">
               <div className="imgDiv">
               <span className='displayImg'>
-              {product.images.length == 0 ? <img className='showImg' src={noimage}></img>: <img className='showImg' src={product.images[0].url} alt=''></img>}
+              {product.images.length == 0 ? <img className='showImg' src={noimage}></img>: <img className='showImg' src={product.images[0].url}
+              onError={(e)=>{ if (e.target.src !== noimage)
+              { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
               </span>
               </div>
               <div className='detailDiv'>

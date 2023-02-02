@@ -53,7 +53,9 @@ function AllProducts(){
               <div className="DivCont">
               <span>
               <Link to={`/products/${product.id}`}>
-              {product.images.length == 0 ? <img className='img' src={noimage}></img>:<img className='img' src={product.images[0].url} alt=''></img>}
+              {product.images.length == 0 ? <img className='img' src={noimage}></img>: <img className='img' src={product.images[0].url}
+              onError={(e)=>{ if (e.target.src !== noimage)
+              { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
              <div>
              <span id="displayCont">
                 <span className='curr'>$</span>
