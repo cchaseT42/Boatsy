@@ -33,6 +33,20 @@ def add_cart():
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @cart_routes.route('/<int:id>', methods=['PUT'])
+def update_cart(id):
+  cart = Cart.query.get(id)
+
+  form = CartForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    cart.productName = form.data['productName']
+    cart.productDescription = form.data['productDescription']
+    cart.count = int(cart.count) + int(form.data['price'])
+    db.session.commit()
+    return cart.to_dict(), 201
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 @cart_routes.route('/<int:id>', methods=['DELETE'])
 def remove_cart(id):
   cart = Cart.query.get(id)
