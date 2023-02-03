@@ -79,6 +79,7 @@ function Cart(){
               <div className='amount'>
               <p id="product_name">{product.products.productName}</p>
               <div className='amount_buttons'>
+
               <button className='cart_button' onClick={e => addtoCart(product.id, product.productId)}>Add</button>
               <span id='amount_p'> Amount {product.count}</span>
               <button className='cart_button' onClick={product.count > 1 ? e => (removefromCart(product.id, product.productId)) :

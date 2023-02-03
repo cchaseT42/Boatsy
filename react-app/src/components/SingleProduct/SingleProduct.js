@@ -24,6 +24,12 @@ function SingleProduct(){
   const addtoCart = async (e) => {
     e.preventDefault()
 
+    let added = document.getElementById('added_to_cart')
+    added.style.display="flex"
+    console.log(added)
+
+
+
     let cartScan = Object.values(cart)
     let cartArr = []
     cartScan.forEach(product => {
@@ -88,7 +94,7 @@ function SingleProduct(){
                 </div>
                 </div>
               {user !== null && user.id !== product.ownerId && (<div className="notOwnerButtons">
-                <div><p id='added_to_cart'>Added!</p></div>
+                <div id='added_to_cart'><p>Added!</p></div>
                 <button className="cartbutton" onClick={addtoCart}>Add To Cart</button>
               </div>)}
               {!user && (<div className='not_logged_in'>
