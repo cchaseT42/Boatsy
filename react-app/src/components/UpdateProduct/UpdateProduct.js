@@ -37,6 +37,7 @@ function UpdateProduct(){
 
     if (!image) imgErrors.push ('Please input an image.')
     if (image && !(image.includes('http' || 'https'))) imgErrors.push("Image url must be a valid web address.")
+    if (image && !(image.includes('jpg' || 'png'))) errors.push("Image url must be a jpg or png.")
     if (imgErrors.length) return setImgvalidationErrors(imgErrors)
 
     const imgPayload = {
