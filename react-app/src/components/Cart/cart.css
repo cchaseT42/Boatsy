@@ -72,3 +72,7 @@
   flex-direction: column;
   align-items: flex-end;
 }
+
+.no_cart{
+  margin-left: 23%;
+}

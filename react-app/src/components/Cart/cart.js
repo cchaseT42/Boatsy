@@ -102,7 +102,7 @@ function Cart(){
       </div>
       <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
       </div>
-    </div> : <div className='container_cart'><h1 className='count_total'>You haven't added anything to your cat yet
+    </div> : <div className='no_cart'><h1 className='count_total'>You haven't added anything to your cart yet
     . Have a look around!</h1></div> }
   </div>
     )
