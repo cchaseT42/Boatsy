@@ -52,7 +52,7 @@ class Product(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
 
     carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
-
+    reviews = images = db.relationship("Review", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
@@ -63,6 +63,7 @@ class Product(db.Model):
             'id': self.id,
             'ownerId': self.ownerId,
             'images': [image.to_dict() for image in self.images],
+            'reviews': [review.to_dict() for review in self.reviews],
             'productName': self.productName,
             'productDescription': self.productDescription,
             'price': str(self.price)
@@ -130,6 +131,8 @@ class Reviews(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
+    user = db.relationship("User", back_populates="reviews")
+
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
 
@@ -140,6 +143,7 @@ class Reviews(db.Model):
         return {
             'id': self.id,
             'userId': self.userId,
+            'user': self.user.to_dict(),
             'productId': self.productId,
             'stars': self.stars,
             'review': self.review
