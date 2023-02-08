@@ -20,6 +20,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    reviews = db.relationship("Reviews", back_populates="user", cascade="all, delete-orphan")
+
 
     @property
     def password(self):
@@ -52,7 +54,7 @@ class Product(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
 
     carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
-    reviews = images = db.relationship("Review", back_populates="product", cascade="all, delete-orphan")
+    reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
@@ -135,6 +137,8 @@ class Reviews(db.Model):
 
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
+
+    product = db.relationship("Product", back_populates="reviews")
 
     stars = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.String, nullable=False)
