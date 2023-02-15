@@ -8,7 +8,7 @@ review_routes = Blueprint('review', __name__)
 
 @review_routes.route('/create', methods=['POST'])
 @login_required
-def add_review():
+def add_review(id):
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 

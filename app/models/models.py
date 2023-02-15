@@ -66,6 +66,7 @@ class Product(db.Model):
             'ownerId': self.ownerId,
             'images': [image.to_dict() for image in self.images],
             'reviews': [review.to_dict() for review in self.reviews],
+            'reviewAvg': [review.stars for review in self.reviews],
             'productName': self.productName,
             'productDescription': self.productDescription,
             'price': str(self.price)

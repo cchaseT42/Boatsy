@@ -167,8 +167,12 @@ def seed_users():
     review1 = Reviews(
        id=1, userId=2, productId=1, stars=5, review="dummyreview"
     )
+    review2 = Reviews(
+       id=1, userId=3, productId=1, stars=3, review="dummyreview2"
+    )
 
     db.session.add(review1)
+    db.session.add(review2)
     db.session.commit()
 
 

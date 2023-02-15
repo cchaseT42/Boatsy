@@ -20,6 +20,16 @@ function SingleProduct(){
   const cart = useSelector(state => state.carts)
   const product = productsArr[0]
   const user = useSelector(state => state.session.user)
+  let count = 0
+  let avg
+
+  for(let i = 0; i < product.reviewAvg.length; i++){
+    count += product.reviewAvg[i]
+  }
+  avg = count/product.reviewAvg.length
+
+  console.log(avg)
+  console.log(product)
 
   const addtoCart = async (e) => {
     e.preventDefault()
@@ -77,6 +87,7 @@ function SingleProduct(){
 
 
   return (
+    <div>
     <div className="ProductDetails">
               <div className="imgDiv">
               <span className='displayImg'>
@@ -122,6 +133,24 @@ function SingleProduct(){
                 </div>
                 </div>
               </div>
+              </div>
+        <div className="reviews_div">
+          <div>
+            <p>Average Rating<span class="fa fa-star checked">{avg}</span></p>
+          </div>
+          <div>
+            <button id='leave_review_btn'>Leave Review</button>
+          </div>
+          {product.reviews.map((review) => {
+            return (
+              <div className="reviewContainer">
+              <span>{review.stars}</span>
+              <span>{review.review}</span>
+              <span>{review.user.username}</span>
+              </div>
+            )
+          })}
+        </div>
     </div>
   )
 }
