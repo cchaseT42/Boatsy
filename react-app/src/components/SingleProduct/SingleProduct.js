@@ -95,10 +95,36 @@ function SingleProduct(){
               onError={(e)=>{ if (e.target.src !== noimage)
               { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
               </span>
+              <div>
+          <div className='lower_div'>
+          <div>
+            <button id='leave_review_btn'>Leave Review</button>
+          </div>
+          <div className="reviews_div">
+            <p>{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
+          </div>
+          {product.reviews.map((review) => {
+            return (
+              <div className="reviewContainer">
+              <div className="star_count">
+              {[...Array(review.stars)].map((star) => {
+                return (
+                  <span id="ratingStars" class="fa fa-star checked"></span>
+                )
+              })}
+            </div>
+              <span>{review.review}</span>
+              <span>{review.user.username}</span>
+              </div>
+            )
+          })}
+          </div>
+        </div>
               </div>
               <div className='detailDiv'>
                 <p id='ownerId'></p>
                 <div className='product_name'>
+                <p id="avg">{avg}</p>
                 <h1 id='name'>{product.productName}</h1>
                 <div className='product_price'>
                   <h2 id='product_price'>${product.price}</h2>
@@ -134,22 +160,7 @@ function SingleProduct(){
                 </div>
               </div>
               </div>
-        <div className="reviews_div">
-          <div>
-            <p>Average Rating<span class="fa fa-star checked">{avg}</span></p>
-          </div>
-          <div>
-            <button id='leave_review_btn'>Leave Review</button>
-          </div>
-          {product.reviews.map((review) => {
-            return (
-              <div className="reviewContainer">
-              <span>{review.stars}</span>
-              <span>{review.review}</span>
-              <span>{review.user.username}</span>
-              </div>
-            )
-          })}
+              <div className="lower_div">
         </div>
     </div>
   )

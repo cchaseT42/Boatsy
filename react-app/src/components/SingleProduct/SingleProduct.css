@@ -17,6 +17,15 @@
   width:700px;
 }
 
+.lower_div{
+}
+
+.reviews_div{
+  border-style: solid;
+  border-color: transparent;
+  border-bottom-color: rgb(222,222,222);
+}
+
 .product_price{
   width: 70%;
 }
@@ -70,6 +79,10 @@ p{
   overflow-wrap: break-word;
 }
 
+#avg{
+  padding:0%
+}
+
 #handshakeicon{
   font-size: 32px;
   margin-top: 10px;
@@ -79,6 +92,8 @@ p{
   font-weight: bold;
   font-size: 12px;
 }
+
+
 
 #PiracyBody{
   font-size: 12px;
@@ -118,6 +133,11 @@ p{
   align-items:center;
   flex-direction: column;
   margin-left: 15%;
+}
+
+#ratingStars{
+  font-size: 24px;
+  padding-right: 0.5%;
 }
 
 #info{
