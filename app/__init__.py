@@ -35,7 +35,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(product_routes, url_prefix='/api/products')
 app.register_blueprint(image_routes, url_prefix='/api/images')
 app.register_blueprint(cart_routes, url_prefix='/api/cart')
-app.register_blueprint(review_routes, url_prefix='/api/reviews')
+app.register_blueprint(review_routes, url_prefix='/api/review')
 db.init_app(app)
 Migrate(app, db)
 

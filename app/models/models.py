@@ -141,7 +141,7 @@ class Reviews(db.Model):
 
     product = db.relationship("Product", back_populates="reviews")
 
-    stars = db.Column(db.Integer, primary_key=True)
+    stars = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String, nullable=False)
 
     def to_dict(self):

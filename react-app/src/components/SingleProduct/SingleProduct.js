@@ -79,6 +79,11 @@ function SingleProduct(){
     await dispatch(getCart(user.id))
   }
 
+  const leaveReview = async (e) => {
+    e.preventDefault()
+    await history.push(`/products/leavereview/${productId}`)
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
@@ -98,7 +103,7 @@ function SingleProduct(){
               <div>
           <div className='lower_div'>
           <div>
-            <button id='leave_review_btn'>Leave Review</button>
+            <button id='leave_review_btn' onClick={leaveReview}>Leave Review</button>
           </div>
           <div className="reviews_div">
             <p>{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
@@ -109,7 +114,8 @@ function SingleProduct(){
               <div className="star_count">
               {[...Array(review.stars)].map((star) => {
                 return (
-                  <span id="ratingStars" class="fa fa-star checked"></span>
+                  <span id="ratingStars" class="fa fa-star checked">
+                  </span>
                 )
               })}
             </div>
@@ -124,7 +130,7 @@ function SingleProduct(){
               <div className='detailDiv'>
                 <p id='ownerId'></p>
                 <div className='product_name'>
-                <p id="avg">{avg}</p>
+                <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>
                 <h1 id='name'>{product.productName}</h1>
                 <div className='product_price'>
                   <h2 id='product_price'>${product.price}</h2>

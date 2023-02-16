@@ -6,9 +6,14 @@ from .auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('review', __name__)
 
+@review_routes.route('/<int:id>')
+def review(id):
+  review = Reviews.query.get(id)
+  return review.to_dict(), 200
+
 @review_routes.route('/create', methods=['POST'])
 @login_required
-def add_review(id):
+def add_review():
   form = ReviewForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -22,7 +27,7 @@ def add_review(id):
 
   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@review_routes.route('/update', methods=['PUT'])
+@review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_review(id):
   review = Reviews.query.get(id)

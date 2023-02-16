@@ -1,6 +1,15 @@
+const LOAD = 'review/getReview'
 const CREATE = "review/createReview"
 const UPDATE = 'review/updateReview'
 const DELETE = 'review/deleteReview'
+
+
+const load = (review) => {
+  return {
+    type: LOAD,
+    review
+  }
+}
 
 const create = (review) => {
   return {
@@ -24,6 +33,7 @@ const destroy = (review) => {
 }
 
 export const createReview = (data) => async dispatch => {
+  console.log(data)
   const response = await fetch(`/api/review/create`, {
     method: 'post',
     headers: {
