@@ -6,6 +6,7 @@ import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
 import { getCart } from "../../store/cart"
 import { updateCart } from "../../store/cart"
+import { getAllReviews } from "../../store/review"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -87,7 +88,9 @@ function SingleProduct(){
 
   useEffect(() => {
     dispatch(getProduct(productId))
+    dispatch(getAllReviews())
   }, [dispatch])
+
 
 
 

@@ -6,23 +6,33 @@ import { getReview } from "../../store/review"
 
 function UpdateReview(){
   const dispatch = useDispatch()
-  const history = useHistory()
   const { reviewId } = useParams()
-  const reviews = useSelector(state => state.reviews)
-  console.log(reviews)
-  const user = useSelector(state => state.session.user)
-  const reviewEdit = Object.values(reviews)[0]
-  console.log(reviewEdit, "edit")
+  let reviewEdit
 
   useEffect(() => {
     dispatch(getReview(reviewId))
-  }, [dispatch])
+  }, [reviewEdit], [dispatch])
+
+  const history = useHistory()
+  const reviews = useSelector(state => state.reviews)
+  console.log(reviews)
+
+  if (reviews) {
+    reviewEdit = reviews
+  }
+  console.log(reviewEdit)
+  const user = useSelector(state => state.session.user)
+
+  // if (reviewId !== reviewEdit.id){
+  //   return null
+  // }
+  console.log(reviewEdit, "edit")
 
   const [validationErrors, setValidationErrors] = useState([])
   const errors = []
 
-  const [stars, setStars] = useState(Object.values(reviews)[0].stars)
-  const [review, setReview] = useState(Object.values(reviews)[0].review)
+  const [stars, setStars] = useState(reviewEdit.stars)
+  const [review, setReview] = useState(reviewEdit.review)
 
   const handleSubmit = async (e) => {
     e.preventDefault();

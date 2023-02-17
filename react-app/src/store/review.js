@@ -1,4 +1,5 @@
 const LOAD = 'review/getReview'
+const LOADALL='review/getAllReviews'
 const CREATE = "review/createReview"
 const UPDATE = 'review/updateReview'
 const DELETE = 'review/deleteReview'
@@ -8,6 +9,13 @@ const load = (review) => {
   return {
     type: LOAD,
     review
+  }
+}
+
+const loadall = (reviews) => {
+  return {
+    type: LOADALL,
+    reviews
   }
 }
 
@@ -38,6 +46,15 @@ export const getReview = (reviewId) => async dispatch => {
   if (response.ok) {
     const review = await response.json()
     dispatch(load(review))
+  }
+}
+
+export const getAllReviews= () => async dispatch => {
+  const response = await fetch(`/api/review/`)
+  console.log(response)
+  if (response.ok) {
+    const reviews = await response.json()
+    dispatch(loadall(reviews))
   }
 }
 
@@ -82,6 +99,29 @@ const reviews = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
       const newState = {[action.review.id]: action.review}
+      return newState
+    }
+    case LOADALL: {
+      const newState = {}
+      let reviewArr = action.reviews.reviews
+      reviewArr.forEach(product => {
+        newState[product.id] = product
+      })
+      return newState
+    }
+    case CREATE: {
+      const newState = {...state}
+      newState[action.review.id] = action.review
+      return newState
+    }
+    case UPDATE: {
+      const newState = {...state}
+      newState[action.review.id] = action.review
+      return newState
+    }
+    case DELETE: {
+      const newState = {...state}
+      delete newState[action.review.id]
       return newState
     }
     default: return state
