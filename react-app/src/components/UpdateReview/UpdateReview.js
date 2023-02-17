@@ -1,19 +1,28 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { createReview } from "../../store/review"
-import './CreateReview.css'
+import { updateReview } from "../../store/review"
+import { getReview } from "../../store/review"
 
-function CreateReview(){
+function UpdateReview(){
   const dispatch = useDispatch()
   const history = useHistory()
-  const { productId } = useParams()
+  const { reviewId } = useParams()
+  const reviews = useSelector(state => state.reviews)
+  console.log(reviews)
   const user = useSelector(state => state.session.user)
+  const reviewEdit = Object.values(reviews)[0]
+  console.log(reviewEdit, "edit")
+
+  useEffect(() => {
+    dispatch(getReview(reviewId))
+  }, [dispatch])
+
   const [validationErrors, setValidationErrors] = useState([])
   const errors = []
 
-  const [stars, setStars] = useState('')
-  const [review, setReview] = useState('')
+  const [stars, setStars] = useState(Object.values(reviews)[0].stars)
+  const [review, setReview] = useState(Object.values(reviews)[0].review)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,20 +33,22 @@ function CreateReview(){
     if (errors.length) return setValidationErrors(errors)
 
     const payload = {
+      id: reviewId,
+      productId: Object.values(reviews)[0].productId,
       userId: user.id,
-      productId: Number(productId),
       stars: Number(stars),
       review
     }
 
-    let newReview = await dispatch(createReview(payload))
-    await history.push(`/products/${productId}`)
+    let updatedReview = await dispatch(updateReview(reviewId, payload))
+    await history.push(`/products/${Object.values(reviews)[0].productId}`)
   }
 
+
   return (
-    <div className= "ReviewForm">
+    <div className="ReviewForm">
       <form onSubmit={handleSubmit}>
-        <ul className="errors">
+      <ul className="errors">
         {validationErrors.length > 0 && validationErrors.map((error, idx) => (
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
@@ -70,4 +81,4 @@ function CreateReview(){
   )
 }
 
-export default CreateReview
+export default UpdateReview

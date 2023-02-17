@@ -32,8 +32,16 @@ const destroy = (review) => {
   }
 }
 
+export const getReview = (reviewId) => async dispatch => {
+  console.log("made it")
+  const response = await fetch(`/api/review/${reviewId}`)
+  if (response.ok) {
+    const review = await response.json()
+    dispatch(load(review))
+  }
+}
+
 export const createReview = (data) => async dispatch => {
-  console.log(data)
   const response = await fetch(`/api/review/create`, {
     method: 'post',
     headers: {
@@ -46,8 +54,8 @@ export const createReview = (data) => async dispatch => {
   return newreview
 }
 
-export const updateReview = (data) => async dispatch => {
-  const response = await fetch(`/api/review/update`, {
+export const updateReview = (id, data) => async dispatch => {
+  const response = await fetch(`/api/review/${id}`, {
     method: 'put',
     headers: {
       'Content-Type': 'application/json'
@@ -67,3 +75,17 @@ export const destroyReview = (id) => async dispatch => {
       dispatch(destroy(id))
     }
 }
+
+let initialState = {}
+
+const reviews = (state = initialState, action) => {
+  switch (action.type) {
+    case LOAD: {
+      const newState = {[action.review.id]: action.review}
+      return newState
+    }
+    default: return state
+  }
+}
+
+export default reviews

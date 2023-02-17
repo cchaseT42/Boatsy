@@ -121,6 +121,13 @@ function SingleProduct(){
             </div>
               <span>{review.review}</span>
               <span>{review.user.username}</span>
+              <span>
+                {user !== null && user.id === review.userId && (
+                  <div>
+                    <button onClick={e => history.push(`/review/edit/${review.id}`)}>Edit Review</button>
+                  </div>
+                )}
+              </span>
               </div>
             )
           })}
