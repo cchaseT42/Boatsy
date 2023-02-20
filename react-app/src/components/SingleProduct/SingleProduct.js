@@ -26,6 +26,11 @@ function SingleProduct(){
   let count = 0
   let avg
   let userHasReview = false
+  let productHasReviews = false
+
+  if (product.reviews.length){
+    productHasReviews = true
+  }
 
   if (user){
   for(let i = 0; i < product.reviews.length; i++){
@@ -123,7 +128,7 @@ function SingleProduct(){
             <CreateReviewModal/>
           </div>}
           <div className="reviews_div">
-            <p className="review_counter">{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
+            <p className="review_counter">{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg || 0}</span></p>
           </div>
           {product.reviews.map((review) => {
             return (
@@ -156,7 +161,7 @@ function SingleProduct(){
               <div className='detailDiv'>
                 <p id='ownerId'></p>
                 <div className='product_name'>
-                <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>
+                  {productHasReviews && <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>}
                 <h1 id='name'>{product.productName}</h1>
                 <div className='product_price'>
                   <h2 id='product_price'>${product.price}</h2>
