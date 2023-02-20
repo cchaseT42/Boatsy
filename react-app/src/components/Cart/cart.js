@@ -79,6 +79,7 @@ function Cart(){
               <div className='amount'>
               <p id="product_name">{product.products.productName}</p>
               <div className='amount_buttons'>
+
               <button className='cart_button' onClick={e => addtoCart(product.id, product.productId)}>Add</button>
               <span id='amount_p'> Amount {product.count}</span>
               <button className='cart_button' onClick={product.count > 1 ? e => (removefromCart(product.id, product.productId)) :
@@ -101,7 +102,7 @@ function Cart(){
       </div>
       <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
       </div>
-    </div> : <div className='container_cart'><h1 className='count_total'>You haven't added anything to your cat yet
+    </div> : <div className='no_cart'><h1 className='count_total'>You haven't added anything to your cart yet
     . Have a look around!</h1></div> }
   </div>
     )
