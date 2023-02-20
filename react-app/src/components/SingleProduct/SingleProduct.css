@@ -65,6 +65,23 @@
   transform: scale(1.02);
 }
 
+#deleteReviewButton {
+  border-radius: 25px;
+  color: white;
+  height: 24px;
+  width: 85px;
+  border: none;
+  font-size: 16px;
+  background-color: rgb(84, 83, 83);
+  transition: all .02s ease-in-out;
+  margin-left: 1%;
+}
+
+#deleteReviewButton:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
 .editReview {
   margin-bottom: 20px;
 }

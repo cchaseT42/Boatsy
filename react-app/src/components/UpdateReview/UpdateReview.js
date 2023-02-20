@@ -52,12 +52,12 @@ function UpdateReview(){
   return (
     <div className="ReviewForm">
       <form onSubmit={handleSubmit}>
-      <ul className="errors">
+      <ul className="errorsReview">
         {validationErrors.length > 0 && validationErrors.map((error, idx) => (
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
         </ul>
-        <div className='inputDiv'>
+        <div className='reviewInputDiv'>
           <label htmlFor="Review" className='inputName'>Review</label>
           <input
             className='inputArea'
@@ -67,7 +67,7 @@ function UpdateReview(){
             onChange={(e) => setReview(e.target.value)}
             />
         </div>
-        <div className='inputDiv'>
+        <div className='reviewInputDiv'>
           <label htmlFor="stars" className='inputName'>Stars</label>
           <input
             className='inputArea'
@@ -77,8 +77,8 @@ function UpdateReview(){
             onChange={(e) => setStars(e.target.value)}
             />
         </div>
-        <div className='btnDiv'>
-        <button id='submitBtn'>Submit</button>
+        <div className='btndivReview'>
+        <button id='submitBtnReview'>Submit</button>
         </div>
       </form>
     </div>
