@@ -6,6 +6,9 @@ import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
 import { getCart } from "../../store/cart"
 import { updateCart } from "../../store/cart"
+import { getAllReviews, destroyReview } from "../../store/review"
+import CreateReviewModal from "../CreateReviewModal"
+import UpdateReviewModal from "../UpdateReviewModal"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -20,6 +23,23 @@ function SingleProduct(){
   const cart = useSelector(state => state.carts)
   const product = productsArr[0]
   const user = useSelector(state => state.session.user)
+  let count = 0
+  let avg
+  let userHasReview = false
+
+  if (user){
+  for(let i = 0; i < product.reviews.length; i++){
+    if (product.reviews[i].user.id === user.id) userHasReview = true
+  }
+}
+
+  for(let i = 0; i < product.reviewAvg.length; i++){
+    count += product.reviewAvg[i]
+  }
+  avg = count/product.reviewAvg.length
+
+  console.log(avg)
+  console.log(product)
 
   const addtoCart = async (e) => {
     e.preventDefault()
@@ -69,14 +89,27 @@ function SingleProduct(){
     await dispatch(getCart(user.id))
   }
 
+  const leaveReview = async (e) => {
+    e.preventDefault()
+    await history.push(`/products/leavereview/${productId}`)
+  }
+
+  const deleteReview = async (id) => {
+    let deletedReview = await dispatch(destroyReview(id))
+    await dispatch(getProduct(productId))
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
+    dispatch(getAllReviews(productId))
   }, [dispatch])
 
 
 
+
   return (
+    <div>
     <div className="ProductDetails">
               <div className="imgDiv">
               <span className='displayImg'>
@@ -84,10 +117,46 @@ function SingleProduct(){
               onError={(e)=>{ if (e.target.src !== noimage)
               { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
               </span>
+              <div>
+          <div className='lower_div'>
+          {user && !userHasReview && <div>
+            <CreateReviewModal/>
+          </div>}
+          <div className="reviews_div">
+            <p className="review_counter">{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
+          </div>
+          {product.reviews.map((review) => {
+            return (
+              <div className="reviewContainer">
+
+              <div className="star_count">
+              {[...Array(review.stars)].map((star) => {
+                return (
+                  <span id="ratingStars" class="fa fa-star checked">
+                  </span>
+                )
+              })}
+            </div>
+              <span className="reviewText">{review.review}</span>
+              <span className="reviewUser">By {review.user.username}</span>
+              <span>
+                {user !== null && user.id === review.userId && (
+                  <div className="editReview">
+                    <UpdateReviewModal reviewto={{review}}/>
+                    <button id="deleteReviewButton"onClick={e => deleteReview(review.id)}>Delete</button>
+                  </div>
+                )}
+              </span>
+              </div>
+            )
+          })}
+          </div>
+        </div>
               </div>
               <div className='detailDiv'>
                 <p id='ownerId'></p>
                 <div className='product_name'>
+                <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>
                 <h1 id='name'>{product.productName}</h1>
                 <div className='product_price'>
                   <h2 id='product_price'>${product.price}</h2>
@@ -122,6 +191,9 @@ function SingleProduct(){
                 </div>
                 </div>
               </div>
+              </div>
+              <div className="lower_div">
+        </div>
     </div>
   )
 }

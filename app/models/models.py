@@ -20,6 +20,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    reviews = db.relationship("Reviews", back_populates="user", cascade="all, delete-orphan")
+
 
     @property
     def password(self):
@@ -52,7 +54,7 @@ class Product(db.Model):
         add_prefix_for_prod('users.id')), nullable=False)
 
     carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
-
+    reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
@@ -63,6 +65,8 @@ class Product(db.Model):
             'id': self.id,
             'ownerId': self.ownerId,
             'images': [image.to_dict() for image in self.images],
+            'reviews': [review.to_dict() for review in self.reviews],
+            'reviewAvg': [review.stars for review in self.reviews],
             'productName': self.productName,
             'productDescription': self.productDescription,
             'price': str(self.price)
@@ -130,16 +134,21 @@ class Reviews(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
+    user = db.relationship("User", back_populates="reviews")
+
     productId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('products.id')), nullable=False)
 
-    stars = db.Column(db.Integer, primary_key=True)
+    product = db.relationship("Product", back_populates="reviews")
+
+    stars = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
+            'user': self.user.to_dict(),
             'productId': self.productId,
             'stars': self.stars,
             'review': self.review

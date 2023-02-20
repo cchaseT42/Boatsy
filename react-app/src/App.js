@@ -11,6 +11,8 @@ import AllProducts from './components/AllProducts/AllProducts';
 import SingleProduct from './components/SingleProduct/SingleProduct';
 import CreateProduct from './components/CreateProduct/CreateProduct';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
+import CreateReview from './components/CreateReview/CreateReview';
+import UpdateReview from './components/UpdateReview/UpdateReview';
 import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
 
@@ -56,6 +58,12 @@ function App() {
         </Route>
         <Route path='/products/edit/:productId'>
           <UpdateProduct/>
+        </Route>
+        <Route path='/products/leavereview/:productId'>
+          <CreateReview/>
+        </Route>
+        <Route path='/review/edit/:reviewId'>
+          <UpdateReview/>
         </Route>
         <Route path='/products/:productId'>
           <SingleProduct/>
