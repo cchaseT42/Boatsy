@@ -17,13 +17,56 @@
   width:700px;
 }
 
-.lower_div{
+.reviewText {
+  margin-top: 10px;
+}
+
+.reviewUser{
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .reviews_div{
   border-style: solid;
   border-color: transparent;
   border-bottom-color: rgb(222,222,222);
+  margin-bottom: 30px;
+}
+
+#editReviewButton{
+  border-radius: 25px;
+  color: white;
+  height: 24px;
+  width: 50px;
+  border: none;
+  font-size: 16px;
+  background-color: rgb(84, 83, 83);
+  transition: all .02s ease-in-out;
+}
+
+#editReviewButton:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+#leave_review_btn{
+  border-radius: 25px;
+  color: white;
+  height: 24px;
+  width: 150px;
+  border: none;
+  font-size: 16px;
+  background-color: rgb(84, 83, 83);
+  transition: all .02s ease-in-out;
+}
+
+#leave_review_btn:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.editReview {
+  margin-bottom: 20px;
 }
 
 .product_price{

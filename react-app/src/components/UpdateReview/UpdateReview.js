@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { updateReview } from "../../store/review"
-import { getReview } from "../../store/review"
 
 function UpdateReview(){
   const dispatch = useDispatch()

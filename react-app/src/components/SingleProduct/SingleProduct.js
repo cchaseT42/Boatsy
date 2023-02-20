@@ -6,7 +6,7 @@ import { deleteProduct } from "../../store/product"
 import { createCart } from "../../store/cart"
 import { getCart } from "../../store/cart"
 import { updateCart } from "../../store/cart"
-import { getAllReviews } from "../../store/review"
+import { getAllReviews, destroyReview } from "../../store/review"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -23,6 +23,13 @@ function SingleProduct(){
   const user = useSelector(state => state.session.user)
   let count = 0
   let avg
+  let userHasReview = false
+
+  if (user){
+  for(let i = 0; i < product.reviews.length; i++){
+    if (product.reviews[i].user.id === user.id) userHasReview = true
+  }
+}
 
   for(let i = 0; i < product.reviewAvg.length; i++){
     count += product.reviewAvg[i]
@@ -85,6 +92,11 @@ function SingleProduct(){
     await history.push(`/products/leavereview/${productId}`)
   }
 
+  const deleteReview = async (id) => {
+    let deletedReview = await dispatch(destroyReview(id))
+    await dispatch(getProduct(productId))
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
@@ -105,11 +117,11 @@ function SingleProduct(){
               </span>
               <div>
           <div className='lower_div'>
-          <div>
+          {user && !userHasReview && <div>
             <button id='leave_review_btn' onClick={leaveReview}>Leave Review</button>
-          </div>
+          </div>}
           <div className="reviews_div">
-            <p>{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
+            <p className="review_counter">{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
           </div>
           {product.reviews.map((review) => {
             return (
@@ -122,12 +134,13 @@ function SingleProduct(){
                 )
               })}
             </div>
-              <span>{review.review}</span>
-              <span>{review.user.username}</span>
+              <span className="reviewText">{review.review}</span>
+              <span className="reviewUser">By {review.user.username}</span>
               <span>
                 {user !== null && user.id === review.userId && (
-                  <div>
-                    <button onClick={e => history.push(`/review/edit/${review.id}`)}>Edit Review</button>
+                  <div className="editReview">
+                    <button id="editReviewButton"onClick={e => history.push(`/review/edit/${review.id}`)}>Edit</button>
+                    <button id="deleteReviewButton"onClick={e => deleteReview(review.id)}>Delete</button>
                   </div>
                 )}
               </span>
