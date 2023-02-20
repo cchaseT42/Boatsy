@@ -88,7 +88,7 @@ function SingleProduct(){
 
   useEffect(() => {
     dispatch(getProduct(productId))
-    dispatch(getAllReviews())
+    dispatch(getAllReviews(productId))
   }, [dispatch])
 
 

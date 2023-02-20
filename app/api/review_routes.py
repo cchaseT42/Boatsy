@@ -6,9 +6,10 @@ from .auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('review', __name__)
 
-@review_routes.route('/')
-def reviews():
+@review_routes.route('/product')
+def reviews(id):
   reviews = Reviews.query.all()
+  reviews = list(filter(lambda review: review.productId == id, reviews))
   return {'reviews': [review.to_dict() for review in reviews]}
 
 @review_routes.route('/<int:id>')

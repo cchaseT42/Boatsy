@@ -49,8 +49,8 @@ export const getReview = (reviewId) => async dispatch => {
   }
 }
 
-export const getAllReviews= () => async dispatch => {
-  const response = await fetch(`/api/review/`)
+export const getAllReviews = (productId) => async dispatch => {
+  const response = await fetch(`/api/review/product`)
   console.log(response)
   if (response.ok) {
     const reviews = await response.json()
@@ -98,7 +98,7 @@ let initialState = {}
 const reviews = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
-      const newState = {[action.review.id]: action.review}
+      const newState = [action.review]
       return newState
     }
     case LOADALL: {

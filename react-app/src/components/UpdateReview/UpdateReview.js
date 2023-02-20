@@ -9,24 +9,18 @@ function UpdateReview(){
   const { reviewId } = useParams()
   let reviewEdit
 
-  useEffect(() => {
-    dispatch(getReview(reviewId))
-  }, [reviewEdit], [dispatch])
 
   const history = useHistory()
-  const reviews = useSelector(state => state.reviews)
-  console.log(reviews)
+  let product = useSelector(state => state.products)
+  product = Object.values(product)[0].reviews
 
-  if (reviews) {
-    reviewEdit = reviews
-  }
-  console.log(reviewEdit)
+  product.forEach(ele => {
+    if (ele.id == reviewId){
+      return reviewEdit = ele
+    }
+  })
   const user = useSelector(state => state.session.user)
 
-  // if (reviewId !== reviewEdit.id){
-  //   return null
-  // }
-  console.log(reviewEdit, "edit")
 
   const [validationErrors, setValidationErrors] = useState([])
   const errors = []
@@ -38,20 +32,21 @@ function UpdateReview(){
     e.preventDefault();
 
     if (!stars) errors.push("Stars are Required.")
+    if (isNaN(stars) || (stars > 5 || stars < 1)) errors.push("Stars must be an integer between 1 and 5")
     if (!review) errors.push("Review is Required.")
 
     if (errors.length) return setValidationErrors(errors)
 
     const payload = {
       id: reviewId,
-      productId: Object.values(reviews)[0].productId,
+      productId: reviewEdit.productId,
       userId: user.id,
       stars: Number(stars),
       review
     }
 
     let updatedReview = await dispatch(updateReview(reviewId, payload))
-    await history.push(`/products/${Object.values(reviews)[0].productId}`)
+    await history.push(`/products/${reviewEdit.productId}`)
   }
 
 
