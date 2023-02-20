@@ -2,22 +2,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { updateReview } from "../../store/review"
+import { getProduct } from "../../store/product"
 
-function UpdateReview(){
+function UpdateReview({setShowModal, review2}){
   const dispatch = useDispatch()
-  const { reviewId } = useParams()
-  let reviewEdit
+  let reviewEdit = Object.values(review2)[0]
+  console.log("AAAAAAAAAAAAAAAA", Object.values(review2)[0])
 
 
   const history = useHistory()
-  let product = useSelector(state => state.products)
-  product = Object.values(product)[0].reviews
+  // let product = useSelector(state => state.products)
+  // product = Object.values(product)[0].reviews
 
-  product.forEach(ele => {
-    if (ele.id == reviewId){
-      return reviewEdit = ele
-    }
-  })
+  // product.forEach(ele => {
+  //   if (ele.id == reviewId){
+  //     return reviewEdit = ele
+  //   }
+  // })
   const user = useSelector(state => state.session.user)
 
 
@@ -37,15 +38,16 @@ function UpdateReview(){
     if (errors.length) return setValidationErrors(errors)
 
     const payload = {
-      id: reviewId,
+      id: reviewEdit.id,
       productId: reviewEdit.productId,
       userId: user.id,
       stars: Number(stars),
       review
     }
 
-    let updatedReview = await dispatch(updateReview(reviewId, payload))
-    await history.push(`/products/${reviewEdit.productId}`)
+    let updatedReview = await dispatch(updateReview(reviewEdit.id, payload))
+    setShowModal(false)
+    await dispatch(getProduct(reviewEdit.productId))
   }
 
 

@@ -7,6 +7,8 @@ import { createCart } from "../../store/cart"
 import { getCart } from "../../store/cart"
 import { updateCart } from "../../store/cart"
 import { getAllReviews, destroyReview } from "../../store/review"
+import CreateReviewModal from "../CreateReviewModal"
+import UpdateReviewModal from "../UpdateReviewModal"
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './SingleProduct.css'
 
@@ -118,7 +120,7 @@ function SingleProduct(){
               <div>
           <div className='lower_div'>
           {user && !userHasReview && <div>
-            <button id='leave_review_btn' onClick={leaveReview}>Leave Review</button>
+            <CreateReviewModal/>
           </div>}
           <div className="reviews_div">
             <p className="review_counter">{product.reviewAvg.length} Reviews <span id="ratingStars" class="fa fa-star checked">{avg}</span></p>
@@ -126,6 +128,7 @@ function SingleProduct(){
           {product.reviews.map((review) => {
             return (
               <div className="reviewContainer">
+
               <div className="star_count">
               {[...Array(review.stars)].map((star) => {
                 return (
@@ -139,7 +142,7 @@ function SingleProduct(){
               <span>
                 {user !== null && user.id === review.userId && (
                   <div className="editReview">
-                    <button id="editReviewButton"onClick={e => history.push(`/review/edit/${review.id}`)}>Edit</button>
+                    <UpdateReviewModal reviewto={{review}}/>
                     <button id="deleteReviewButton"onClick={e => deleteReview(review.id)}>Delete</button>
                   </div>
                 )}

@@ -2,9 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { createReview } from "../../store/review"
+import { getProduct } from "../../store/product"
 import './CreateReview.css'
 
-function CreateReview(){
+function CreateReview({setShowModal}){
   const dispatch = useDispatch()
   const history = useHistory()
   const { productId } = useParams()
@@ -31,7 +32,9 @@ function CreateReview(){
     }
 
     let newReview = await dispatch(createReview(payload))
-    await history.push(`/products/${productId}`)
+    setShowModal(false)
+    await dispatch(getProduct(productId))
+
   }
 
   return (
