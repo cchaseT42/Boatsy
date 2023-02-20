@@ -19,8 +19,10 @@ function CreateReview({setShowModal}){
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stars) errors.push("Stars are Required.")
     if (!review) errors.push("Review is Required.")
+    if (!stars) errors.push("Stars are Required.")
+    if ((stars && isNaN(stars)) || (stars > 5 || stars < 1)) errors.push("Stars must be an integer between 1 and 5")
+
 
     if (errors.length) return setValidationErrors(errors)
 
