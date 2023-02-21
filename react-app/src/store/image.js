@@ -23,12 +23,8 @@ const destroy = (image) => {
   }
 }
 
-export const createImg = (data) => async dispatch => {
+export const createImg = (data, id) => async dispatch => {
   const response = await fetch(`/api/images/create`, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json'
-  },
   body: JSON.stringify(data)
   })
   const newImage = await response.json()
