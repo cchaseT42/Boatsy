@@ -17,12 +17,6 @@ import linkedin from '../assets/linkin.png'
 const NavBar = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
-  // const cartObj = useSelector(state => state.carts)
-  // const cart = Object.values(cartObj)
-  // console.log(cart.length)
-  // useEffect(() => {
-  //   dispatch(getCart(user.id))
-  // }, [dispatch])
 
   return (
     <nav id="navbar">
@@ -33,12 +27,12 @@ const NavBar = () => {
           </NavLink>
           </div>
           <div className='socials'>
-            <a href="https://github.com/cchaseT42">
+            <a href="https://github.com/cchaseT42" target="_blank">
             <div className="github">
             <img id="socialimg" src={github}></img>
             </div>
             </a>
-            <a href='https://www.linkedin.com/in/chase-towe-89673523a/'>
+            <a href='https://www.linkedin.com/in/chase-towe-89673523a/' target="_blank">
             <div className='linkedin'>
             <img id="socialimg2" src={linkedin}></img>
             </div>
