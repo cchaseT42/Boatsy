@@ -1,26 +1,45 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app.models import Image, db
 from app.forms import ImageForm
 from .auth_routes import validation_errors_to_error_messages
+from app.AWSupload import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 image_routes = Blueprint('images', __name__)
 
-@image_routes.route('/create', methods=['POST'])
+@image_routes.route('/<int:id>', methods=['POST'])
 @login_required
-def add_image():
-  form = ImageForm()
-  form['csrf_token'].data = request.cookies['csrf_token']
+def add_image(id):
+  productId = id
+  print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  print(request.files)
+  if "image" not in request.files:
+        return {"errors": "image required"}, 400
 
-  if form.validate_on_submit():
-    new_image = Image()
-    form.populate_obj(new_image)
+  image = request.files["image"]
 
-    db.session.add(new_image)
-    db.session.commit()
-    return new_image.to_dict(), 201
+  print(image, "image")
 
-  return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+  if not allowed_file(image.filename):
+      return {"errors": "file type not permitted"}, 400
+
+  image.filename = get_unique_filename(image.filename)
+  upload = upload_file_to_s3(image)
+
+  print("AAAAAAAAAAAAAAAAAAAAAAAAA", upload)
+
+  if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+  url = upload["url"]
+  new_image = Image(productId=productId, url=url)
+  db.session.add(new_image)
+  db.session.commit()
+  return {"url": url}
 
 
 @image_routes.route('/<int:id>', methods=['DELETE'])

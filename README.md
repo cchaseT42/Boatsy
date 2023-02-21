@@ -58,3 +58,16 @@ Users can upload a file for an image instead of pasting a url.
 2. Users can view their favorites from a favorites page
 3. Users can remove items from their favorites
 
+
+## Technical difficulties
+
+###### Implementing a cart feature
+I've never worked on a cart feature before. the solution I found is rather inelegant and subject to change. I saved the cart object with a count value and initialized it to 1. Every time you add an item to your cart it checks to see if an item with that id already exists, and if it does, it calls edit instead of create, which will increment the counter by one. removing an item from the cart is identical, but instead of incrementing is decrements. If the count is below or equal to one, delete is called, which will remove that item from the cart.
+
+```javascript
+<button className='cart_button' onClick={e => addtoCart(product.id, product.productId)}>Add</button>
+<span id='amount_p'> Amount {product.count}</span>
+<button className='cart_button' onClick={product.count > 1 ? e => (removefromCart(product.id, product.productId)) : 
+e => deletefromCart(product.id) }>Remove</button>
+</div>
+```
