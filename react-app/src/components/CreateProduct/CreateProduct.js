@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { createProduct } from "../../store/product";
 import { createImg } from "../../store/image";
 import './CreateProduct.css'
+import UploadPicture from "../UploadImage/UploadImage";
 
 function CreateProduct({setShowModal}){
   const dispatch = useDispatch()
@@ -13,8 +14,8 @@ function CreateProduct({setShowModal}){
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
-  const [image, setImage] = useState("")
   const [validationErrors, setValidationErrors] = useState([])
+  const [image, setImage] = useState(null);
   const errors = []
 
   const handleSubmit = async (e) => {
@@ -27,8 +28,6 @@ function CreateProduct({setShowModal}){
     if (!price) errors.push("Price field is required")
     if (isNaN(price)) errors.push("Price field must be a number")
     if (price && !isNaN(price) && price < 1) errors.push("Price must be a positive integer")
-    if (image && !(image.includes('https' || 'http'))) errors.push("Image url must be a valid web address.")
-    if (image && !(image.includes('jpg' || 'png'))) errors.push("Image url must be a jpg or png.")
 
     if (errors.length) return setValidationErrors(errors)
 
@@ -47,11 +46,24 @@ function CreateProduct({setShowModal}){
       url: image
     }
 
-    let newImg = await dispatch(createImg(imgPayload))
-    setShowModal(false)
-    await history.push(`/products/${newProduct.id}`)
+    const formData = new FormData();
+    formData.append("image", image);
 
+    let res = await fetch(`/api/images/${newProduct.id}`, {
+      method: "POST",
+      body: formData,
+    });
+    if (res.ok) {
+      await res.json();
+      setShowModal(false)
+    await history.push(`/products/${newProduct.id}`)
+    }
   }
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+}
 
   return (
     <div className= "CreateProductForm">
@@ -94,11 +106,9 @@ function CreateProduct({setShowModal}){
         <div className='inputDiv'>
           <label htmlFor="image" className='inputName'>Preview Image (optional)</label>
           <input
-            className='inputArea'
-            name="image"
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
             />
         </div>
         <div className='btnDiv'>
