@@ -41,11 +41,7 @@ function CreateProduct({setShowModal}){
 
     let newProduct = await dispatch(createProduct(payload))
 
-    const imgPayload = {
-      productId: newProduct.id,
-      url: image
-    }
-
+    if (image){
     const formData = new FormData();
     formData.append("image", image);
 
@@ -58,6 +54,9 @@ function CreateProduct({setShowModal}){
       setShowModal(false)
     await history.push(`/products/${newProduct.id}`)
     }
+  }
+  setShowModal(false)
+  await history.push(`/products/${newProduct.id}`)
   }
 
   const updateImage = (e) => {

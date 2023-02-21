@@ -35,24 +35,23 @@ function UpdateProduct(){
   const addimgSubmit = async (e) => {
     e.preventDefault()
 
-    if (!image) imgErrors.push ('Please input an image.')
-    if (image && !(image.includes('http' || 'https'))) imgErrors.push("Image url must be a valid web address.")
-    if (image && !(image.includes('jpg' || 'png'))) imgErrors.push("Image url must be a jpg or png.")
-    if (imgErrors.length) return setImgvalidationErrors(imgErrors)
+    const formData = new FormData();
+    formData.append("image", image);
 
-    const imgPayload = {
-      productId,
-      url: image
+    let res = await fetch(`/api/images/${productId}`, {
+      method: "POST",
+      body: formData,
+    });
+    if (res.ok) {
+      await res.json();
+      await dispatch(getProduct(productId))
     }
-
-    setImgvalidationErrors([])
-
-
-
-    let newImg = await dispatch(createImg(imgPayload))
-
-    await dispatch(getProduct(productId))
   }
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -135,13 +134,12 @@ function UpdateProduct(){
             <li key={idx}><i class="fa-sharp fa-solid fa-circle-exclamation"></i> {error}</li>
           ))}
         </ul>
-        <label className='edit_tag' htmlFor="image">Add New Image</label>
+        {/* <label className='edit_tag' htmlFor="image">Add New Image</label> */}
+        <label htmlFor="image" className='inputName'>Add New Image</label>
           <input
-            className='input_body'
-            name="image"
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+              type="file"
+              accept="image/*"
+              onChange={updateImage}
             />
             <button id='img_submit_btn'>Add</button>
           </div>
