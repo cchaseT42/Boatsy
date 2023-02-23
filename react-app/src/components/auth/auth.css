@@ -252,7 +252,7 @@
   font-size: 32px;
   transition: all .2s ease-in-out;
   border-radius: 10px;
-  margin-top: 7px;
+  margin-right: 40px;
 }
 
 #carticon:hover{
@@ -275,4 +275,69 @@
 #signup_btn:hover{
   cursor: pointer;
   transform: scale(1.02);
+}
+
+.profile-dropdown {
+  font-family: Montserrat,sans-serif;
+  position: absolute;
+  background-color: rgb(252, 254, 254);
+  padding-left: 0;
+  padding-right: 0;
+  width: auto;
+  border-radius: 15px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.1);
+  list-style: none;
+}
+.credentials {
+  position: relative;
+  background-color: transparent;
+  width: 100%
+}
+
+#nav_button {
+  font-size: 16px;
+  background: transparent;
+  background-color: white;
+  bottom: 1px;
+  border: none;
+  width: 100%
+}
+
+#nav_button:hover{
+  background-color: rgb(222,222,222);
+  cursor: pointer;
+}
+
+#nav_button_orders {
+  font-size: 16px;
+  background: transparent;
+  background-color: white;
+  bottom: 1px;
+  border: none;
+  width: 100%
+}
+
+#nav_button_orders:hover{
+  background-color: rgb(222,222,222);
+  cursor: not-allowed;
+}
+
+#button {
+  background: transparent;
+  font-size: 40px;
+  border-radius: 20px;
+}
+
+#button:hover {
+box-shadow: 0 2px 1px 1px rgba(137, 137, 137, 0.1);
+background-color: rgb(222,222,222);
+transition-duration: 0.02s;
+cursor: pointer;
+}
+
+#loggedInInfo{
+  position: relative;
+  padding-right: 30px;
+  width: 100%;
+  padding-top: 10px;
 }
