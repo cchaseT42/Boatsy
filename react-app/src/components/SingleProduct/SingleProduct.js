@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { getProduct } from "../../store/product"
-import { deleteProduct } from "../../store/product"
-import { createCart } from "../../store/cart"
-import { getCart } from "../../store/cart"
-import { updateCart } from "../../store/cart"
+import { getProduct, deleteProduct } from "../../store/product"
+import { getCart, updateCart, createCart } from "../../store/cart"
 import { getAllReviews, destroyReview } from "../../store/review"
+import { getFavorites, addFavorite, deleteFavorite } from "../../store/favorites"
 import CreateReviewModal from "../CreateReviewModal"
 import UpdateReviewModal from "../UpdateReviewModal"
 import noimage from '../../no_image/No_Image_Available.jpg'
@@ -18,6 +16,8 @@ function SingleProduct(){
   const dispatch = useDispatch()
   const history = useHistory()
   const { productId } = useParams()
+  const favorites = useSelector(state => state.favorites)
+  const favArr = []
   const products = useSelector(state => state.products)
   const productsArr = Object.values(products)
   const cart = useSelector(state => state.carts)
@@ -28,6 +28,10 @@ function SingleProduct(){
   let userHasReview = false
   let productHasReviews = false
 
+  Object.values(favorites).forEach(ele =>{
+    favArr.push(ele.productId)
+  })
+
   if (product.reviews.length){
     productHasReviews = true
   }
@@ -36,7 +40,7 @@ function SingleProduct(){
   for(let i = 0; i < product.reviews.length; i++){
     if (product.reviews[i].user.id === user.id) userHasReview = true
   }
-}
+  }
 
   for(let i = 0; i < product.reviewAvg.length; i++){
     count += product.reviewAvg[i]
@@ -103,10 +107,30 @@ function SingleProduct(){
     await dispatch(getProduct(productId))
   }
 
+  const favorite_add = async (id) => {
+
+
+
+    const payload = {
+      productId: id,
+      userId: user.id
+    }
+
+    let newFavorite = await dispatch(addFavorite(payload))
+    await dispatch(getFavorites(user.id))
+  }
+
+  const favorite_delete = async (productId) => {
+
+    let deletedFavorite = await dispatch(deleteFavorite(user.id, productId))
+    await dispatch(getFavorites(user.id))
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
     dispatch(getAllReviews(productId))
+    if (user)dispatch(getFavorites(user.id))
   }, [dispatch])
 
 

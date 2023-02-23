@@ -14,12 +14,9 @@ function AllProducts(){
 
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
+  console.log(user)
   const favorites = useSelector(state => state.favorites)
   const favArr = []
-
-  if (!user){
-    let user = {id: 0}
-  }
 
 
  Object.values(favorites).forEach(ele =>{
@@ -31,7 +28,7 @@ function AllProducts(){
 
   useEffect(() => {
     dispatch(getProducts())
-    dispatch(getFavorites(user.id))
+    if (user) dispatch(getFavorites(user.id))
   }, [dispatch])
 
   const favorite_add = async (id) => {
