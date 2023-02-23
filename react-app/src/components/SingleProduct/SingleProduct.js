@@ -51,7 +51,6 @@ function SingleProduct(){
 
     let added = document.getElementById('added_to_cart')
     added.style.display="flex"
-    console.log(added)
 
 
 

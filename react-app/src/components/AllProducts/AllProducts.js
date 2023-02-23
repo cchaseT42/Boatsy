@@ -12,7 +12,11 @@ function AllProducts(){
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
   const favorites = useSelector(state => state.favorites)
-  console.log("FAVORITES", favorites)
+  const favArr = []
+
+ Object.values(favorites).forEach(ele =>{
+    favArr.push(ele.productId)
+  })
 
   const productsArr6 = Object.values(products).slice(0, 6)
   const productsArr7on = Object.values(products).slice(6)
@@ -56,6 +60,14 @@ function AllProducts(){
             <li key={product.id} className='product'>
               <div className="DivCont">
               <span>
+                {!favArr.includes(product.id)? <div className='favorite'>
+                  <span id="not_favorite" class="material-symbols-outlined">favorite</span>
+                </div>
+                :
+                <div className='favorite'>
+                  <span id="is_favorite" class="material-symbols-outlined">favorite</span>
+                </div>
+                }
               <Link to={`/products/${product.id}`}>
               {product.images.length == 0 ? <img className='img' src={noimage}></img>: <img className='img' src={product.images[0].url}
               onError={(e)=>{ if (e.target.src !== noimage)

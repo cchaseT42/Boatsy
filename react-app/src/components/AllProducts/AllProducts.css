@@ -20,6 +20,33 @@
   margin-right: 25%;
 }
 
+.favorite{
+  position: absolute;
+  top: 3%;
+  right: 24%;
+  z-index: 1;
+  width: 8%;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.favorite:hover{
+  cursor: pointer;
+}
+
+#not_favorite{
+  position: relative;
+  top: 3px;
+  left: 0.02pc;
+}
+
+#is_favorite{
+  position: relative;
+  top: 3px;
+  left: 0.02pc;
+  color: red;
+}
+
 .splash_text{
   display: flex;
   justify-content: center;
