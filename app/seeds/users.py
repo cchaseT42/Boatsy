@@ -1,4 +1,4 @@
-from app.models import db, User, Product, Image, Reviews, environment, SCHEMA
+from app.models import db, User, Product, Image, Reviews, Favorites, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
@@ -163,6 +163,19 @@ def seed_users():
     db.session.add(image13)
     db.session.add(image14)
     db.session.commit()
+
+    favorite1 = Favorites(
+        userId=1, productId=1
+    )
+
+    favorite2 = Favorites(
+        userId=1, productId=2
+    )
+
+    db.session.add(favorite1)
+    db.session.add(favorite2)
+    db.session.commit()
+
 
     # review1 = Reviews(
     #     id=1, userId=2, productId=1, stars=5, review="dummyreview"

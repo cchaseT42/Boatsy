@@ -56,6 +56,7 @@ class Product(db.Model):
     carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
     reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
+    favorites = db.relationship("Favorites", back_populates="product", cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
     price = db.Column(db.Numeric(5,2), nullable=False)
@@ -173,4 +174,28 @@ class Image(db.Model):
             'id': self.id,
             'productId': self.productId,
             'url': self.url
+        }
+
+
+class Favorites(db.Model):
+    __tablename__ = 'favorites'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    productId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+
+    userId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+
+    product = db.relationship("Product", back_populates="favorites")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'productId': self.productId,
+            'userId': self.userId,
+            'products': self.product.to_dict()
         }

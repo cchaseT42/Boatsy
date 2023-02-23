@@ -10,7 +10,7 @@ cart_routes = Blueprint('cart', __name__)
 @login_required
 def cart(id):
   carts = Cart.query.all()
-  print("all", cart)
+  print("all", carts)
   carts = list(filter(lambda cart: cart.userId == id, carts))
   print(carts)
   # cart = db.session.query(Cart).filter(Cart.userId == id)

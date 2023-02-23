@@ -2,6 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getProducts } from '../../store/product'
+import { getFavorites } from '../../store/favorites'
+import { addFavorite } from '../../store/favorites'
+import { deleteFavorite } from '../../store/favorites'
+import LoginFormModal from '../LoginFormModal'
 import './AllProducts.css'
 import noimage from '../../no_image/No_Image_Available.jpg'
 
@@ -10,13 +14,41 @@ function AllProducts(){
 
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
+  console.log(user)
+  const favorites = useSelector(state => state.favorites)
+  const favArr = []
+
+
+ Object.values(favorites).forEach(ele =>{
+    favArr.push(ele.productId)
+  })
 
   const productsArr6 = Object.values(products).slice(0, 6)
   const productsArr7on = Object.values(products).slice(6)
 
   useEffect(() => {
     dispatch(getProducts())
+    if (user) dispatch(getFavorites(user.id))
   }, [dispatch])
+
+  const favorite_add = async (id) => {
+
+
+
+    const payload = {
+      productId: id,
+      userId: user.id
+    }
+
+    let newFavorite = await dispatch(addFavorite(payload))
+    await dispatch(getFavorites(user.id))
+  }
+
+  const favorite_delete = async (productId) => {
+
+    let deletedFavorite = await dispatch(deleteFavorite(user.id, productId))
+    await dispatch(getFavorites(user.id))
+  }
 
   return (
     <div className='container'>
@@ -30,6 +62,17 @@ function AllProducts(){
           {productsArr6.map((product) => {
             return (
               <li key={product.id}>
+                 {(user && !favArr.includes(product.id)) && <div className='favorite_bubble'>
+                  <span id="not_favorite" class="material-symbols-outlined" onClick={
+                     e => favorite_add(product.id)
+                  }>favorite</span>
+                </div>
+                }
+                 {(user && favArr.includes(product.id)) &&<div className='favorite_bubble'>
+                  <span id="is_favorite" class="material-symbols-outlined" onClick={
+                    e => favorite_delete(product.id)
+                  }>favorite</span>
+                </div>}
                  <Link to={`/products/${product.id}`}>
                 <span>
                 {product.images.length == 0 ? <img className='bubbleimg' src={noimage}></img>:<img className='bubbleimg' src={product.images[0].url} alt=''></img>}
@@ -63,6 +106,18 @@ function AllProducts(){
               </span>
               </div>
               </Link>
+              {(user && !favArr.includes(product.id)) && <div className='favorite'>
+                  <span id="not_favorite" class="material-symbols-outlined" onClick={
+                     e => favorite_add(product.id)
+                  }>favorite</span>
+                </div>
+                }
+                {(user && favArr.includes(product.id)) && <div className='favorite'>
+                  <span id="is_favorite" class="material-symbols-outlined" onClick={
+                    e => favorite_delete(product.id)
+                  }>favorite</span>
+                </div>
+                }
               </span>
               </div>
             </li>
