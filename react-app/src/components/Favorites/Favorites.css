@@ -1,0 +1,11 @@
+.favorites_list{
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.favorite_item{
+  display: flex;
+  flex-direction: row;
+}

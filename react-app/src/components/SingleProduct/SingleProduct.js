@@ -47,8 +47,6 @@ function SingleProduct(){
   }
   avg = count/product.reviewAvg.length
 
-  console.log(avg)
-  console.log(product)
 
   const addtoCart = async (e) => {
     e.preventDefault()
