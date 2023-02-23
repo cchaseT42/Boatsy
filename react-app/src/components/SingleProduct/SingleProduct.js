@@ -183,6 +183,17 @@ function SingleProduct(){
               </div>
               <div className='detailDiv'>
                 <p id='ownerId'></p>
+                {(user && !favArr.includes(product.id)) && <div className='favorite_single'onClick={
+                  e => favorite_add(product.id)
+                }>
+                  <span id="not_favorite_single" class="material-symbols-outlined">favorite</span>
+                </div>
+                }
+              {(user && favArr.includes(product.id)) &&<div className='favorite_single'onClick={
+                  e => favorite_delete(product.id)
+                }>
+                 <span id="is_favorite_single" class="material-symbols-outlined">favorite</span>
+                </div>}
                 <div className='product_name'>
                   {productHasReviews && <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>}
                 <h1 id='name'>{product.productName}</h1>
