@@ -27,7 +27,8 @@ function Favorites(){
   }, [dispatch])
 
   return (
-    <div className="favorites_list">
+    <div>
+      { favoritesArr.length > 0 ? <div className="favorites_list">
       {favoritesArr.map((favorite) => {
         return (
           <li key={favorite.products.id}>
@@ -40,14 +41,19 @@ function Favorites(){
               </div>
               </Link>
               <div className="favorite_details">
-                <p>{favorite.products.productName}</p>
+                <p id="favorite_name">{favorite.products.productName}</p>
                 <span className='price'>${favorite.products.price}</span>
+                <div className='remove_button_div'>
                 <button id="remove_fav_button" onClick={e => favorite_delete(favorite.products.id)}>Remove From Favorites</button>
+                </div>
               </div>
             </div>
           </li>
         )
       })}
+      </div>
+      : <div className='no_favorites'><h1 className='count_total'>You haven't favorited anything
+      yet.</h1></div> }
     </div>
   )
 }
