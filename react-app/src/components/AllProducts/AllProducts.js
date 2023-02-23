@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getProducts } from '../../store/product'
+import { getFavorites } from '../../store/favorites'
 import './AllProducts.css'
 import noimage from '../../no_image/No_Image_Available.jpg'
 
@@ -10,12 +11,15 @@ function AllProducts(){
 
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
+  const favorites = useSelector(state => state.favorites)
+  console.log("FAVORITES", favorites)
 
   const productsArr6 = Object.values(products).slice(0, 6)
   const productsArr7on = Object.values(products).slice(6)
 
   useEffect(() => {
     dispatch(getProducts())
+    dispatch(getFavorites(user.id))
   }, [dispatch])
 
   return (
