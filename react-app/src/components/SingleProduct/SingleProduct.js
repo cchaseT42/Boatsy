@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { getProduct } from "../../store/product"
-import { deleteProduct } from "../../store/product"
-import { createCart } from "../../store/cart"
-import { getCart } from "../../store/cart"
-import { updateCart } from "../../store/cart"
+import { getProduct, deleteProduct } from "../../store/product"
+import { getCart, updateCart, createCart } from "../../store/cart"
 import { getAllReviews, destroyReview } from "../../store/review"
+import { getFavorites, addFavorite, deleteFavorite } from "../../store/favorites"
 import CreateReviewModal from "../CreateReviewModal"
 import UpdateReviewModal from "../UpdateReviewModal"
 import noimage from '../../no_image/No_Image_Available.jpg'
@@ -18,6 +16,8 @@ function SingleProduct(){
   const dispatch = useDispatch()
   const history = useHistory()
   const { productId } = useParams()
+  const favorites = useSelector(state => state.favorites)
+  const favArr = []
   const products = useSelector(state => state.products)
   const productsArr = Object.values(products)
   const cart = useSelector(state => state.carts)
@@ -28,6 +28,10 @@ function SingleProduct(){
   let userHasReview = false
   let productHasReviews = false
 
+  Object.values(favorites).forEach(ele =>{
+    favArr.push(ele.productId)
+  })
+
   if (product.reviews.length){
     productHasReviews = true
   }
@@ -36,22 +40,19 @@ function SingleProduct(){
   for(let i = 0; i < product.reviews.length; i++){
     if (product.reviews[i].user.id === user.id) userHasReview = true
   }
-}
+  }
 
   for(let i = 0; i < product.reviewAvg.length; i++){
     count += product.reviewAvg[i]
   }
   avg = count/product.reviewAvg.length
 
-  console.log(avg)
-  console.log(product)
 
   const addtoCart = async (e) => {
     e.preventDefault()
 
     let added = document.getElementById('added_to_cart')
     added.style.display="flex"
-    console.log(added)
 
 
 
@@ -104,10 +105,30 @@ function SingleProduct(){
     await dispatch(getProduct(productId))
   }
 
+  const favorite_add = async (id) => {
+
+
+
+    const payload = {
+      productId: id,
+      userId: user.id
+    }
+
+    let newFavorite = await dispatch(addFavorite(payload))
+    await dispatch(getFavorites(user.id))
+  }
+
+  const favorite_delete = async (productId) => {
+
+    let deletedFavorite = await dispatch(deleteFavorite(user.id, productId))
+    await dispatch(getFavorites(user.id))
+  }
+
 
   useEffect(() => {
     dispatch(getProduct(productId))
     dispatch(getAllReviews(productId))
+    if (user)dispatch(getFavorites(user.id))
   }, [dispatch])
 
 
@@ -160,6 +181,17 @@ function SingleProduct(){
               </div>
               <div className='detailDiv'>
                 <p id='ownerId'></p>
+                {(user && !favArr.includes(product.id)) && <div className='favorite_single'onClick={
+                  e => favorite_add(product.id)
+                }>
+                  <span id="not_favorite_single" class="material-symbols-outlined">favorite</span>
+                </div>
+                }
+              {(user && favArr.includes(product.id)) &&<div className='favorite_single'onClick={
+                  e => favorite_delete(product.id)
+                }>
+                 <span id="is_favorite_single" class="material-symbols-outlined">favorite</span>
+                </div>}
                 <div className='product_name'>
                   {productHasReviews && <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>}
                 <h1 id='name'>{product.productName}</h1>

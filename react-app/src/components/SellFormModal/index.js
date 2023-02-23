@@ -7,7 +7,7 @@ function SellFormModal() {
 
   return (
     <>
-      <button id='sellbtn'  onClick={() => setShowModal(true)}>Sell</button>
+      <button id='nav_button' onClick={() => setShowModal(true)}>Sell</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreateProduct setShowModal={setShowModal}/>

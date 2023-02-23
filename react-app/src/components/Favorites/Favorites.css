@@ -1,0 +1,45 @@
+.favorites_list{
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.favorite_item{
+  display: flex;
+  flex-direction: row;
+}
+
+.favorite_details{
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  height: 100%;
+}
+
+.remove_button_div{
+  display: flex;
+  align-items: flex-end;
+}
+#favorite_name{
+  overflow-wrap: break-word;
+}
+
+#remove_fav_button{
+  border-radius: 5pc;
+  width: 80%;
+  background-color: red;
+  color: white;
+  border-color: transparent;
+  transition: all .02s ease-in-out;
+  align-items: flex-end;
+}
+
+#remove_fav_button:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.no_favorites{
+  margin-left: 35%;
+}
