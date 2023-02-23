@@ -39,10 +39,10 @@ function Favorites(){
              <div>
               </div>
               </Link>
-              <div>
+              <div className="favorite_details">
                 <p>{favorite.products.productName}</p>
-                <span className='curr'>$</span>
-                <span className='price'>{favorite.products.price}</span>
+                <span className='price'>${favorite.products.price}</span>
+                <button id="remove_fav_button" onClick={e => favorite_delete(favorite.products.id)}>Remove From Favorites</button>
               </div>
             </div>
           </li>

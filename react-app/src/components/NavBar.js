@@ -41,11 +41,11 @@ const NavBar = () => {
             </a>
           </div>
           <div className='user_buttons'>
-          <NavLink to='/cart' exact={true} activeClassName='active'>
           <div>
+          <NavLink to='/cart' exact={true} activeClassName='active'>
           <span className='cart_div'>{user && <span className="material-symbols-outlined" id='carticon'>shopping_cart_checkout</span>}</span>
-          </div>
           </NavLink>
+          </div>
             {!user && <SignUpFormModal/>}
           <li>
             {!user && <LoginFormModal/>}
