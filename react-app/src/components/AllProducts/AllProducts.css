@@ -24,10 +24,19 @@
   position: absolute;
   top: 3%;
   right: 24%;
-  z-index: 1;
   width: 8%;
   background-color: white;
   border-radius: 25px;
+}
+
+.favorite_bubble {
+  position: relative;
+  top: 10%;
+  left: 80%;
+}
+
+.favorite_bubble:hover {
+  cursor: pointer;
 }
 
 .favorite:hover{
@@ -92,15 +101,18 @@ a{
 }
 
 .img {
+  position:static;
   width: 250px;
   height: 250px;
   border-radius: 5%;
+  z-index: -2;
   transition: all .02s ease-in-out;
 }
 
 .img:hover{
   cursor: pointer;
-  filter: drop-shadow(0 0 0.75rem rgb(223, 223, 223))
+  filter: drop-shadow(0 0 0.75rem rgb(223, 223, 223));
+  z-index: -2;
 }
 
 li {

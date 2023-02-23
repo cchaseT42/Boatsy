@@ -31,6 +31,29 @@ export const getFavorites = (id) => async dispatch => {
   }
 }
 
+export const addFavorite = (data) => async dispatch => {
+  const response = await fetch(`/api/favorites/add`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const newFavorite = await response.json()
+  dispatch(create(newFavorite))
+  return newFavorite
+}
+
+export const deleteFavorite = (userId, productId) => async dispatch => {
+  const response = await fetch(`/api/favorites/${userId}/${productId}`, {
+    method: 'delete',
+  })
+  if (response.ok){
+    console.log(response)
+    dispatch(destroy(userId, productId))
+  }
+}
+
 let initialState = {}
 
 const favorites = (state = initialState, action) => {
@@ -41,6 +64,16 @@ const favorites = (state = initialState, action) => {
       favoritesArr.forEach(favorite => {
         newState[favorite.id] = favorite
       })
+      return newState
+    }
+    case CREATE: {
+      const newState = {...state}
+      newState[action.favorite.id] = action.favorite
+      return newState
+    }
+    case DELETE: {
+      const newState = {...state}
+      delete newState[action.favorite.id]
       return newState
     }
     default: return state

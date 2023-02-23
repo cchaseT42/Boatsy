@@ -27,3 +27,16 @@ def add_favorite():
         db.session.commit()
         return new_favorite.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@favorites_routes.route('/<int:userId>/<int:productId>', methods=['DELETE'])
+def delete_favorite(userId, productId):
+
+    favorite = db.session.query(Favorites).filter_by(userId = int(userId), productId = int(productId)).first()
+    # favorites = Favorites.query.all()
+    # favorites = list(filter(lambda favorites: favorites.userId == userId, favorites))
+    # favorites = list(filter(lambda favorites: favorites.productId == productId, favorites))
+    # print(favorites[0], "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+    db.session.delete(favorite)
+    db.session.commit()
+    return 'Successfully deleted'
