@@ -45,9 +45,16 @@ def upgrade():
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('productId', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['productId'], ['products.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('order_items',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('orderId', sa.Integer(), nullable=False),
+    sa.Column('productId', sa.Integer(), nullable=False),
+    sa.Column('count', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['productId'], ['products.id'], ),
+    sa.ForeignKeyConstraint(['orderId'], ['orders.id']),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reviews',

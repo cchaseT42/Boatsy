@@ -101,6 +101,28 @@ class Cart(db.Model):
             'products': self.product.to_dict()
         }
 
+class Order_Items(db.Model):
+    __tablename = "order_items"
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key = True)
+    orderId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('orders.id')), nullable=False)
+    productId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    count = db.Column(db.Integer, nullable = False)
+
+    product = db.relationship("Product", back_populates="order_items")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'orderId': self.orderId,
+            'productId': self.productId,
+            'count': self.count,
+            'products': self.product.to_dict()
+        }
 
 class Orders(db.Model):
     __tablename__ = 'orders'
@@ -112,15 +134,13 @@ class Orders(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    productId = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')), nullable=False)
-
+    order_items = db.relationship("Order_Items", back_populates="orders", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
-            'productId': self.productId
+            'items': self.items.order_items.to_dict()
         }
 
 

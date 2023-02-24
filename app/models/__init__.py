@@ -1,3 +1,3 @@
 from .db import db
-from .models import User, Product, Cart, Image, Reviews
+from .models import User, Product, Cart, Image, Reviews, Orders, Order_Items
 from .db import environment, SCHEMA
