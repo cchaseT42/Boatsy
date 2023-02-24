@@ -57,7 +57,7 @@ class Product(db.Model):
     reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     favorites = db.relationship("Favorites", back_populates="product", cascade="all, delete-orphan")
-    order_items = db.relationship("Order_Items", back_populates='product', cascade="all, delete-orphan")
+    orderItems = db.relationship("OrderItems", back_populates='product', cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
     price = db.Column(db.Numeric(5,2), nullable=False)
@@ -103,8 +103,8 @@ class Cart(db.Model):
             'products': self.product.to_dict()
         }
 
-class Order_Items(db.Model):
-    __tablename = "order_items"
+class OrderItems(db.Model):
+    __tablename__ = "orderItems"
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
@@ -115,9 +115,9 @@ class Order_Items(db.Model):
         add_prefix_for_prod('products.id')), nullable=False)
     count = db.Column(db.Integer, nullable = False)
 
-    orders = db.relationship("Orders", back_populates="order_items")
+    orders = db.relationship("Orders", back_populates="orderItems")
 
-    product = db.relationship("Product", back_populates="order_items")
+    product = db.relationship("Product", back_populates="orderItems")
 
     def to_dict(self):
         return {
@@ -138,13 +138,13 @@ class Orders(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    order_items = db.relationship("Order_Items", back_populates="orders", cascade="all, delete-orphan")
+    orderItems = db.relationship("OrderItems", back_populates="orders", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
-            'items': self.items.order_items.to_dict()
+            'orderItems': [orderItem.to_dict() for orderItem in self.orderItems]
         }
 
 
