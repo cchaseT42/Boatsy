@@ -13,10 +13,12 @@ import carts from '../store/cart';
 import { getCart } from '../store/cart';
 import github  from '../assets/github-mark.png'
 import linkedin from '../assets/linkin.png'
+import ProfileButton from './ProfileButton/ProfileButton';
 
 const NavBar = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <nav id="navbar">
@@ -39,16 +41,17 @@ const NavBar = () => {
             </a>
           </div>
           <div className='user_buttons'>
-          <NavLink to='/cart' exact={true} activeClassName='active'>
           <div>
+          <NavLink to='/cart' exact={true} activeClassName='active'>
           <span className='cart_div'>{user && <span className="material-symbols-outlined" id='carticon'>shopping_cart_checkout</span>}</span>
-          </div>
           </NavLink>
-            {user && <SellFormModal/>}
+          </div>
             {!user && <SignUpFormModal/>}
           <li>
             {!user && <LoginFormModal/>}
-            {user && <LogoutButton/>}
+          </li>
+          <li>
+            {user && <ProfileButton/>}
           </li>
           </div>
       </div>
