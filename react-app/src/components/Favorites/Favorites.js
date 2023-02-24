@@ -34,7 +34,8 @@ function Favorites(){
           <li key={favorite.products.id}>
             <div className="favorite_item">
             <Link to={`/products/${favorite.products.id}`}>
-              {favorite.products.images.length == 0 ? <img className='img' src={noimage}></img>: <img className='img' src={favorite.products.images[0].url}
+              {favorite.products.images.length == 0 ? <img className='img' src={noimage}></img>:
+               <img className='img' src={favorite.products.images[0].url}
               onError={(e)=>{ if (e.target.src !== noimage)
               { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
              <div>
