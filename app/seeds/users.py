@@ -177,11 +177,11 @@ def seed_users():
     db.session.commit()
 
     order1 = Orders(
-        userId=1
+        userId=1, total=5, subTotal=1500
     )
 
     order2 = Orders(
-        userId=1
+        userId=1, total=1, subTotal=700
     )
 
     order_item1 = OrderItems(

@@ -5,3 +5,5 @@ from app.models import db
 
 class OrderForm(FlaskForm):
   userId = IntegerField("userId", validators=[DataRequired()])
+  total = IntegerField("total", validators=[DataRequired()])
+  subTotal = IntegerField("subTotal", validators=[DataRequired()])

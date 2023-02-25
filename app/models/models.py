@@ -138,12 +138,18 @@ class Orders(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
+    total = db.Column(db.Integer, nullable=False)
+
+    subTotal = db.Column(db.Integer, nullable=False)
+
     orderItems = db.relationship("OrderItems", back_populates="orders", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
+            'total': self.total,
+            'subTotal': self.subTotal,
             'orderItems': [orderItem.to_dict() for orderItem in self.orderItems]
         }
 
