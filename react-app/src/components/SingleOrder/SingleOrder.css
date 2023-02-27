@@ -7,6 +7,13 @@
 .order_item{
   display: flex;
   flex-direction: row;
+  margin-top: 1%;
+  padding-bottom: 1%;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: rgb(222, 222, 222)
 }
 
 #single_order{

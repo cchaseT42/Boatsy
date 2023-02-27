@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getOrders } from '../../store/orders'
+import './Orders.css'
 import noimage from '../../no_image/No_Image_Available.jpg'
 
 function Orders() {
@@ -23,21 +24,28 @@ useEffect(() => {
 
 return (
   <div>
-    <div className="orders">
+    {ordersArr.length > 0 ? <div className="orders">
       {ordersArr.map((order) => {
         return (
           <li key={order.id}>
-            <p>{order.total} Items</p>
-            <p>${order.subTotal}</p>
+            <div className="order">
+              <div className="orderDetails">
             {order.orderItems[0].products.images.length == 0 ? <img className='img' src={noimage}></img>:
             <img className='img' src={order.orderItems[0].products.images[0].url}
               onError={(e)=>{ if (e.target.src !== noimage)
               { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
-              <button id="order_details" onClick={e => redirect(order.id)}>View Order Details</button>
+              <div>
+              <p id="detail">{order.total} Items</p>
+              <p id="detail">${order.subTotal}</p>
+              </div>
+              </div>
+              <button id="details_button" onClick={e => redirect(order.id)}>View Order Details</button>
+              </div>
           </li>
         )
       })}
-    </div>
+    </div> : <div className='no_orders'><h1 className='count_total'>No orders to display.
+    Buy somethin' will ya!</h1></div>}
   </div>
 )
 }
