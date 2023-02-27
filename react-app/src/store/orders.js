@@ -100,7 +100,7 @@ const orders = (state = initialState, action) => {
     }
     case CREATE: {
       const newState = {...state}
-      newState[action.orders.id] = action.orders
+      newState[action.order.id] = action.order
       return newState
     }
     case LOADONE: {

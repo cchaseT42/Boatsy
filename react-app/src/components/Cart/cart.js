@@ -4,12 +4,18 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { updateCart } from "../../store/cart";
 import { deleteCart } from "../../store/cart";
 import { getCart } from "../../store/cart";
+import { addOrderItem, createOrder } from "../../store/orders";
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './cart.css'
 
 function Cart(){
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
+
+  const cartsObj = useSelector(state => state.carts)
+  const carts = Object.values(cartsObj)
+  console.log(carts)
+  const history = useHistory()
   let total = 0
   let count = 0
 
@@ -43,6 +49,35 @@ function Cart(){
     await dispatch(getCart(user.id))
   }
 
+  const newOrder = async () => {
+
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
+
+    const payload = {
+      userId: user.id,
+      total: count,
+      subTotal: total
+    }
+
+    let createdOrder = await dispatch(createOrder(payload))
+
+    console.log(createdOrder, "ORDER")
+
+    carts.forEach(async (item) => {
+
+      let cartPayload = {
+        orderId: createdOrder.id,
+        productId: item.productId,
+        count: item.count
+      }
+
+      let addedItem = await dispatch(addOrderItem(cartPayload))
+    })
+
+    await history.push(`orders/${createdOrder.id}`)
+  }
+
   const deletefromCart = async (id) => {
     let deleted = await dispatch(deleteCart(id))
     await dispatch(getCart(user.id))
@@ -52,17 +87,11 @@ function Cart(){
     dispatch(getCart(user.id))
   }, [dispatch])
 
-  const cartsObj = useSelector(state => state.carts)
-  console.log(cartsObj)
-  console.log(cartsObj)
-  const carts = Object.values(cartsObj)
-  console.log(carts)
-
 
 
   return (
   <div>
-    { carts.length > 0 ? <div className='container_cart'>
+    { carts.length > 0 ? <div className="flex-row"><div className='container_cart'>
       <div className="cart_items">
       {carts.map((product) => {
         return(
@@ -100,7 +129,13 @@ function Cart(){
         {count === 1 ? <h1 className='count_total'>{count} Item in Cart</h1> :
         <h1 className='count_total'>{count} Items in Cart</h1>}
       </div>
-      <h1 className='count_total'>total ${Number(total).toFixed(2)}</h1>
+      </div>
+      </div>
+      <div className="checkout">
+      <h3 id="count_checkout">{count} Items</h3>
+      <h3 id="shipping">Total <h3 id="total">${Number(total).toFixed(2)}</h3></h3>
+      <h3 id="shipping">Shipping <h3 id="free">FREE</h3></h3>
+      <button id="place_order_button" onClick={e => newOrder()}>Place Order</button>
       </div>
     </div> : <div className='no_cart'><h1 className='count_total'>You haven't added anything to your cart yet
     . Have a look around!</h1></div> }

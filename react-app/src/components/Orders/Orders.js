@@ -12,6 +12,10 @@ let ordersArr = Object.values(orders)
 console.log(ordersArr)
 const user = useSelector(state => state.session.user)
 
+const redirect = async (id) => {
+  await history.push(`/orders/${id}`)
+}
+
 
 useEffect(() => {
   if (user) dispatch(getOrders(user.id))
@@ -29,7 +33,7 @@ return (
             <img className='img' src={order.orderItems[0].products.images[0].url}
               onError={(e)=>{ if (e.target.src !== noimage)
               { e.target.onerror = null; e.target.src=noimage; } }} alt='displayimg'></img>}
-              <button id="order_details" onClick={history.push(`/orders/${order.id}`)}>View Order Details</button>
+              <button id="order_details" onClick={e => redirect(order.id)}>View Order Details</button>
           </li>
         )
       })}
