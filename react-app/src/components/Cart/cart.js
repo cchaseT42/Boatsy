@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
 import { useHistory, useParams, Link } from "react-router-dom";
-import { updateCart } from "../../store/cart";
-import { deleteCart } from "../../store/cart";
-import { getCart } from "../../store/cart";
+import { updateCart, getCart, deleteCart } from "../../store/cart";
 import { addOrderItem, createOrder } from "../../store/orders";
 import noimage from '../../no_image/No_Image_Available.jpg'
 import './cart.css'
@@ -72,6 +70,7 @@ function Cart(){
         count: item.count
       }
 
+      deletefromCart(item.id)
       let addedItem = await dispatch(addOrderItem(cartPayload))
     })
 
