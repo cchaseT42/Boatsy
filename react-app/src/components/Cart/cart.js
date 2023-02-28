@@ -12,7 +12,6 @@ function Cart(){
 
   const cartsObj = useSelector(state => state.carts)
   const carts = Object.values(cartsObj)
-  console.log(carts)
   const history = useHistory()
   let total = 0
   let count = 0
@@ -25,7 +24,6 @@ function Cart(){
       count: 1
     }
 
-    console.log(payload)
 
     let newCart = await dispatch(updateCart(id, payload))
 
@@ -39,7 +37,6 @@ function Cart(){
       count: -1
     }
 
-    console.log(payload)
 
     let newCart = await dispatch(updateCart(id, payload))
 
@@ -49,7 +46,6 @@ function Cart(){
 
   const newOrder = async () => {
 
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 
     const payload = {
@@ -60,7 +56,7 @@ function Cart(){
 
     let createdOrder = await dispatch(createOrder(payload))
 
-    console.log(createdOrder, "ORDER")
+
 
     carts.forEach(async (item) => {
 

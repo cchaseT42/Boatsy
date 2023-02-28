@@ -10,7 +10,6 @@ const dispatch = useDispatch()
 const history = useHistory()
 const orders = useSelector(state => state.orders)
 let ordersArr = Object.values(orders)
-console.log(ordersArr)
 const user = useSelector(state => state.session.user)
 
 const redirect = async (id) => {

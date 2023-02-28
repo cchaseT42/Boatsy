@@ -12,14 +12,12 @@ function SingleOrder() {
   const orders = useSelector(state => Object.values(state.orders)[0])
   const orderItems = orders.orderItems
 
-  console.log(orderItems)
   const user = useSelector(state => state.session.user)
 
-  console.log(orders)
 
   const destroyOrder = async (id) => {
     await dispatch(deleteOrder(id))
-    await history.push('/')
+    await history.push('/orders')
   }
 
 

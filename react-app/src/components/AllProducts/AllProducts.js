@@ -14,7 +14,6 @@ function AllProducts(){
 
   const products = useSelector(state => state.products)
   const user = useSelector(state => state.session.user)
-  console.log(user)
   const favorites = useSelector(state => state.favorites)
   const favArr = []
 
