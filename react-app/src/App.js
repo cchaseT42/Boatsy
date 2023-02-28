@@ -13,6 +13,8 @@ import CreateProduct from './components/CreateProduct/CreateProduct';
 import UpdateProduct from './components/UpdateProduct/UpdateProduct';
 import CreateReview from './components/CreateReview/CreateReview';
 import UpdateReview from './components/UpdateReview/UpdateReview';
+import Orders from './components/Orders/Orders'
+import SingleOrder from './components/SingleOrder/SingleOrder';
 import Favorites from './components/Favorites/Favorites';
 import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
@@ -53,6 +55,12 @@ function App() {
         </Route>
         <Route path='/cart'>
           <Cart/>
+        </Route>
+        <Route path='/orders/:orderId'>
+          <SingleOrder/>
+        </Route>
+        <Route path='/orders'>
+          <Orders/>
         </Route>
         <Route path='/favorites'>
           <Favorites/>

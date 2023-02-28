@@ -23,6 +23,12 @@ function ProfileButton({setShowModal}) {
     await history.push(`/favorites`)
   }
 
+  const openOrders = async (e) => {
+    e.preventDefault()
+
+    await history.push('/orders')
+  }
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -43,7 +49,7 @@ function ProfileButton({setShowModal}) {
       (<ul className="profile-dropdown">
         <div id="loggedInInfo">
           <li className="credentials"><SellFormModal/></li>
-          <li className="credentials"><button id="nav_button_orders">Orders</button></li>
+          <li className="credentials"><button id="nav_button_orders" onClick={openOrders}>Orders</button></li>
           <li className="credentials"><button id="nav_button" onClick={openFavorites}>Favorites</button></li>
           <li className="credentials"><LogoutButton/></li>
         </div>

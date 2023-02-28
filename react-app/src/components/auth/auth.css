@@ -319,7 +319,7 @@
 
 #nav_button_orders:hover{
   background-color: rgb(222,222,222);
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 #button {

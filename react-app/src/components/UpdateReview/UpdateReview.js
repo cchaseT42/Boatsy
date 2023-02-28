@@ -7,18 +7,9 @@ import { getProduct } from "../../store/product"
 function UpdateReview({setShowModal, review2}){
   const dispatch = useDispatch()
   let reviewEdit = Object.values(review2)[0]
-  console.log("AAAAAAAAAAAAAAAA", Object.values(review2)[0])
 
 
   const history = useHistory()
-  // let product = useSelector(state => state.products)
-  // product = Object.values(product)[0].reviews
-
-  // product.forEach(ele => {
-  //   if (ele.id == reviewId){
-  //     return reviewEdit = ele
-  //   }
-  // })
   const user = useSelector(state => state.session.user)
 
 
