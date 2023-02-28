@@ -57,6 +57,7 @@ class Product(db.Model):
     reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
     favorites = db.relationship("Favorites", back_populates="product", cascade="all, delete-orphan")
+    orderItems = db.relationship("OrderItems", back_populates='product', cascade="all, delete-orphan")
     productName = db.Column(db.String, nullable=False)
     productDescription = db.Column(db.String, nullable=False)
     price = db.Column(db.Numeric(5,2), nullable=False)
@@ -102,6 +103,30 @@ class Cart(db.Model):
             'products': self.product.to_dict()
         }
 
+class OrderItems(db.Model):
+    __tablename__ = "orderItems"
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key = True)
+    orderId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('orders.id')), nullable=False)
+    productId = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    count = db.Column(db.Integer, nullable = False)
+
+    orders = db.relationship("Orders", back_populates="orderItems")
+
+    product = db.relationship("Product", back_populates="orderItems")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'orderId': self.orderId,
+            'productId': self.productId,
+            'count': self.count,
+            'products': self.product.to_dict()
+        }
 
 class Orders(db.Model):
     __tablename__ = 'orders'
@@ -113,15 +138,19 @@ class Orders(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    productId = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('products.id')), nullable=False)
+    total = db.Column(db.Integer, nullable=False)
 
+    subTotal = db.Column(db.Integer, nullable=False)
+
+    orderItems = db.relationship("OrderItems", back_populates="orders", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
-            'productId': self.productId
+            'total': self.total,
+            'subTotal': self.subTotal,
+            'orderItems': [orderItem.to_dict() for orderItem in self.orderItems]
         }
 
 

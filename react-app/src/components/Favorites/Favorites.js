@@ -13,7 +13,6 @@ function Favorites(){
   const favorites = useSelector(state => state.favorites)
   const favoritesArr = Object.values(favorites)
 
-  console.log(favoritesArr)
 
 
   const favorite_delete = async (productId) => {

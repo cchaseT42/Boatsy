@@ -24,12 +24,6 @@ const UploadPicture = () => {
         if (res.ok) {
             await res.json();
         }
-        else {
-            // setImageLoading(false);
-            // a real app would probably use more advanced
-            // error handling
-            console.log("error");
-        }
     }
 
     const updateImage = (e) => {

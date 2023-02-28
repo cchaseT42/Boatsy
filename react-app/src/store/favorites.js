@@ -49,7 +49,6 @@ export const deleteFavorite = (userId, productId) => async dispatch => {
     method: 'delete',
   })
   if (response.ok){
-    console.log(response)
     dispatch(destroy(userId, productId))
   }
 }

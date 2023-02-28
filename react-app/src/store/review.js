@@ -41,7 +41,6 @@ const destroy = (review) => {
 }
 
 export const getReview = (reviewId) => async dispatch => {
-  console.log("made it")
   const response = await fetch(`/api/review/${reviewId}`)
   if (response.ok) {
     const review = await response.json()
@@ -51,7 +50,6 @@ export const getReview = (reviewId) => async dispatch => {
 
 export const getAllReviews = (productId) => async dispatch => {
   const response = await fetch(`/api/review/product`)
-  console.log(response)
   if (response.ok) {
     const reviews = await response.json()
     dispatch(loadall(reviews))
