@@ -2,15 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
 import '../components/auth/auth.css'
 import LoginFormModal from './LoginFormModal';
 import SignUpFormModal from './SignupFormModal';
 import SellFormModal from './SellFormModal';
 import logo from '../logo/Screenshot_49.png'
-import carts from '../store/cart';
-import { getCart } from '../store/cart';
 import github  from '../assets/github-mark.png'
 import linkedin from '../assets/linkin.png'
 import ProfileButton from './ProfileButton/ProfileButton';

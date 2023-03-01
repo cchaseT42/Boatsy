@@ -3,11 +3,13 @@
   flex-direction: column;
   margin-left: 15%;
   margin-right: 15%;
+  margin-top: 1%;
 }
 
 .favorite_item{
   display: flex;
   flex-direction: row;
+  margin: 1%;
 }
 
 .favorite_details{
