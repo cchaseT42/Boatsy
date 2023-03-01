@@ -10,26 +10,28 @@
   display: flex;
   flex-direction: row;
   margin: 1%;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: rgb(222, 222, 222)
 }
 
 .favorite_details{
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: auto;
   height: 100%;
 }
 
-.remove_button_div{
-  display: flex;
-  align-items: flex-end;
-}
 #favorite_name{
   overflow-wrap: break-word;
 }
 
 #remove_fav_button{
   border-radius: 5pc;
-  width: 80%;
+  position: relative;
+  width: 120px;
   background-color: red;
   color: white;
   border-color: transparent;
