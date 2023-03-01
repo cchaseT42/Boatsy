@@ -164,17 +164,6 @@ def seed_users():
     db.session.add(image14)
     db.session.commit()
 
-    favorite1 = Favorites(
-        userId=1, productId=1
-    )
-
-    favorite2 = Favorites(
-        userId=1, productId=2
-    )
-
-    db.session.add(favorite1)
-    db.session.add(favorite2)
-    db.session.commit()
 
     order1 = Orders(
         userId=1, total=5, subTotal=1500
@@ -204,16 +193,16 @@ def seed_users():
     db.session.commit()
 
 
-    # review1 = Reviews(
-    #     id=1, userId=2, productId=1, stars=5, review="dummyreview"
-    # )
-    # review2 = Reviews(
-    #     id=2, userId=3, productId=1, stars=3, review="dummyreview2"
-    # )
+    review1 = Reviews(
+        userId=4, productId=1, stars=5, review="I love it. Great ship"
+    )
+    review2 = Reviews(
+        userId=3, productId=1, stars=2, review="Didn't last very long. Sunk to the bottom of the ocean after a few months."
+    )
 
-    # db.session.add(review1)
-    # db.session.add(review2)
-    # db.session.commit()
+    db.session.add(review1)
+    db.session.add(review2)
+    db.session.commit()
 
 
 

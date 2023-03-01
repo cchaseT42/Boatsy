@@ -15,13 +15,30 @@ function CreateReview({setShowModal}){
 
   const [stars, setStars] = useState('')
   const [review, setReview] = useState('')
+  const [color, setColor] = useState('black')
+
+  const click = color => {
+    setColor(color)
+  }
+
+  useEffect(() => {
+    for(let i = 0; i <= stars; i++){
+      let item = document.getElementById(`ratingStarsCreate${i}`)
+      if (item) item.style.color = color
+    }
+
+    for(let i = stars+1; i <= 5; i++){
+      let item = document.getElementById(`ratingStarsCreate${i}`)
+      if (item) item.style.color = 'black'
+    }
+
+  }, [stars])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!review) errors.push("Review is Required.")
     if (!stars) errors.push("Stars are Required.")
-    if ((stars && isNaN(stars)) || (stars > 5 || stars < 1)) errors.push("Stars must be an integer between 1 and 5")
 
 
     if (errors.length) return setValidationErrors(errors)
@@ -57,15 +74,22 @@ function CreateReview({setShowModal}){
             onChange={(e) => setReview(e.target.value)}
             />
         </div>
-        <div className='reviewInputDiv'>
-          <label htmlFor="stars" className='inputName'>Stars</label>
-          <input
-            className='inputArea'
-            name="stars"
-            type="text"
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
-            />
+        <div className='stars_div'>
+        <div className="inputStar" onClick={(e) => click("yellow")}>
+        <span id="ratingStarsCreate1" class="fa fa-star checked" onClick={(e) => setStars(1)}></span>
+        </div>
+        <div className="inputStar" onClick={(e) => click('yellow')}>
+        <span id="ratingStarsCreate2" class="fa fa-star checked" onClick={(e) => setStars(2)}></span>
+        </div>
+        <div className="inputStar" onClick={(e) => click('yellow')}>
+        <span id="ratingStarsCreate3" class="fa fa-star checked" onClick={(e) => setStars(3)}></span>
+        </div>
+        <div className="inputStar" onClick={(e) => click("yellow")}>
+        <span id="ratingStarsCreate4" class="fa fa-star checked" onClick={(e) => setStars(4)}></span>
+        </div>
+        <div className="inputStar" onClick={(e) => click('yellow')}>
+        <span id="ratingStarsCreate5" class="fa fa-star checked" onClick={(e) => setStars(5)}></span>
+        </div>
         </div>
         <div className='btndivReview'>
         <button id='submitBtnReview'>Submit</button>

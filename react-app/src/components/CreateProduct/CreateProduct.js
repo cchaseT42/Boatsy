@@ -6,7 +6,7 @@ import { createImg } from "../../store/image";
 import './CreateProduct.css'
 import UploadPicture from "../UploadImage/UploadImage";
 
-function CreateProduct({setShowModal}){
+function CreateProduct({setShowModal, setShowMenu}){
   const dispatch = useDispatch()
   const history = useHistory()
   const user = useSelector(state => state.session.user)
@@ -52,10 +52,12 @@ function CreateProduct({setShowModal}){
     if (res.ok) {
       await res.json();
       setShowModal(false)
+      setShowMenu(false)
     await history.push(`/products/${newProduct.id}`)
     }
   }
   setShowModal(false)
+  setShowMenu(false)
   await history.push(`/products/${newProduct.id}`)
   }
 
