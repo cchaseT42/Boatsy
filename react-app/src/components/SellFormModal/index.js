@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/modal';
 import CreateProduct from '../CreateProduct/CreateProduct';
+import ProfileButton from '../ProfileButton/ProfileButton';
 
-function SellFormModal() {
+function SellFormModal({setShowMenu}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -10,7 +11,7 @@ function SellFormModal() {
       <button id='nav_button' onClick={() => setShowModal(true)}>Sell</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateProduct setShowModal={setShowModal}/>
+          <CreateProduct setShowModal={setShowModal} setShowMenu={setShowMenu}/>
         </Modal>
       )}
     </>

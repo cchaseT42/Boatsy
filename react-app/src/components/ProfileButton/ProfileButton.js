@@ -6,7 +6,7 @@ import LogoutButton from '../auth/LogoutButton';
 import SellFormModal from "../SellFormModal";
 import '../auth/auth.css'
 
-function ProfileButton({setShowModal}) {
+function ProfileButton() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user)
@@ -21,25 +21,15 @@ function ProfileButton({setShowModal}) {
     e.preventDefault()
 
     await history.push(`/favorites`)
+    setShowMenu(false)
   }
 
   const openOrders = async (e) => {
     e.preventDefault()
 
     await history.push('/orders')
+    setShowMenu(false)
   }
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
 
 
   return (
@@ -48,7 +38,7 @@ function ProfileButton({setShowModal}) {
       {showMenu && (
       (<ul className="profile-dropdown">
         <div id="loggedInInfo">
-          <li className="credentials"><SellFormModal/></li>
+          <li className="credentials"><SellFormModal setShowMenu={setShowMenu}/></li>
           <li className="credentials"><button id="nav_button_orders" onClick={openOrders}>Orders</button></li>
           <li className="credentials"><button id="nav_button" onClick={openFavorites}>Favorites</button></li>
           <li className="credentials"><LogoutButton/></li>
