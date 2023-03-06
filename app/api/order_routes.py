@@ -34,7 +34,7 @@ def create_order():
         return new_order.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@order_routes.route('/updateOrder', methods=['PUT'])
+@order_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_order():
     order = Orders.query.get(id)
@@ -48,7 +48,7 @@ def update_order():
         return order.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@order_routes.route('/updateItem', methods=['PUT'])
+@order_routes.route('/updateItem/<int:id>', methods=['PUT'])
 @login_required
 def update_item():
     order_item = OrderItems.query.get(id)
