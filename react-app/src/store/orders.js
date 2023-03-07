@@ -96,7 +96,6 @@ export const updateItem = (data, itemId) => async dispatch => {
 }
 
 export const updateOrder = (data, orderId) => async dispatch => {
-  console.log(data, "hiiii!!!")
   const response = await fetch(`/api/orders/updateOrder/${orderId}`, {
     method: 'put',
     headers: {

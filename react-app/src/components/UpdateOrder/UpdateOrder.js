@@ -12,7 +12,6 @@ function UpdateOrder() {
   const orders = useSelector(state => Object.values(state.orders)[0])
   const orderItems = orders.orderItems
   let cost = orders.subTotal
-  console.log(cost)
   let count = orders.total
 
   const user = useSelector(state => state.session.user)
@@ -34,10 +33,8 @@ function UpdateOrder() {
 
   const updateOrderAdd = async (price) => {
 
-    console.log(cost, "total")
-    console.log(price, "price")
+
     let newCost = (Number(cost) + Number(price))
-    console.log(newCost)
 
     const orderpayload = {
       userId: Number(user.id),
@@ -65,10 +62,7 @@ function UpdateOrder() {
 
   const updateOrderRemove = async (price) => {
 
-    console.log(cost, "total")
-    console.log(price, "price")
     let newCost = (Number(cost) - Number(price))
-    console.log(newCost)
 
     const orderpayload = {
       userId: Number(user.id),
