@@ -23,6 +23,9 @@ function SingleProduct(){
   const cart = useSelector(state => state.carts)
   const product = productsArr[0]
   const user = useSelector(state => state.session.user)
+  let notOwner = true
+
+  if (product.ownerId == user.id) notOwner = false
   let count = 0
   let avg
   let userHasReview = false
@@ -145,7 +148,7 @@ function SingleProduct(){
               </span>
               <div>
           <div className='lower_div'>
-          {user && !userHasReview && <div>
+          {notOwner && (user && !userHasReview) && <div>
             <CreateReviewModal/>
           </div>}
           <div className="reviews_div">
