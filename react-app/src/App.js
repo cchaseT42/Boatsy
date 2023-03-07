@@ -16,6 +16,7 @@ import UpdateReview from './components/UpdateReview/UpdateReview';
 import Orders from './components/Orders/Orders'
 import SingleOrder from './components/SingleOrder/SingleOrder';
 import Favorites from './components/Favorites/Favorites';
+import UpdateOrder from './components/UpdateOrder/UpdateOrder';
 import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
 
@@ -55,6 +56,9 @@ function App() {
         </Route>
         <Route path='/cart'>
           <Cart/>
+        </Route>
+        <Route path='/orders/update/:orderId'>
+          <UpdateOrder/>
         </Route>
         <Route path='/orders/:orderId'>
           <SingleOrder/>

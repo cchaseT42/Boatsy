@@ -92,10 +92,12 @@ export const updateItem = (data, itemId) => async dispatch => {
   })
   const updatedItem = await response.json()
   dispatch(updateitem(updatedItem))
+  return updatedItem
 }
 
 export const updateOrder = (data, orderId) => async dispatch => {
-  const response = await fetch(`/api/orders/${orderId}`, {
+  console.log(data, "hiiii!!!")
+  const response = await fetch(`/api/orders/updateOrder/${orderId}`, {
     method: 'put',
     headers: {
       'Content-Type': 'application/json'
@@ -149,7 +151,8 @@ const orders = (state = initialState, action) => {
       return newState
     }
     case UPDATEORDER: {
-      const newState = {[action.order.id]: action.order}
+      const newState = {...state}
+      newState[action.order.id] = action.order
       return newState
     }
     case DELETE: {
