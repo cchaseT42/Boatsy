@@ -25,7 +25,9 @@ function SingleProduct(){
   const user = useSelector(state => state.session.user)
   let notOwner = true
 
-  if (product.ownerId == user.id) notOwner = false
+  if (user) {
+    if (product.ownerId == user.id) notOwner = false
+  }
   let count = 0
   let avg
   let userHasReview = false
