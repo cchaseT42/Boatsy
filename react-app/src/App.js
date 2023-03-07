@@ -57,10 +57,10 @@ function App() {
         <Route path='/cart'>
           <Cart/>
         </Route>
-        <Route path='/orders/update/:orderId'>
+        <Route path='/orders/update/:orderId' exact={true}>
           <UpdateOrder/>
         </Route>
-        <Route path='/orders/:orderId'>
+        <Route path='/orders/:orderId' exact={true}>
           <SingleOrder/>
         </Route>
         <Route path='/orders'>

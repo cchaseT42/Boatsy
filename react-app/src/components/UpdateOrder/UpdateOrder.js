@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { updateItem, updateOrder, getOrder, deleteItem } from "../../store/orders";
 import noimage from '../../no_image/No_Image_Available.jpg'
+import './UpdateOrder.css'
 
 function UpdateOrder() {
   const dispatch = useDispatch()
@@ -98,7 +99,6 @@ function UpdateOrder() {
 
   return (
     <div id="single_order">
-      {orderItems.length ? <div >
       <div className="orderItems">
       {orderItems.map((item) => {
         return(
@@ -116,12 +116,12 @@ function UpdateOrder() {
             <p>Amount: {item.count}</p>
             <p>{item.products.productName}</p>
             <p>${item.products.price}</p>
-            <button onClick={e => increaseCount(item.id, item.productId, item.orderId, item.products.price)}>add</button>
+            <button className='order_button' onClick={e => increaseCount(item.id, item.productId, item.orderId, item.products.price)}>Add</button>
             {Number(item.count) > 1 && <div>
-              <button onClick={e => (decreaseCount(item.id, item.productId, item.orderId, item.products.price))}>subtract</button>
+              <button className='order_button' onClick={e => (decreaseCount(item.id, item.productId, item.orderId, item.products.price))}>Remove</button>
               </div>}
             {(orderItems.length > 1 && Number(item.count) <= 1) && <div>
-              <button onClick={e => deleteItemFromOrder(item.id, item.products.price)}>delete</button>
+              <button className='order_button' onClick={e => deleteItemFromOrder(item.id, item.products.price)}>delete</button>
               </div>}
             </div>
             </div>
@@ -131,9 +131,8 @@ function UpdateOrder() {
     </div>
     <div className="order_details">
       <p className="order_price">{orders.total} Item(s): ${orders.subTotal}</p>
-      <button id='delete_order_button'>Return</button>
+      <button id='delete_order_button' onClick={e => history.push(`/orders/${orderId}`)}>Return</button>
       </div>
-      </div>: <p>Nothing to show.</p>}
   </div>
   )
 }
