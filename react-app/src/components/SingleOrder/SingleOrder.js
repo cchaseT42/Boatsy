@@ -53,6 +53,7 @@ function SingleOrder() {
       <div className="order_details">
         <p className="order_price">{orders.total} Item(s): ${orders.subTotal}</p>
         <button id='delete_order_button' onClick={e => destroyOrder(orders.id)}>Cancel Order</button>
+        <button id='delete_order_button' onClick={e => history.push(`/orders/update/${orderId}`)}>Edit Order</button>
         </div>
     </div>
   )

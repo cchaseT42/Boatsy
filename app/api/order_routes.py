@@ -34,6 +34,35 @@ def create_order():
         return new_order.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+@order_routes.route('updateOrder/<int:id>', methods=['PUT'])
+def update_order(id):
+    order = Orders.query.get(id)
+    print (order, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
+    form = OrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        order.userId = form.data['userId']
+        order.total = int(order.total) + int(form.data['total'])
+        order.subTotal = form.data['subTotal']
+        db.session.commit()
+        return order.to_dict(), 201
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@order_routes.route('/updateItem/<int:id>', methods=['PUT'])
+@login_required
+def update_item(id):
+    order_item = OrderItems.query.get(id)
+
+    form = Order_ItemForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        order_item.count = int(order_item.count) + int(form.data['count'])
+        db.session.commit()
+        return order_item.to_dict(), 201
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 @order_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_order(id):
@@ -41,6 +70,14 @@ def delete_order(id):
     db.session.delete(order)
     db.session.commit()
     return 'Successfully deleted'
+
+@order_routes.route('/delete/item/<int:id>', methods=['DELETE'])
+@login_required
+def delete_item(id):
+    item = OrderItems.query.get(id)
+    db.session.delete(item)
+    db.session.commit()
+    return 'Successfully delete'
 
 @order_routes.route('/add', methods=['POST'])
 @login_required

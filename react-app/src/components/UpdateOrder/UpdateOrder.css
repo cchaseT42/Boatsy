@@ -1,0 +1,14 @@
+.order_button{
+  width: 100px;
+  margin: 5%;
+  border-radius: 25px;
+  border-style: none;
+  height: 30px;
+  font-size: 20px;
+  color: black;
+  background-color: aqua;
+}
+
+.order_button:hover{
+  cursor: pointer;
+}

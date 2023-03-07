@@ -2,6 +2,8 @@ const LOAD = "order/getOrders"
 const LOADONE = "order/getOrder"
 const CREATE = "order/createOrder"
 const CREATEITEM = "order/createItem"
+const UPDATEITEM = "order/updateItem"
+const UPDATEORDER = "order/updateOrder"
 const DELETE = "order/deleteOrder"
 
 const load = (orders) => {
@@ -25,9 +27,23 @@ const create = (order) => {
   }
 }
 
+const updateorder = (order) => {
+  return {
+    type: UPDATEORDER,
+    order
+  }
+}
+
 const createitem = (orderItem) => {
   return {
     type: CREATEITEM,
+    orderItem
+  }
+}
+
+const updateitem = (orderItem) => {
+  return {
+    type: UPDATEITEM,
     orderItem
   }
 }
@@ -65,6 +81,33 @@ export const createOrder = (data) => async dispatch => {
   dispatch(create(newOrder))
   return newOrder
 }
+
+export const updateItem = (data, itemId) => async dispatch => {
+  const response = await fetch(`/api/orders/updateItem/${itemId}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(data)
+  })
+  const updatedItem = await response.json()
+  dispatch(updateitem(updatedItem))
+  return updatedItem
+}
+
+export const updateOrder = (data, orderId) => async dispatch => {
+  console.log(data, "hiiii!!!")
+  const response = await fetch(`/api/orders/updateOrder/${orderId}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  const updateOrder = await response.json()
+  dispatch(updateorder(updateOrder))
+}
+
 export const addOrderItem = (data) => async dispatch => {
   const response = await fetch(`/api/orders/add`, {
     method: 'post',
@@ -86,6 +129,12 @@ export const deleteOrder = (orderid) => async dispatch => {
   }
 }
 
+export const deleteItem = (itemId) => async dispatch => {
+  const response = await fetch(`/api/orders/delete/item/${itemId}`, {
+    method: 'delete'
+  })
+}
+
 let initialState = {}
 
 const orders = (state = initialState, action) => {
@@ -105,6 +154,11 @@ const orders = (state = initialState, action) => {
     }
     case LOADONE: {
       const newState = {[action.order.id]: action.order}
+      return newState
+    }
+    case UPDATEORDER: {
+      const newState = {...state}
+      newState[action.order.id] = action.order
       return newState
     }
     case DELETE: {
