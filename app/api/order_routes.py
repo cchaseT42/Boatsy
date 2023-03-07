@@ -71,6 +71,14 @@ def delete_order(id):
     db.session.commit()
     return 'Successfully deleted'
 
+@order_routes.route('/delete/item/<int:id>', methods=['DELETE'])
+@login_required
+def delete_item(id):
+    item = OrderItems.query.get(id)
+    db.session.delete(item)
+    db.session.commit()
+    return 'Successfully delete'
+
 @order_routes.route('/add', methods=['POST'])
 @login_required
 def add_item():

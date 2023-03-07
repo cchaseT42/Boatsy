@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams, Link } from "react-router-dom";
-import { updateItem, updateOrder, getOrder } from "../../store/orders";
+import { updateItem, updateOrder, getOrder, deleteItem } from "../../store/orders";
 import noimage from '../../no_image/No_Image_Available.jpg'
 
 function UpdateOrder() {
@@ -27,7 +27,7 @@ function UpdateOrder() {
 
     let updatedItem = await dispatch(updateItem(payload, id))
 
-    updateOrderAdd(itemPrice)
+    await updateOrderAdd(itemPrice)
     await dispatch(getOrder(orderId))
   }
 
@@ -58,7 +58,7 @@ function UpdateOrder() {
 
     let updatedItem = await dispatch(updateItem(payload, id))
 
-    updateOrderRemove(itemPrice)
+    await updateOrderRemove(itemPrice)
     await dispatch(getOrder(orderId))
   }
 
@@ -78,6 +78,19 @@ function UpdateOrder() {
     let updatedOrder = await dispatch(updateOrder(orderpayload, orderId))
   }
 
+  const deleteItemFromOrder = async (id, price) => {
+    let deleted = await dispatch(deleteItem(id))
+
+    let newCost = (Number(cost) - Number(price))
+    const orderpayload = {
+      userId: Number(user.id),
+      total: Number(-1),
+      subTotal: Number(newCost)
+    }
+
+    let updatedOrder = await dispatch(updateOrder(orderpayload, orderId))
+  }
+
 
   useEffect(() => {
     dispatch(getOrder(orderId))
@@ -85,7 +98,8 @@ function UpdateOrder() {
 
   return (
     <div id="single_order">
-    <div className="orderItems">
+      {orderItems.length ? <div >
+      <div className="orderItems">
       {orderItems.map((item) => {
         return(
         <li key={item.id}>
@@ -103,7 +117,12 @@ function UpdateOrder() {
             <p>{item.products.productName}</p>
             <p>${item.products.price}</p>
             <button onClick={e => increaseCount(item.id, item.productId, item.orderId, item.products.price)}>add</button>
-            <button onClick={e => decreaseCount(item.id, item.productId, item.orderId, item.products.price)}>remove</button>
+            {Number(item.count) > 1 && <div>
+              <button onClick={e => (decreaseCount(item.id, item.productId, item.orderId, item.products.price))}>subtract</button>
+              </div>}
+            {(orderItems.length > 1 && Number(item.count) <= 1) && <div>
+              <button onClick={e => deleteItemFromOrder(item.id, item.products.price)}>delete</button>
+              </div>}
             </div>
             </div>
         </li>
@@ -112,8 +131,9 @@ function UpdateOrder() {
     </div>
     <div className="order_details">
       <p className="order_price">{orders.total} Item(s): ${orders.subTotal}</p>
-      <button id='delete_order_button'>Submit</button>
+      <button id='delete_order_button'>Return</button>
       </div>
+      </div>: <p>Nothing to show.</p>}
   </div>
   )
 }

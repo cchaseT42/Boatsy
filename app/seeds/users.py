@@ -33,59 +33,59 @@ def seed_users():
     #Product Seed Data
 
     product1 = Product(
-        productName='Sunny in a Bottle', productDescription='The sunny from one piece, in a bottle', price=59.99, ownerId=2
+        productName='Sunny in a Bottle', productDescription='The sunny from one piece, in a bottle', price=60, ownerId=2
     )
 
     product2 = Product(
-        productName='Merry in a Bottle', productDescription='The merry from one piece, in a bottle', price=49.99, ownerId=3
+        productName='Merry in a Bottle', productDescription='The merry from one piece, in a bottle', price=50, ownerId=3
     )
 
     product3 = Product(
-        productName='King of Red Lions in a Bottle', productDescription='The King of Red Lions from Wind Waker, in a bottle', price=39.99, ownerId=4
+        productName='King of Red Lions in a Bottle', productDescription='The King of Red Lions from Wind Waker, in a bottle', price=40, ownerId=4
     )
 
     product4 = Product(
-        productName='Ship in a Bottle', productDescription='Just a regular old ship in a Bottle', price=9.99, ownerId=5
+        productName='Ship in a Bottle', productDescription='Just a regular old ship in a Bottle', price=10, ownerId=5
     )
 
     product5 = Product(
-        productName='Lego Ship in a Bottle', productDescription='A Ship in a Bottle made of Legos', price=99.99, ownerId=6
+        productName='Lego Ship in a Bottle', productDescription='A Ship in a Bottle made of Legos', price=100, ownerId=6
     )
 
     product6 = Product(
-        productName='Antique Ship in a Bottle', productDescription='A very old ship in a bottle. or maybe its just an old design. Not sure.', price=999.99, ownerId=7
+        productName='Antique Ship in a Bottle', productDescription='A very old ship in a bottle. or maybe its just an old design. Not sure.', price=1000, ownerId=7
     )
 
     product7=Product(
-        productName='Pirate Ship in a Bottle', productDescription='A real pirate ship in a Bottle! The crew is still on there, too.', price=5.99, ownerId=8
+        productName='Pirate Ship in a Bottle', productDescription='A real pirate ship in a Bottle! The crew is still on there, too.', price=6, ownerId=8
     )
 
     product8=Product(
-        productName="Queen Anne's Revenge in a Bottle", productDescription="The famous Edward Teach's flagship, in a bottle!", price=220.99, ownerId=2
+        productName="Queen Anne's Revenge in a Bottle", productDescription="The famous Edward Teach's flagship, in a bottle!", price=220, ownerId=2
     )
 
     product9=Product(
-        productName="San Juan Miniature in a Bottle", productDescription="The famous Spanish ship, in a bottle!", price=250.99, ownerId=3
+        productName="San Juan Miniature in a Bottle", productDescription="The famous Spanish ship, in a bottle!", price=250, ownerId=3
     )
 
     product10=Product(
-        productName="MayFlower in a Bottle", productDescription="Sail to the new world, in a bottle!", price=16.20, ownerId=4
+        productName="MayFlower in a Bottle", productDescription="Sail to the new world, in a bottle!", price=16, ownerId=4
     )
 
     product11=Product(
-        productName="The Titanic in a Bottle", productDescription="The famous doomed ship, in a bottle!... A little morbid, if you ask me.", price=19.12, ownerId=5
+        productName="The Titanic in a Bottle", productDescription="The famous doomed ship, in a bottle!... A little morbid, if you ask me.", price=19, ownerId=5
     )
 
     product12=Product(
-        productName="BattleShip in a Bottle", productDescription="Go to war with this bottle!", price=19.45, ownerId=6
+        productName="BattleShip in a Bottle", productDescription="Go to war with this bottle!", price=19, ownerId=6
     )
 
     product13=Product(
-        productName="Ship outside of a bottle", productDescription="Not in the bottle yet! Put it in there yourself!", price=12.98, ownerId=7
+        productName="Ship outside of a bottle", productDescription="Not in the bottle yet! Put it in there yourself!", price=12, ownerId=7
     )
 
     product14=Product(
-        productName="Ship in a corked bottle", productDescription="Had to put the cork on because the ship kept trying to get out. Willing to negotiate, Don't want this in my house anymore. In a bottle.", price=00.99, ownerId=8
+        productName="Ship in a corked bottle", productDescription="Had to put the cork on because the ship kept trying to get out. Willing to negotiate, Don't want this in my house anymore. In a bottle.", price=1, ownerId=8
     )
 
     db.session.add(product1)

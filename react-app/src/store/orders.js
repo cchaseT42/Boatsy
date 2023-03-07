@@ -129,6 +129,12 @@ export const deleteOrder = (orderid) => async dispatch => {
   }
 }
 
+export const deleteItem = (itemId) => async dispatch => {
+  const response = await fetch(`/api/orders/delete/item/${itemId}`, {
+    method: 'delete'
+  })
+}
+
 let initialState = {}
 
 const orders = (state = initialState, action) => {
