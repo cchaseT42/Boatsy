@@ -1,1 +1,25 @@
-/* TODO Add site wide styles */
+.footer {
+  background-color: rgba(60, 59, 59, 0.948);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5%;
+  bottom: 0;
+  width: 100vw;
+}
+
+.footer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 80vw;
+  margin: auto;
+  justify-items: center;
+  padding: 5px;
+  text-align: center;
+}
+
+#contact{
+  font-size: 24px;
+  margin-right: 10px;
+}

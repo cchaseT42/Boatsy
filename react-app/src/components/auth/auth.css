@@ -49,21 +49,24 @@
 .socials{
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  position: relative;
-  margin-top: 2%;
+  width: 150px;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 #socialimg{
   height:50px;
   width: 50px;
+  margin: 10%;
 }
 
 #socialimg2{
   position: relative;
-  height: 60px;
-  width: 60px;
-  bottom: 3px;
+  height: 65px;
+  width: 65px;
+  bottom: 5px;
+  margin: 5%;
 }
 
 .signup_div{
