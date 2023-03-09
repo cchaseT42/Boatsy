@@ -22,6 +22,7 @@
   flex-direction: column;
   width: auto;
   height: 100%;
+  margin-left: 1%;
 }
 
 #favorite_name{
@@ -30,13 +31,16 @@
 
 #remove_fav_button{
   border-radius: 5pc;
+  font-size: 18px;
   position: relative;
-  width: 120px;
+  width: 250px;
+  height: 45px;
   background-color: red;
   color: white;
   border-color: transparent;
   transition: all .02s ease-in-out;
   align-items: flex-end;
+  margin-top: 5%;
 }
 
 #remove_fav_button:hover{
