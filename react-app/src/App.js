@@ -19,6 +19,8 @@ import Favorites from './components/Favorites/Favorites';
 import UpdateOrder from './components/UpdateOrder/UpdateOrder';
 import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
+import Footer from './components/Footer';
+import './index.css'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +40,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <div className="main">
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -85,6 +88,9 @@ function App() {
           <SingleProduct/>
         </Route>
       </Switch>
+      </div>
+      <div id="footer"></div>
+      <Footer />
     </BrowserRouter>
   );
 }
