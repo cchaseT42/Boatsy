@@ -32,11 +32,6 @@ def add_favorite():
 def delete_favorite(userId, productId):
 
     favorite = db.session.query(Favorites).filter_by(userId = int(userId), productId = int(productId)).first()
-    # favorites = Favorites.query.all()
-    # favorites = list(filter(lambda favorites: favorites.userId == userId, favorites))
-    # favorites = list(filter(lambda favorites: favorites.productId == productId, favorites))
-    # print(favorites[0], "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-
     db.session.delete(favorite)
     db.session.commit()
     return 'Successfully deleted'

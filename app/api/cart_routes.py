@@ -10,15 +10,11 @@ cart_routes = Blueprint('cart', __name__)
 @login_required
 def cart(id):
   carts = Cart.query.all()
-  print("all", carts)
   carts = list(filter(lambda cart: cart.userId == id, carts))
-  print(carts)
-  # cart = db.session.query(Cart).filter(Cart.userId == id)
   return {'cart_items': [cart.to_dict() for cart in carts]}, 200
 
 @cart_routes.route('/add', methods=['POST'])
 def add_cart():
-  print("hello")
   form = CartForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
