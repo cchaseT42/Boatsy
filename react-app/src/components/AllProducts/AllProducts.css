@@ -1,5 +1,6 @@
 .splash{
-  background-color: rgb(83, 235, 235);
+  background: rgb(128,132,209);
+  background: linear-gradient(55deg, rgba(128,132,209,1) 0%, rgba(83,235,235,1) 0%, rgba(0,212,255,1) 55%);
   width:100%;
   height:150px;
   display: flex;
@@ -131,4 +132,9 @@ li {
 
 .DivCont {
   position: relative;
+}
+
+.main{
+  display: block;
+  overflow: auto;
 }

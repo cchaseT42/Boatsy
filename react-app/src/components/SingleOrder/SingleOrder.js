@@ -26,7 +26,7 @@ function SingleOrder() {
   }, [dispatch])
 
   return (
-    <div id="single_order">
+    <div id="single_order" className="ext_main">
       <div className="orderItems">
         {orderItems.map((item) => {
           return(

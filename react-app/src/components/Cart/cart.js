@@ -83,7 +83,7 @@ function Cart(){
 
 
   return (
-  <div>
+  <div className="ext_main">
     { carts.length > 0 ? <div className="flex-row"><div className='container_cart'>
       <div className="cart_items">
       {carts.map((product) => {

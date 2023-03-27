@@ -3,10 +3,11 @@
   color: white;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: 5%;
+  position: relative;
   bottom: 0;
-  width: 100vw;
+  justify-content: center;
+  width: 100%;
+  height: auto;
 }
 
 .footer-row {
