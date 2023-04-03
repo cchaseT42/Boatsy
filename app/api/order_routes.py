@@ -37,8 +37,6 @@ def create_order():
 @order_routes.route('updateOrder/<int:id>', methods=['PUT'])
 def update_order(id):
     order = Orders.query.get(id)
-    print (order, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

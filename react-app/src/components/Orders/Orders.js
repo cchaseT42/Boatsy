@@ -22,7 +22,7 @@ useEffect(() => {
 }, [dispatch])
 
 return (
-  <div>
+  <div className="ext_main">
     {ordersArr.length > 0 ? <div className="orders">
       {ordersArr.map((order) => {
         return (

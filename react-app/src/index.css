@@ -1,12 +1,14 @@
 .footer {
-  background-color: rgba(60, 59, 59, 0.948);
+  background-color: #000000;
+background-image: linear-gradient(360deg, #000000 0%, #04619f 74%);
   color: white;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: 5%;
+  position: relative;
   bottom: 0;
-  width: 100vw;
+  justify-content: center;
+  width: 100%;
+  height: auto;
 }
 
 .footer-row {

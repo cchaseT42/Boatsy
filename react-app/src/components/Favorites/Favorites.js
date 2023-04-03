@@ -26,7 +26,7 @@ function Favorites(){
   }, [dispatch])
 
   return (
-    <div>
+    <div className="ext_main">
       { favoritesArr.length > 0 ? <div className="favorites_list">
       {favoritesArr.map((favorite) => {
         return (

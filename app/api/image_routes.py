@@ -12,14 +12,10 @@ image_routes = Blueprint('images', __name__)
 @login_required
 def add_image(id):
   productId = id
-  print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-  print(request.files)
   if "image" not in request.files:
         return {"errors": "image required"}, 400
 
   image = request.files["image"]
-
-  print(image, "image")
 
   if not allowed_file(image.filename):
       return {"errors": "file type not permitted"}, 400
@@ -27,7 +23,6 @@ def add_image(id):
   image.filename = get_unique_filename(image.filename)
   upload = upload_file_to_s3(image)
 
-  print("AAAAAAAAAAAAAAAAAAAAAAAAA", upload)
 
   if "url" not in upload:
         # if the dictionary doesn't have a url key
