@@ -199,6 +199,7 @@ function SingleProduct(){
                  <span id="is_favorite_single" class="material-symbols-outlined">favorite</span>
                 </div>}
                 <div className='product_name'>
+                  <p>Sold by {product.user.username}</p>
                   {productHasReviews && <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>}
                 <h1 id='name'>{product.productName}</h1>
                 <div className='product_price'>
