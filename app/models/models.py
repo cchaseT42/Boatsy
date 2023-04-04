@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     reviews = db.relationship("Reviews", back_populates="user", cascade="all, delete-orphan")
+    product = db.relationship("Product", back_populates="user",cascade="all, delete-orphan")
 
 
     @property
@@ -53,6 +54,7 @@ class Product(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
+    user = db.relationship("User", back_populates="product")
     carts = db.relationship("Cart", back_populates="product", cascade='all, delete-orphan')
     reviews = db.relationship("Reviews", back_populates="product", cascade="all, delete-orphan")
     images = db.relationship("Image", back_populates="product", cascade="all, delete-orphan")
@@ -66,6 +68,7 @@ class Product(db.Model):
         return {
             'id': self.id,
             'ownerId': self.ownerId,
+            'user': self.user.to_dict(),
             'images': [image.to_dict() for image in self.images],
             'reviews': [review.to_dict() for review in self.reviews],
             'reviewAvg': [review.stars for review in self.reviews],

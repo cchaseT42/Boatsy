@@ -22,6 +22,7 @@ function SingleProduct(){
   const productsArr = Object.values(products)
   const cart = useSelector(state => state.carts)
   const product = productsArr[0]
+  console.log(product)
   const user = useSelector(state => state.session.user)
   let notOwner = true
 
