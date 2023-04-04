@@ -126,6 +126,7 @@
 .cart_details{
   display: flex;
   flex-direction: row;
+  margin-bottom: 2%;
 }
 
 .count_total {
