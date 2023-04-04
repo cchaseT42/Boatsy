@@ -2,6 +2,15 @@
   display: flex;
   width: 70%;
   flex-direction: column;
+  height: 100vh;
+}
+
+.cart_items {
+  overflow-y:scroll;
+  height: 80vh;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom-color: rgb(222,222,222);
 }
 
 .flex-row{

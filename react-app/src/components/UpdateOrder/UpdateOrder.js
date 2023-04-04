@@ -92,8 +92,8 @@ function UpdateOrder() {
   }, [dispatch])
 
   return (
-    <div id="single_order">
-      <div className="orderItems">
+    <div id="single_order" className="ext_main">
+      <div className="orderItems" >
       {orderItems.map((item) => {
         return(
         <li key={item.id}>
@@ -115,7 +115,7 @@ function UpdateOrder() {
               <button className='order_button' onClick={e => (decreaseCount(item.id, item.productId, item.orderId, item.products.price))}>Remove</button>
               </div>}
             {(orderItems.length > 1 && Number(item.count) <= 1) && <div>
-              <button className='order_button' onClick={e => deleteItemFromOrder(item.id, item.products.price)}>delete</button>
+              <button className='order_button' onClick={e => deleteItemFromOrder(item.id, item.products.price)}>Delete</button>
               </div>}
             </div>
             </div>
