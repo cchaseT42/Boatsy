@@ -22,7 +22,6 @@ function SingleProduct(){
   const productsArr = Object.values(products)
   const cart = useSelector(state => state.carts)
   const product = productsArr[0]
-  console.log(product)
   const user = useSelector(state => state.session.user)
   let notOwner = true
 
@@ -201,9 +200,9 @@ function SingleProduct(){
                 <div className='product_name'>
                   <p>Sold by {product.user.username}</p>
                   {productHasReviews && <p id="avg">{avg} <span id="ratingStars" class="fa fa-star checked"></span></p>}
-                <h1 id='name'>{product.productName}</h1>
+                <p id='name'>{product.productName}</p>
                 <div className='product_price'>
-                  <h2 id='product_price'>${product.price}</h2>
+                  <p id='product_price'>${product.price}</p>
                 </div>
                 </div>
               {user !== null && user.id !== product.ownerId && (<div className="notOwnerButtons">
@@ -211,25 +210,29 @@ function SingleProduct(){
                 <button className="cartbutton" onClick={addtoCart}>Add To Cart</button>
               </div>)}
               {!user && (<div className='not_logged_in'>
-                <p id='info'>Sign up or Sign in to access Cart or Seller features!</p>
+                <p id='info'>Sign up or Sign to add to cart!</p>
               </div>)}
               {user !== null && user.id === product.ownerId && (<div className='ownerbuttons'>
               <button className="buttonOwner" onClick={e => history.push(`/products/edit/${product.id}`)}>Edit</button>
               <button className="buttonOwner" onClick={handleDelete}>Delete</button>
               </div>)}
               <div id='lower'>
-                <div id="filler-text">
-                <span class="material-symbols-outlined" id='shipicon'>sailing</span>
-                <p id='Hooray'>Hooray!</p>
-                <p> This item ships free to any of the seven seas.</p>
-                </div>
-              <p id='description'>Description :</p>
+              <p id='description'>Description</p>
               <p id='desc'>{product.productDescription}</p>
+                <div id="filler-text">
+                  <div id="filler-text-inner">
+                <span class="material-symbols-outlined" id='shipicon'>sailing</span>
+                </div>
+                <p id="filler-ship"> This item ships free to any of the seven seas.</p>
+                </div>
               </div>
               <div id="filler-text-2nd">
+                <div id="piracyDiv">
                 <span class="material-symbols-outlined" id='handshakeicon'>handshake</span>
+                <p id='Piracy'>Piracy Protection Policy:</p>
+                </div>
                 <div>
-                <p id='PiracyBody'><p id='Piracy'>Piracy Protection Policy:</p>Shop confidently with boatsy. should your loot be plundered
+                <p id='PiracyBody'>Shop confidently with boatsy. should your loot be plundered
                 during its journey to your port, I will personally send those responsible to Davy Jones's Locker
                 </p>
                 </div>

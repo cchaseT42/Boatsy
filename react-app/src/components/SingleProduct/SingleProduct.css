@@ -128,7 +128,11 @@
   margin-left: 15%;
   display: flex;
   flex-direction: row;
+}
 
+#filler-text-inner{
+  display: flex;
+  flex-direction: row;
 }
 
 p{
@@ -137,18 +141,22 @@ p{
 
 #product_price {
   font-family: Montserrat,sans-serif;
-  font-weight: 80;
+  font-weight: 20;
   font-size: 32px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #name{
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 26px;
   font-family: Montserrat,sans-serif;
   font-weight: 20;
-  padding-right: 23%;
 }
 
 #lower{
-  margin-top: 50px;
+  margin-top: 2%;
 }
 
 #Hooray{
@@ -179,46 +187,45 @@ p{
 #Piracy{
   font-weight: bold;
   font-size: 12px;
+  padding-bottom: 0px;
 }
 
-
-
-#PiracyBody{
-  font-size: 12px;
+#piracyDiv{
+  display: flex;
+  flex-direction: row;
 }
 
 #filler-text-2nd{
-  margin-top: 30px;
   display: inline-flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   margin-left: 15%;
   margin-right: 10%
 }
 
 #desc{
   margin-left: 15%;
+  margin-top: 10px;
   font-family: Montserrat,sans-serif;
-  font-size: 24px;
   overflow-wrap: break-word;
   padding-right: 20%;
 }
 
 #description{
   margin-left: 15%;
+  margin-bottom: 0px;
   font-family: Montserrat,sans-serif;
-  font-weight: bold;
+  font-weight: 26pt;
 }
 
 .notOwnerButtons{
   display: flex;
   align-items:center;
   flex-direction: column;
+  margin-bottom: 10%;
 }
 
 .not_logged_in{
   display: flex;
-  align-items:center;
   flex-direction: column;
   margin-left: 15%;
 }
@@ -230,7 +237,7 @@ p{
 
 #info{
   color: red;
-  font-size: 26px;
+  font-size: 18px;
 }
 
 .ownerbuttons {
