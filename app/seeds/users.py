@@ -109,7 +109,7 @@ def seed_users():
         productId=1, url='https://www.dhresource.com/f2/albu/g19/M00/E0/83/rBVap2E7N7WAWdOPAADp7vvOhoU834.jpg'
     )
     image2 = Image(
-        productId=2, url='https://cdn1.sugotoys.com.au/images/20220610062407/fantastic-shengyi-sci-one-piece-ship-in-bottle-going-merry-licensed-7-1-1.jpg?strip=all&lossy=1&ssl=1'
+        productId=2, url='https://m.media-amazon.com/images/I/715eVg-yFML._AC_UF894,1000_QL80_.jpg'
     )
     image3 = Image(
         productId=3, url='https://ih1.redbubble.net/image.1867065170.5440/raf,750x1000,075,t,FFFFFF:97ab1c12de.jpg'
