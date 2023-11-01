@@ -1,5 +1,15 @@
+html, body {
+margin:0;
+padding:0;
+}
+
+.main {
+  margin-bottom: 150px;
+}
+
 .footer {
-  background-color: rgba(60, 59, 59, 0.948);
+  background-color: #000000;
+  background-image: linear-gradient(360deg, #000000 0%, #04619f 74%);
   color: white;
   display: flex;
   flex-direction: row;

@@ -20,11 +20,14 @@ import UpdateOrder from './components/UpdateOrder/UpdateOrder';
 import Cart from './components/Cart/cart';
 import { authenticate } from './store/session';
 import Footer from './components/Footer';
+import ReactGA from 'react-ga';
 import './index.css'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const TRACKING_ID = "G-XEXB615L5Y "; // YOUR_OWN_TRACKING_ID
+  ReactGA.initialize(TRACKING_ID);
 
   useEffect(() => {
     (async() => {

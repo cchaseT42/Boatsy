@@ -117,10 +117,10 @@ function Cart(){
           </ul>
         )
       })}
-      <div>
+      {/* <div>
         {count === 1 ? <h1 className='count_total'>{count} Item in Cart</h1> :
         <h1 className='count_total'>{count} Items in Cart</h1>}
-      </div>
+      </div> */}
       </div>
       </div>
       <div className="checkout">
